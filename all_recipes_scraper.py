@@ -37,6 +37,7 @@ completed = 0
 skipped = 0
 start = 6663
 end = 30000
+starting_file_number = 1
 for i in range(start, end):
     sleeptime = random.randint(2,5)
     print("Sleeping for " + str(sleeptime) + " seconds")
@@ -60,7 +61,14 @@ for i in range(start, end):
         if image_url == 'http://images.media-allrecipes.com/global/recipes/nophoto/nopicture-910x511.png':
             skipped += 1
             print('No image')
-            continue # don't want meals without images? we can decide on this later
+            continue
+
+        # Get ratings
+        rating = soup.find('div', {'class': 'rating-stars'})['data-ratingstars']
+        if rating == '0':
+            skipped += 1
+            print('No rating')
+            continue
 
         # Get ready in time
         ready_in_minutes = get_minutes(soup.find('span', {'class': 'ready-in-time'}))
@@ -93,13 +101,13 @@ for i in range(start, end):
             continue
 
         # Add this recipe to our dictionary
-        recipes['recipes'][(completed % 5)+1] = ({"id": i, "title": title, "minutes": ready_in_minutes, "ingredients": ingredients_list, "instructions": instructions_list, "image": image_url})
+        recipes['recipes'][(completed % 5)+1] = ({"id": i, "title": title, "rating": float(rating), "minutes": ready_in_minutes, "ingredients": ingredients_list, "instructions": instructions_list, "image": image_url})
         print('Recipe stored!')
         completed += 1
 
         # Print 5 recipes to a file
         if completed % 5 == 0:
-            filename = 'recipes' + str(int(completed/5)) + '.json'
+            filename = 'recipes/recipes' + str(int(completed/5)-1+starting_file_number) + '.json'
             print("Printing " + filename)
             with open(filename, 'w') as outfile:
                 json.dump(recipes, outfile)
@@ -108,5 +116,5 @@ for i in range(start, end):
         print('ERROR')
         continue
 
-print(str(skipped) + " complete recipes found")
+print(str(completed) + " complete recipes found")
 print(str(skipped) + " recipes skipped")
