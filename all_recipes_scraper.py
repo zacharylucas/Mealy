@@ -3,6 +3,7 @@ import re
 from bs4 import BeautifulSoup
 import json
 import time
+import glob
 import random
 
 TIME_REGEX = re.compile(
@@ -35,18 +36,29 @@ def normalize_string(string):
 recipes = { 'recipes' : {} }
 completed = 0
 skipped = 0
-start = 6663
-end = 30000
-starting_file_number = 1
-for i in range(start, end):
+starting_file_number = 24
+
+# Get recipe IDs from text files
+recipe_ids = []
+for filename in glob.iglob('recipe_ids/*.txt'):
+    with open(filename, 'r') as id_file:
+        ids = id_file.readlines()
+        for id in ids:
+            recipe_ids.append(int(id.replace('\n', '')))
+
+# Append IDs of recipes that were not saved in previous run
+recipe_ids.append(87605)
+recipe_ids.append(15956)
+
+for id in recipe_ids: #range(start, end):
     sleeptime = random.randint(2,5)
     print("Sleeping for " + str(sleeptime) + " seconds")
     time.sleep(sleeptime)
-    print("Querying for ID: " + str(i))
+    print("Querying for ID: " + str(id))
 
     # Collect and parse recipe page
     try:
-        page = requests.get('http://allrecipes.com/recipe/' + str(i))
+        page = requests.get('http://allrecipes.com/recipe/' + str(id))
         soup = BeautifulSoup(page.text, "html.parser")
 
         # Get recipe title
@@ -101,7 +113,7 @@ for i in range(start, end):
             continue
 
         # Add this recipe to our dictionary
-        recipes['recipes'][(completed % 5)+1] = ({"id": i, "title": title, "rating": float(rating), "minutes": ready_in_minutes, "ingredients": ingredients_list, "instructions": instructions_list, "image": image_url})
+        recipes['recipes'][(completed % 5)+1] = ({"id": id, "title": title, "rating": float(rating), "minutes": ready_in_minutes, "ingredients": ingredients_list, "instructions": instructions_list, "image": image_url})
         print('Recipe stored!')
         completed += 1
 
@@ -116,5 +128,7 @@ for i in range(start, end):
         print('ERROR')
         continue
 
-print(str(completed) + " complete recipes found")
+print(str(completed) + " recipes stored")
 print(str(skipped) + " recipes skipped")
+print("Remaining recipes not saved to files: ")
+print(recipes)
