@@ -8,5 +8,6 @@ def index(request):
     context = {}
     return render(request, 'app/index.html', context)
 
-def detail(request, page_id):
-    return HttpResponse("You're looking at app page %s." % page_id)
+def search(request):
+    context = {}
+    return render(request, 'app/MealPlanSearch.html', context)
