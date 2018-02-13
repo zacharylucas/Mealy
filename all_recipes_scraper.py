@@ -33,7 +33,6 @@ def normalize_string(string):
             '\t', ' ').strip()
     )
 
-recipes = { 'recipes' : {} }
 completed = 0
 skipped = 0
 starting_file_number = 24
@@ -45,10 +44,6 @@ for filename in glob.iglob('recipe_ids/*.txt'):
         ids = id_file.readlines()
         for id in ids:
             recipe_ids.append(int(id.replace('\n', '')))
-
-# Append IDs of recipes that were not saved in previous run
-recipe_ids.append(87605)
-recipe_ids.append(15956)
 
 for id in recipe_ids: #range(start, end):
     sleeptime = random.randint(2,5)
@@ -112,23 +107,17 @@ for id in recipe_ids: #range(start, end):
             print('No instructions')
             continue
 
-        # Add this recipe to our dictionary
-        recipes['recipes'][(completed % 5)+1] = ({"id": id, "title": title, "rating": float(rating), "minutes": ready_in_minutes, "ingredients": ingredients_list, "instructions": instructions_list, "image": image_url})
+        # Create a file for this recipe in JSON
+        recipe_object = ({"title": title, "rating": float(rating), "minutes": ready_in_minutes, "ingredients": ingredients_list, "instructions": instructions_list, "image": image_url})
         print('Recipe stored!')
         completed += 1
-
-        # Print 5 recipes to a file
-        if completed % 5 == 0:
-            filename = 'recipes/recipes' + str(int(completed/5)-1+starting_file_number) + '.json'
-            print("Printing " + filename)
-            with open(filename, 'w') as outfile:
-                json.dump(recipes, outfile)
-            recipes = { 'recipes' : {} }
+        filename = 'recipes/recipe' + str(id) + '.json'
+        print("Printing " + filename)
+        with open(filename, 'w') as outfile:
+            json.dump(recipe_object, outfile)
     except:
         print('ERROR')
         continue
 
 print(str(completed) + " recipes stored")
 print(str(skipped) + " recipes skipped")
-print("Remaining recipes not saved to files: ")
-print(recipes)
