@@ -35,7 +35,6 @@ def normalize_string(string):
 
 completed = 0
 skipped = 0
-starting_file_number = 24
 
 # Get recipe IDs from text files
 recipe_ids = []
