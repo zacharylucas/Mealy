@@ -8,7 +8,8 @@ from .Controllers import watsonQueries as wQ
 def search(request):
     parsedData = []
     if request.method == 'POST':
-        username = request.POST.get('user')
+        searchTerm = request.POST.get('user')
+        results = wQ.queryWatson(searchTerm)
         #req = requests.get('https://api.github.com/users/' + username)
         #jsonList = []
         #jsonList.append(req.json())
