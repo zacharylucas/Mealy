@@ -3,10 +3,10 @@
 <head>
     <script src="/static/jquery/dist/jquery.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-	 
+
 	 <!-- jQuery library -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-		
+
    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
@@ -16,7 +16,7 @@
           max-width: 550px;
           padding: 15px;
           margin: 0 auto;
-        }    
+        }
       </style>
 <nav class="navbar navbar-default">
             <div class="container-fluid">
@@ -30,7 +30,7 @@
                 </button>
                 <a class="navbar-brand" href="#">Mealy</a>
                 </div>
-            
+
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
@@ -64,17 +64,12 @@
           </form>
       </div>
      <div class="form-container" >
-			<div class="form-group">
-				<label for="search">Search:</label>
-				<input type="search" class="form-control" id="search">
-				<button type="button" class="btn btn-primary" onclick="showResponse()">Search</button>
-			</div>
 			<div class="dontShow" id="searchResponse">
 			{% for recipe in recipes %}
 				<div class="row">
 					<div class="thumbnail">
-						<div class="col-md-4 col-lg-4">
-						{{recipe.image}}
+                        <div class="col-md-4 col-lg-4">
+							<img src={{recipe.image}}>
 						</div>
 					<div class="col-md-8 col-lg-8">
 						{{recipe.title}}
