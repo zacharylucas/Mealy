@@ -6,28 +6,16 @@ from .Controllers import watsonQueries as wQ
 
 # Create your views here.
 def search(request):
-    parsedData = []
+    data = {}
     if request.method == 'POST':
-        username = request.POST.get('user')
-        #req = requests.get('https://api.github.com/users/' + username)
-        #jsonList = []
-        #jsonList.append(req.json())
-        userData = {}
-        userData['name'] = username
-        '''
-        for data in jsonList:
-            userData['name'] = data['name']
-            userData['blog'] = data['blog']
-            userData['email'] = data['email']
-            userData['public_gists'] = data['public_gists']
-            userData['public_repos'] = data['public_repos']
-            userData['avatar_url'] = data['avatar_url']
-            userData['followers'] = data['followers']
-            userData['following'] = data['following']
-        '''
-        parsedData.append(userData)
-    return render(request, 'app/search.html', {'data' : parsedData})
-
-def MealPlanSearch(request):
-    context = {}
-    return render(request,'app/MealPlanSearch.html',context)
+        searchTerm = request.POST.get('user')
+        query = wQ.queryWatson(searchTerm)
+        numResults = query['matching_results']
+        recipes = []
+        for i in range(numResults):
+            recipe = {}
+            recipe['image'] = query['result'][i]['image']
+            recipe['title'] = query['result'][i]['title']
+            recipes.append(recipe)
+        data = {'recipes' : recipes}
+    return render(request, 'app/search.html', data)
