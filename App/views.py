@@ -28,6 +28,3 @@ def search(request):
         parsedData.append(userData)
     return render(request, 'app/search.html', {'data' : parsedData})
 
-def MealPlanSearch(request):
-    context = {}
-    return render(request,'app/MealPlanSearch.html',context)
