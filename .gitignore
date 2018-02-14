@@ -1,6 +1,1 @@
-<<<<<<< HEAD
-/Mealy/__pycache__/
-=======
-app/__pycache__/
-Mealy/__pycache__/
->>>>>>> master
+*.pyc

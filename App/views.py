@@ -5,7 +5,7 @@ from django.template import loader
 
 # Create your views here.
 def index(request):
-    context = {}
+    context = {queryWatson()}
     return render(request, 'app/index.html', context)
 
 def detail(request, page_id):
