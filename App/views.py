@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from .models import User
 from django.template import loader
-from .Cotrollers import watsonQueries
+from .Controllers import watsonQueries as wQ
 
 # Create your views here.
 def search(request):

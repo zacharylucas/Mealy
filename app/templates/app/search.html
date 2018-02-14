@@ -2,12 +2,14 @@
 <html>
 <head>
     <script src="/static/jquery/dist/jquery.js"></script>
-    <script type="text/javascript" src="/static/bootstrap/dist/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="/static/bootstrap/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/static/bootstrap/dist/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	 
+	 <!-- jQuery library -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		
+   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
-<h1 class="text-center"> Github User Data </h1>
 	<div class="col-lg-12">
       <style>
         .form-signin {
@@ -16,7 +18,40 @@
           margin: 0 auto;
         }    
       </style>
-
+<nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">Mealy</a>
+                </div>
+            
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li class=""><a href="#">Meal Plan <span class="sr-only">(current)</span></a></li>
+                    <li><a href="#">Shopping List</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#">Sign In</a></li>
+                    <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Account <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Personal Info</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="#">Dietary Restrictions</a></li>
+                        <li><a href="#">Preferences</a></li>
+                    </ul>
+                    </li>
+                </ul>
+                </div><!-- /.navbar-collapse -->
+            </div><!-- /.container-fluid -->
+        </nav>
 
       <div class="container text-center">
           <form class="form-signin" id="login_form" method="post" action="/app/search/">
@@ -28,36 +63,36 @@
             <button class="btn btn-lg btn-primary btn-block" type="submit">Get Data</button>
           </form>
       </div>
-      <div class="table-responsive">
-          <table class="table table-bordered table-hover table-striped tablesorter">
-              <thead>
-              <tr>
-                <th class="header"> Username <i class="icon-sort"></i></th>
-                <th class="header"> Blog <i class="icon-sort"></i></th>
-                <th class="header"> Public Repos <i class="icon-sort"></i></th>
-                <th class="header"> Public Gists <i class="icon-sort"></i></th>
-                <th class="header"> Email <i class="icon-sort"></i></th>
-                <th class="header"> Followers <i class="icon-sort"></i></th>
-                <th class="header"> Following <i class="icon-sort"></i></th>
-              </tr>
-          </thead>
-          <tbody>
-          
-          {% for key in data %}
-              <tr>
-                  <td>{{ key.name }}</td>
-                  <td>{{ key.blog }}</td>
-                  <td>{{ key.public_repos }}</td>
-                  <td>{{ key.public_gists }}</td>
-                  <td>{{ key.email }}</td>
-                  <td>{{ key.followers }}</td>
-                  <td>{{ key.following }}</td>
-              </tr>
-          {% endfor %}
-          
-          </tbody>
-          </table>
-      </div>
+     <div class="form-container" >
+			<div class="form-group">
+				<label for="search">Search:</label>
+				<input type="search" class="form-control" id="search">
+				<button type="button" class="btn btn-primary" onclick="showResponse()">Search</button>
+			</div>
+			<div class="dontShow" id="searchResponse">
+				<div class="row">
+					<div class="thumbnail">
+						<div class="col-md-4 col-lg-4">
+							<img src="breakfast2no.jpg">
+						</div>
+					
+					<div class="col-md-8 col-lg-8">
+							<p>This is some breakfast yo</p>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+						<div class="thumbnail">
+							<div class="col-md-4 col-lg-4">
+								<img src="breakfast5yes.jpg">
+							</div>
+						<div class="col-md-8 col-lg-8">
+							<p>This is some more breakfast yo</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
     </div>
 </body>
 </html>
