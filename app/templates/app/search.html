@@ -58,21 +58,21 @@
             {% csrf_token %}
 
             <br>
-            <input type="text" name="user" class="form-control" placeholder="Github User Name, e.g: DrkSephy" value="" required autofocus>
+            <input type="text" name="user" class="form-control" placeholder="Search" value="" required autofocus>
             <br>
-            <button class="btn btn-lg btn-primary btn-block" type="submit">Get Data</button>
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Get Recipes</button>
           </form>
       </div>
      <div class="form-container" >
 			<div class="dontShow" id="searchResponse">
 			{% for recipe in recipes %}
-				<div class="row">
+                <div class="row justify-content-md-center">
 					<div class="thumbnail">
                         <div class="col-md-4 col-lg-4">
 							<img src={{recipe.image}}>
 						</div>
-					<div class="col-md-8 col-lg-8">
-						{{recipe.title}}
+					<div class="container text-center">
+						<font size="6">{{recipe.title}}</font>
 						</div>
 					</div>
 				</div>
