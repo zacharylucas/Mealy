@@ -9,7 +9,9 @@ def search(request):
     data = {}
     if request.method == 'POST':
         searchTerm = request.POST.get('user')
+        print(searchTerm)
         query = wQ.queryWatson(searchTerm)
+        print(query)
         numResults = query['matching_results']
         recipes = []
         for i in range(numResults):
