@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from .models import User
 from django.template import loader
+from .Cotrollers import watsonQueries
 
 # Create your views here.
 def search(request):
@@ -26,3 +27,7 @@ def search(request):
         '''
         parsedData.append(userData)
     return render(request, 'app/search.html', {'data' : parsedData})
+
+def MealPlanSearch(request):
+    context = {}
+    return render(request,'app/MealPlanSearch.html',context)
