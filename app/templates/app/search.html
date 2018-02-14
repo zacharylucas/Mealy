@@ -70,27 +70,18 @@
 				<button type="button" class="btn btn-primary" onclick="showResponse()">Search</button>
 			</div>
 			<div class="dontShow" id="searchResponse">
+			{% for recipe in recipes %}
 				<div class="row">
 					<div class="thumbnail">
 						<div class="col-md-4 col-lg-4">
-							<img src="breakfast2no.jpg">
+						{{recipe.image}}
 						</div>
-					
 					<div class="col-md-8 col-lg-8">
-							<p>This is some breakfast yo</p>
+						{{recipe.title}}
 						</div>
 					</div>
 				</div>
-				<div class="row">
-						<div class="thumbnail">
-							<div class="col-md-4 col-lg-4">
-								<img src="breakfast5yes.jpg">
-							</div>
-						<div class="col-md-8 col-lg-8">
-							<p>This is some more breakfast yo</p>
-						</div>
-					</div>
-				</div>
+          {% endfor %}
 			</div>
 		</div>
     </div>
