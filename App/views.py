@@ -9,15 +9,13 @@ def search(request):
     data = {}
     if request.method == 'POST':
         searchTerm = request.POST.get('user')
-        print(searchTerm)
         query = wQ.queryWatson(searchTerm)
-        print(query)
-        numResults = query['matching_results']
+        numResults = int(query['matching_results'])
         recipes = []
-        for i in range(numResults):
+        for currentRecipe in query['results']:
             recipe = {}
-            recipe['image'] = query['result'][i]['image']
-            recipe['title'] = query['result'][i]['title']
+            recipe['image'] = currentRecipe['image']
+            recipe['title'] = currentRecipe['title']
             recipes.append(recipe)
         data = {'recipes' : recipes}
     return render(request, 'app/search.html', data)

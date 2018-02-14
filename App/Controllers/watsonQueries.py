@@ -19,5 +19,3 @@ def queryWatson(queryString, count = '', filters = ''):
     qopts = {'query': queryString, 'count' : count, 'filter': filters}
     recipe_query = discovery.query(environment_id, collection_id, qopts)
     return recipe_query
-
-print(queryWatson('eggs'))
