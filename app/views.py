@@ -10,7 +10,7 @@ def search(request):
     if request.method == 'POST':
         searchTerm = request.POST.get('user')
         query = wQ.queryWatson(searchTerm)
-        numResults = int(query['matching_results'])
+        #numResults = int(query['matching_results'])
         recipes = []
         for currentRecipe in query['results']:
             recipe = {}
@@ -19,3 +19,7 @@ def search(request):
             recipes.append(recipe)
         data = {'recipes' : recipes}
     return render(request, 'app/search.html', data)
+
+def index(request):
+    context = {}
+    return render(request, 'app/index.html', context)

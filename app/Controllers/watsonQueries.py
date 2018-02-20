@@ -14,7 +14,6 @@ collection_id = 'd2218b6c-b02d-4073-a3f4-de28fb145bcb'
 configuration_id = 'bf4f75b5-4849-465f-931a-35961d24a6fa'
 collection_name = 'Recipe_Catalog'
 
-def queryWatson(queryString, count = '', filters = ''):
-    qopts = {'query': queryString, 'count' : count, 'filter': filters}
-    recipe_query = discovery.query(environment_id, collection_id, qopts)
+def queryWatson(queryString, count = ''):
+    recipe_query = discovery.query(environment_id, collection_id, query= queryString, count = count)
     return recipe_query
