@@ -17,7 +17,7 @@ collection_name = 'Recipe_Catalog'
 
 def queryWatson(queryString, count = '', filters = ''):
     qopts = {'query': queryString, 'count' : count, 'filter': filters}
-    qopts = {}
+    #qopts = {'query':'eggs'}
     recipe_query = discovery.query(environment_id, collection_id, qopts)
     return recipe_query
 '''
