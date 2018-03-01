@@ -1,0 +1,16 @@
+username: 22ee75e6-9b0d-4a73-b907-e565e55f1cab
+password: bjOVSchN64CM
+
+classifier_id: 8fc193x296-nlc-3501 << **this gets updated each time you train a new classifier
+
+
+1) Train classifier:
+curl -i --user "22ee75e6-9b0d-4a73-b907-e565e55f1cab":"bjOVSchN64CM" -F training_data=@nlc-training.csv -F training_metadata="{\"language\":\"en\",\"name\":\"RecipeClassifier\"}" "https://gateway.watsonplatform.net/natural-language-classifier/api/v1/classifiers"
+
+***make sure to get the new classifier id and update all the other endpoints in this doc if you update it***
+
+2) Get classifier status:
+curl --user "22ee75e6-9b0d-4a73-b907-e565e55f1cab":"bjOVSchN64CM" "https://gateway.watsonplatform.net/natural-language-classifier/api/v1/classifiers/8fc193x296-nlc-3501"
+
+3) Classify Text:
+curl -G --user "22ee75e6-9b0d-4a73-b907-e565e55f1cab":"bjOVSchN64CM" "https://gateway.watsonplatform.net/natural-language-classifier/api/v1/classifiers/8fc193x296-nlc-3501/classify" --data-urlencode "text=Turkey Sandwich"

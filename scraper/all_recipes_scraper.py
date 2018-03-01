@@ -1,14 +1,12 @@
 import requests
 import re
-from bs4 import BeautifulSoup
 import json
 import time
 import glob
 import random
-
-TIME_REGEX = re.compile(
-    r'(\D*(?P<hours>\d+)\s*(hours|hrs|hr|h|Hours|H))?(\D*(?P<minutes>\d+)\s*(minutes|mins|min|m|Minutes|M))?'
-)
+import time
+from bs4 import BeautifulSoup
+from watson_developer_cloud import NaturalLanguageClassifierV1
 
 def get_minutes(element):
     try:
@@ -33,22 +31,44 @@ def normalize_string(string):
             '\t', ' ').strip()
     )
 
-completed = 0
-skipped = 0
+TIME_REGEX = re.compile(
+    r'(\D*(?P<hours>\d+)\s*(hours|hrs|hr|h|Hours|H))?(\D*(?P<minutes>\d+)\s*(minutes|mins|min|m|Minutes|M))?'
+)
 
-# Get recipe IDs from text files
-recipe_ids = []
-for filename in glob.iglob('recipe_ids/*.txt'):
-    with open(filename, 'r') as id_file:
-        ids = id_file.readlines()
-        for id in ids:
-            recipe_ids.append(int(id.replace('\n', '')))
+natural_language_classifier = NaturalLanguageClassifierV1(
+    username='22ee75e6-9b0d-4a73-b907-e565e55f1cab',
+    password='bjOVSchN64CM'
+)
+# ID of the trained NLC (must be updated every time a new NLC is trained)
+classifier_id = '8fc193x296-nlc-3501'
 
-for id in recipe_ids: #range(start, end):
-    sleeptime = random.randint(2,5)
-    print("Sleeping for " + str(sleeptime) + " seconds")
-    time.sleep(sleeptime)
-    print("Querying for ID: " + str(id))
+completed = 0 # number of completed recipes found
+skipped = 0 # number of recipes skipped
+
+start = 6500 # min ID
+end = 300000 # max ID
+
+# Get list of queryable IDs by removing previously queried IDs
+ids = set(range(start,end))
+queried_filename = 'recipes/queried_ids-DO-NOT-OPEN.txt'
+with open(queried_filename, 'r') as infile:
+    removable_ids = infile.readlines()
+    for x in removable_ids:
+        ids.remove(int(x))
+
+# Loop over every ID until we run out
+while len(ids)>0:
+    # Sleep to not piss off allrecipes
+    sleeptime = random.randint(2,3)
+    print("........Sleeping for " + str(sleeptime) + " seconds........")
+    time.sleep(sleeptime)     
+
+    # Pull a random ID from our list 
+    id = random.choice(list(ids))
+    ids.remove(id)
+    with open(queried_filename, 'a') as outfile:
+        outfile.write(str(id) + '\n')
+    print("  ID: " + str(id))
 
     # Collect and parse recipe page
     try:
@@ -59,28 +79,35 @@ for id in recipe_ids: #range(start, end):
         title = soup.find('h1').get_text()
         if title == 'Oh, snap!':
             skipped += 1
-            print('No title')
+            print('  No title')
             continue # this id doesn't have an associated recipe
 
         # Get image url
         image_url = soup.find('img', {'class': 'rec-photo'})['src']
-        if image_url == 'http://images.media-allrecipes.com/global/recipes/nophoto/nopicture-910x511.png':
+        if 'recipes/nophoto/nopicture' in image_url:
             skipped += 1
-            print('No image')
+            print('  No image')
             continue
 
         # Get ratings
         rating = soup.find('div', {'class': 'rating-stars'})['data-ratingstars']
         if rating == '0':
             skipped += 1
-            print('No rating')
+            print('  No rating')
             continue
 
         # Get ready in time
         ready_in_minutes = get_minutes(soup.find('span', {'class': 'ready-in-time'}))
         if ready_in_minutes == 0:
             skipped += 1
-            print('No time')
+            print('  No time')
+            continue
+
+        # Get calorie count
+        calorie_count = soup.find('span', {'class': 'calorie-count'}).findAll('span')[0].text
+        if calorie_count == 0:
+            skipped += 1
+            print('  No calories')
             continue
 
         # Get ingredients list
@@ -92,7 +119,7 @@ for id in recipe_ids: #range(start, end):
         ]
         if len(ingredients_list) == 0:
             skipped += 1
-            print('No ingredients')
+            print('  No ingredients')
             continue
 
         # Get instructions list
@@ -103,20 +130,27 @@ for id in recipe_ids: #range(start, end):
                 ])
         if len(instructions_list) == 0:
             skipped += 1
-            print('No instructions')
+            print('  No instructions')
             continue
+
+        # Classify with NLC
+        print('  Recipe: ' + title)
+        classifications = natural_language_classifier.classify(classifier_id, title)
+        classification = classifications['classes'][0]['class_name']
+        print('  Class: ' + classification)
 
         # Create a file for this recipe in JSON
         recipe_object = ({"title": title, "rating": float(rating), "minutes": ready_in_minutes, "ingredients": ingredients_list, "instructions": instructions_list, "image": image_url})
-        print('Recipe stored!')
         completed += 1
-        filename = 'recipes/recipe' + str(id) + '.json'
-        print("Printing " + filename)
+        filename = 'recipes/' + classification + '/recipe' + str(id) + '.json'
+        print("  File: " + filename)
         with open(filename, 'w') as outfile:
             json.dump(recipe_object, outfile)
     except:
-        print('ERROR')
+        print('  ~~~ERROR~~~')
         continue
 
+# print results
+print('................................')
 print(str(completed) + " recipes stored")
 print(str(skipped) + " recipes skipped")
