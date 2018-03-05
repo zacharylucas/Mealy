@@ -10,8 +10,8 @@ breakfast_discovery = DiscoveryV1(
 )
 
 lunch_discovery = DiscoveryV1(
-    username = '',
-    password = '',
+    username = '2e414ebd-3356-4218-a8ff-1fa0e4976231',
+    password = 'xiosMyPLM0jR',
     version = '2017-11-07'
 )
 
@@ -22,10 +22,10 @@ dinner_discovery = DiscoveryV1(
 )
 
 breakfast_environment_id = ''
-breakfast_collection_id = 'd2218b6c-b02d-4073-a3f4-de28fb145bcb'
+breakfast_collection_id = ''
 
-lunch_environment_id = '6a487cbb-3a04-4f03-9f06-88084e3c2b6d'
-lunch_collection_id = 'd2218b6c-b02d-4073-a3f4-de28fb145bcb'
+lunch_environment_id = 'e8a03832-1ad4-4c57-a8a9-4d4b3ae99d6e'
+lunch_collection_id = '0d504254-4cb3-43e9-bb20-12b44faa3f76'
 
 dinner_environment_id = '6a487cbb-3a04-4f03-9f06-88084e3c2b6d'
 dinner_collection_id = 'f8d8da1b-414c-4ec6-b8d8-3082e25462f0'
@@ -45,3 +45,4 @@ def queryLunch(queryString, count = ''):
 def queryDinner(queryString, count = ''):
     recipe_query = dinner_discovery.query(dinner_environment_id, dinner_collection_id, query= queryString, count = count)
     return recipe_query
+
