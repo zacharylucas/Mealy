@@ -11,13 +11,20 @@ conversation = ConversationV1(
 workspace_name = 'Chatbot'
 workspace_id = '0053d8c4-64cc-4f83-b0b3-39be8c6e5a0f'
 
-def sendMessage(message):
-    message = re.sub('[\r\t\n]', '', message)
-    inputMessage = {'text': message}
+def sendInitialMessage():
+    inputMessage = {'text': ''}
     response = conversation.message(workspace_id = workspace_id, input = inputMessage)
     print(response)
+    return response['context']
 
-print("Talk to bot")
+def sendMessage(message, context):
+    message = re.sub('[\r\t\n]', '', message)
+    inputMessage = {'text': message}
+    response = conversation.message(workspace_id = workspace_id, input = inputMessage, context = context)
+    print(response)
+    return response['context']
+
+context = sendInitialMessage()
 while(True):
     message = input("")
-    sendMessage(message)
+    context = sendMessage(message, context = context)
