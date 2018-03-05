@@ -20,6 +20,13 @@
 }
 
 /* Chatbot */
+body {
+  font: 15px arial, sans-serif;
+  background-color: #d9d9d9;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
 #bodybox {
   margin: auto;
   max-width: 550px;
@@ -58,4 +65,13 @@
   font: 17px arial, sans-serif;
   height: 22px;
   width: 100%;
+}
+
+h1 {
+  margin: auto;
+}
+
+pre {
+  background-color: #f0f0f0;
+  margin-left: 20px;
 }

@@ -23,3 +23,7 @@ def search(request):
 def index(request):
     context = {}
     return render(request, 'app/index.html', context)
+	
+def conversation(request):
+	context = {}
+	return render(request, 'app/conversation.html', context)
