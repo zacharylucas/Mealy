@@ -74,6 +74,23 @@
 					<div class="container text-center">
 						<font size="6">{{recipe.title}}</font>
 						</div>
+					<div class="container text-center">
+						<font size="6">{{recipe.id}}</font>
+						</div>
+					<div class="container text-center">
+						<font size="6">{{recipe.rating}}</font>
+						</div>
+					<div class="container text-center">
+						<font size="6">{{recipe.minutes}}</font>
+						</div>
+					{% for ingredient in recipe.ingredients %}
+    					<div class="container text-center">
+    						<font size="6">{{ingredient}}</font>
+						</div>
+					{% endfor %}
+					<div class="container text-center">
+						<font size="6">{{recipe.instructions}}</font>
+						</div>
 					</div>
 				</div>
           {% endfor %}
