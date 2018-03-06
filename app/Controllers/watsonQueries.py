@@ -4,8 +4,8 @@ import os
 from watson_developer_cloud import DiscoveryV1
 
 breakfast_discovery = DiscoveryV1(
-    username = '',
-    password = '',
+    username = '443e6698-a0eb-4be8-87a6-dddf917f8e08',
+    password = 'MRIonJJP5wHl',
     version = '2017-11-07'
 )
 
@@ -21,8 +21,8 @@ dinner_discovery = DiscoveryV1(
     version = '2017-11-07'
 )
 
-breakfast_environment_id = ''
-breakfast_collection_id = ''
+breakfast_environment_id = '9eca8cd5-10d4-47f4-b2f0-6c5987717d48'
+breakfast_collection_id = 'dd40dded-24af-4444-a77d-36454cf954a5'
 
 lunch_environment_id = 'e8a03832-1ad4-4c57-a8a9-4d4b3ae99d6e'
 lunch_collection_id = '0d504254-4cb3-43e9-bb20-12b44faa3f76'
@@ -45,4 +45,3 @@ def queryLunch(queryString, count = ''):
 def queryDinner(queryString, count = ''):
     recipe_query = dinner_discovery.query(dinner_environment_id, dinner_collection_id, query= queryString, count = count)
     return recipe_query
-
