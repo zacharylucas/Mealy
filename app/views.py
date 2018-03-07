@@ -5,6 +5,7 @@ from .models import User
 from django.template import loader
 from .Controllers import watsonQueries as wQ
 from .Controllers import Conversation as con
+from .Controllers import Preference as pref
 
 # Create your views here.
 def search(request):
@@ -56,4 +57,7 @@ def conversation(request):
 
 def preferenceSelection(request):
     context = {}
+    if request.method == 'POST':
+        prefDict = pref.createPreferences(request)
+        request.session['prefDict'] = prefDict
     return render(request, 'app/preferenceSelection.html', context)
