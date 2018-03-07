@@ -9,6 +9,7 @@ var messages = [], //array that hold the record of each string in chat
   botMessage = "", //var keeps track of what the chatbot is going to say
   botName = 'Chatbot', //name of the chatbot
   talking = true; //when false the speach function doesn't work
+  currentContext = [];
 //
 //
 //****************************************************************
@@ -22,15 +23,21 @@ var messages = [], //array that hold the record of each string in chat
 function chatbotResponse() {
   talking = true;
   botMessage = "I'm confused"; //the default message
-
-  if (lastUserMessage === 'hi' || lastUserMessage =='hello') {
-    const hi = ['hi','howdy','hello']
-    botMessage = hi[Math.floor(Math.random()*(hi.length))];;
-  }
-
-  if (lastUserMessage === 'name') {
-    botMessage = 'My name is ' + botName;
-  }
+  $.ajax({
+        url: '/app/chatbot/',
+        data: {
+          'text': lastUserMessage
+        },
+        async: false,
+        success: function (data) {
+          botMessage = 'bob'
+          console.log(data)
+      },
+      error: function (request, error) {
+        console.log(arguments);
+        alert(" Can't do because: " + error);
+    },
+    });
 }
 //****************************************************************
 //****************************************************************
@@ -45,7 +52,7 @@ function chatbotResponse() {
 //this runs each time enter is pressed.
 //It controls the overall input and output
 function newEntry() {
-  //if the message from the user isn't empty then run 
+  //if the message from the user isn't empty then run
   if (document.getElementById("chatbox").value != "") {
     //pulls the value from the chatbox ands sets it to lastUserMessage
     lastUserMessage = document.getElementById("chatbox").value;
