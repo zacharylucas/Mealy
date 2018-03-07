@@ -2,6 +2,7 @@ import json
 import sys
 import os
 from watson_developer_cloud import DiscoveryV1
+import random
 
 breakfast_discovery = DiscoveryV1(
     username = '443e6698-a0eb-4be8-87a6-dddf917f8e08',
@@ -45,3 +46,37 @@ def queryLunch(queryString, count = ''):
 def queryDinner(queryString, count = ''):
     recipe_query = dinner_discovery.query(dinner_environment_id, dinner_collection_id, query= queryString, count = count)
     return recipe_query
+
+def prefQueryBreakfast(prefDict):
+    proteinLikes = ['eggs']
+    vegetableLikes = addLikes(prefDict['vegetableDict'])
+    fruitLikes = addLikes(prefDict['fruitDict'])
+    queryString = selectRandom(proteinLikes, vegetableLikes)
+    queryString2 = selectRandom(fruitLikes)
+    return queryBreakfast(random.choice([queryString, queryString2]))
+
+def prefQueryLunch(prefDict):
+    proteinLikes = addLikes(prefDict['proteinDict'])
+    carbLikes = addLikes(prefDict['carbDict'])
+    queryString = selectRandom(proteinLikes, carbLikes)
+    return queryLunch(queryString)
+
+def prefQueryDinner(prefDict):
+    proteinLikes = addLikes(prefDict['proteinDict'])
+    carbLikes = addLikes(prefDict['carbDict'])
+    herbLikes = addLikes(prefDict['herbDict'])
+    queryString = selectRandom(proteinLikes, carbLikes, herbLikes)
+    return queryDinner(queryString)
+
+def addLikes(ingredientDict):
+    likes = []
+    for key in ingredientDict:
+        if ingredientDict[key] == 'like':
+            likes.append(key)
+    return likes
+
+def selectRandom(*args):
+    queryString = ""
+    for i in range(len(args)):
+        queryString += random.choice(args[i]) + " "
+    return queryString
