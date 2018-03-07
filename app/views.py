@@ -13,9 +13,15 @@ def search(request):
         #numResults = int(query['matching_results'])
         recipes = []
         for currentRecipe in query['results']:
+            print(currentRecipe)
             recipe = {}
             recipe['image'] = currentRecipe['image']
             recipe['title'] = currentRecipe['title']
+            recipe['id'] = currentRecipe['id']
+            recipe['minutes'] = currentRecipe['minutes']
+            recipe['rating'] = currentRecipe['rating']
+            recipe['ingredients'] = currentRecipe['ingredients']
+            recipe['instructions'] = currentRecipe['instructions']
             recipes.append(recipe)
         data = {'recipes' : recipes}
     return render(request, 'app/search.html', data)
