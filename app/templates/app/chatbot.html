@@ -57,17 +57,18 @@
       <div class="container text-center">
          <div id='bodybox'>
 		  <div id='chatborder'>
-			<p id="chatlog7" class="chatlog">&nbsp;</p>
-			<p id="chatlog6" class="chatlog">&nbsp;</p>
-			<p id="chatlog5" class="chatlog">&nbsp;</p>
-			<p id="chatlog4" class="chatlog">&nbsp;</p>
-			<p id="chatlog3" class="chatlog">&nbsp;</p>
-			<p id="chatlog2" class="chatlog">&nbsp;</p>
+
             <!--<p id="chatlog1" class="chatlog">&nbsp;</p>
             <input type="text" class="form-control" name="chat" id="chatbox" placeholder='Chat with Me!' onfocus="placeHolder()"> -->
             <form class="form-signin" id="chat_form" method="post" action="/app/chatbot/">
               {% csrf_token %}
-              <p id="chatlog1" class="chatlog">{{response.output.text.0}}</p>
+              <p id="chatlog7" class="chatlog">{{messages.6}}</p>
+  			  <p id="chatlog6" class="chatlog">{{messages.5}}</p>
+  			  <p id="chatlog5" class="chatlog">{{messages.4}}</p>
+  			  <p id="chatlog4" class="chatlog">{{messages.3}}</p>
+  			  <p id="chatlog3" class="chatlog">{{messages.2}}</p>
+  			  <p id="chatlog2" class="chatlog">{{messages.1}}</p>
+              <p id="chatlog1" class="chatlog">{{messages.0}}</p>
               <input type="text" class="form-control" name="chat" id="chatbox" placeholder='Chat with Me!'">
           </form>
 		  </div>

@@ -22,18 +22,22 @@ def search(request):
         data = {'recipes' : recipes}
     return render(request, 'app/search.html', data)
 
-@csrf_exempt
 def chatbot(request):
     data = {}
+    messages = []
     if request.method == 'GET':
         response = con.sendInitialMessage()
-        data = {'response' : response}
-        request.session['context'] = response['context']
+
     if request.method == 'POST':
         userInput = request.POST.get('chat')
         response = con.sendMessage(userInput, request.session['context'])
-        request.session['context'] = response['context']
-        data = {'response' : response}
+        messages = request.session['messages']
+        messages.insert(0,"User: " + userInput)
+
+    messages.insert(0, "Chatbot: " + response['output']['text'][0])
+    request.session['messages'] = messages
+    request.session['context'] = response['context']
+    data = {'messages' : messages}
     return render(request, 'app/chatbot.html', data)
 
 def index(request):
