@@ -20,7 +20,6 @@
     }
   </script>
 
-
 </head>
 
 <body>
@@ -69,7 +68,7 @@
           <p style="text-align:center; font-weight: bold">Breakfast</p>
           <img src="{{breakfast.image}}">
           <p>{{breakfast.title}}</p>
-          <input type="button" class="btn btn-primary" value="Show More" onclick="myFunction('{{breakfast.title}}')">
+          <input type="button" class="btn btn-primary" value="Show More" onclick="myFunction('{{breakfast.title}}')"></input>
           <div id="{{breakfast.title}}" style="display:none">
             <p>Rating: {{breakfast.rating}}/5</p>
             <p>Ready in: {{breakfast.minutes}} minutes</p>
