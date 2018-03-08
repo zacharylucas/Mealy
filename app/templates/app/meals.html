@@ -10,8 +10,8 @@
   <link rel="stylesheet" type="text/css" href="{% static 'app/styles.css' %}"></link>
   <script type="text/javascript" src="{% static 'app/scripts.js' %}"></script>
   <script>
-    function myFunction() {
-      var x = document.getElementById("bye");
+    function myFunction(a) {
+      var x = document.getElementById(a);
       if (x.style.display === "none") {
         x.style.display = "block";
       } else {
@@ -69,8 +69,8 @@
           <p style="text-align:center; font-weight: bold">Breakfast</p>
           <img src="{{breakfast.image}}">
           <p>{{breakfast.title}}</p>
-          <input type="button" class="btn btn-primary" value="Show More" onclick="myFunction()"></input>
-          <div id="bye" style="display:none">
+          <input type="button" class="btn btn-primary" value="Show More" onclick="myFunction('{{breakfast.title}}')">
+          <div id="{{breakfast.title}}" style="display:none">
             <p>Rating: {{breakfast.rating}}/5</p>
             <p>Ready in: {{breakfast.minutes}} minutes</p>
             <p>Ingredients:</p>
@@ -78,6 +78,7 @@
             <p>{{ingredient}}</p>
             {% endfor %}
           </div>
+          </input>
         </div>
       </div>
       {% endfor %}
@@ -91,8 +92,8 @@
           <p style="text-align:center; font-weight: bold">Lunch</p>
           <img src="{{lunch.image}}">
           <p>{{lunch.title}}</p>
-          <input type="button" class="btn btn-primary" value="Show More" onclick="myFunction()"></input>
-          <div id="bye" style="display:none">
+          <input type="button" class="btn btn-primary" value="Show More" onclick="myFunction('{{lunch.title}}')"></input>
+          <div id="{{lunch.title}}" style="display:none">
             <p>Rating: {{lunch.rating}}/5</p>
             <p>Ready in: {{lunch.minutes}} minutes</p>
             <p>Ingredients:</p>
@@ -111,11 +112,11 @@
       {% for dinner in dinners %}
       <div class="col-lg-4">
         <div class="thumbnail">
-          <p style="text-align:center; font-weight: bold">Lunch</p>
+          <p style="text-align:center; font-weight: bold">Dinner</p>
           <img src="{{dinner.image}}">
           <p>{{dinner.title}}</p>
-          <input type="button" class="btn btn-primary" value="Show More" onclick="myFunction()"></input>
-          <div id="bye" style="display:none">
+          <input type="button" class="btn btn-primary" value="Show More" onclick="myFunction('{{dinner.title}}')"></input>
+          <div id="{{dinner.title}}" style="display:none">
             <p>Rating: {{dinner.rating}}/5</p>
             <p>Ready in: {{dinner.minutes}} minutes</p>
             <p>Ingredients:</p>
