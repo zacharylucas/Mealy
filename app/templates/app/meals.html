@@ -20,6 +20,19 @@
     }
   </script>
 
+  <script>
+  function addMeal(a) {
+    if(a.value == "Add Meal") {
+      a.value = "Added!";
+      a.style.opacity = 0.5
+    } else {
+      a.value = "Add Meal";
+      a.style.opacity = 1.0
+    }
+
+  }
+  </script>
+
 </head>
 
 <body>
@@ -69,10 +82,11 @@
           <img src="{{breakfast.image}}">
           <p>{{breakfast.title}}</p>
           <input type="button" class="btn btn-primary" value="Show More" onclick="myFunction('{{breakfast.title}}')"></input>
+          <input type="button" class="btn btn-success" style="float:right" value="Add Meal" onclick="addMeal(this)"></input>
           <div id="{{breakfast.title}}" style="display:none">
-            <p>Rating: {{breakfast.rating}}/5</p>
-            <p>Ready in: {{breakfast.minutes}} minutes</p>
-            <p>Ingredients:</p>
+            <p><b>Rating:</b> {{breakfast.rating}}/5</p>
+            <p><b>Ready in:</b> {{breakfast.minutes}} minutes</p>
+            <p><b>Ingredients:</b></p>
             {% for ingredient in breakfast.ingredients %}
             <p>{{ingredient}}</p>
             {% endfor %}
@@ -92,10 +106,11 @@
           <img src="{{lunch.image}}">
           <p>{{lunch.title}}</p>
           <input type="button" class="btn btn-primary" value="Show More" onclick="myFunction('{{lunch.title}}')"></input>
+          <input type="button" class="btn btn-success" style="float:right" value="Add Meal" onclick="addMeal(this)"></input>
           <div id="{{lunch.title}}" style="display:none">
-            <p>Rating: {{lunch.rating}}/5</p>
-            <p>Ready in: {{lunch.minutes}} minutes</p>
-            <p>Ingredients:</p>
+            <p><b>Rating:</b> {{lunch.rating}}/5</p>
+            <p><b>Ready in:</b> {{lunch.minutes}} minutes</p>
+            <p><b>Ingredients:</b></p>
             {% for ingredient in lunch.ingredients %}
             <p>{{ingredient}}</p>
             {% endfor %}
@@ -115,10 +130,11 @@
           <img src="{{dinner.image}}">
           <p>{{dinner.title}}</p>
           <input type="button" class="btn btn-primary" value="Show More" onclick="myFunction('{{dinner.title}}')"></input>
+          <input type="button" class="btn btn-success" style="float:right" value="Add Meal" onclick="addMeal(this)"></input>
           <div id="{{dinner.title}}" style="display:none">
-            <p>Rating: {{dinner.rating}}/5</p>
-            <p>Ready in: {{dinner.minutes}} minutes</p>
-            <p>Ingredients:</p>
+            <p><b>Rating:</b> {{dinner.rating}}/5</p>
+            <p><b>Ready in:</b> {{dinner.minutes}} minutes</p>
+            <p><b>Ingredients:</b></p>
             {% for ingredient in dinner.ingredients %}
             <p>{{ingredient}}</p>
             {% endfor %}
