@@ -31,7 +31,7 @@ def search(request):
 
 def meals(request):
     data = {}
-    if request.method == 'POST':
+    if request.method == 'GET':
         preferences = request.session['prefDict']
         breakfastQueryResults = wQ.prefQueryBreakfast(preferences)
         lunchQueryResults = wQ.prefQueryLunch(preferences)
@@ -72,4 +72,3 @@ def preferenceSelection(request):
         prefDict = pref.createPreferences(request)
         request.session['prefDict'] = prefDict
     return render(request, 'app/preferenceSelection.html', context)
-

@@ -112,3 +112,13 @@ function keyPress(e) {
 function placeHolder() {
   document.getElementById("chatbox").placeholder = "";
 }
+
+
+function myFunction() {
+    var x = document.getElementById("bye");
+    if (x.style.display === "none") {
+        x.style.display = "block";
+    } else {
+        x.style.display = "none";
+    }
+}

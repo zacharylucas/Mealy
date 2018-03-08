@@ -1,152 +1,133 @@
 {% load static %}
 <!DOCTYPE html>
 <html>
+
 <head>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
-    <!-- jQuery library -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="{% static 'app/styles.css' %}"></link>
-    <script type="text/javascript" src = "{% static 'app/scripts.js' %}"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
+  <!-- jQuery library -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="{% static 'app/styles.css' %}"></link>
+  <script type="text/javascript" src="{% static 'app/scripts.js' %}"></script>
+  <script>
+    function myFunction() {
+      var x = document.getElementById("bye");
+      if (x.style.display === "none") {
+        x.style.display = "block";
+      } else {
+        x.style.display = "none";
+      }
+    }
+  </script>
+
+
 </head>
+
 <body>
-    <nav class="navbar navbar-default">
-        <div class="container-fluid">
-        <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+  <nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
                     <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">Mealy</a>
-            </div>
+        <a class="navbar-brand" href="#">Mealy</a>
+      </div>
 
-                <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
-                    <li class=""><a href="#">Meal Plan <span class="sr-only">(current)</span></a></li>
-                    <li><a href="#">Shopping List</a></li>
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#">Sign In</a></li>
-                    <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Account <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">Personal Info</a></li>
-                        <li role="separator" class="divider"></li>
-                        <li><a href="#">Dietary Restrictions</a></li>
-                        <li><a href="#">Preferences</a></li>
-                    </ul>
-                    </li>
-                </ul>
-            </div><!-- /.navbar-collapse -->
-        </div><!-- /.container-fluid -->
-    </nav>
-
-    <div class="container text-center">
-        <form class="form-signin" id="login_form" method="post" action="/app/meals/">
-            {% csrf_token %}
-            <button class="btn btn-lg btn-primary btn-block" type="submit">Get Recipes</button>
-        </form>
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+          <li class=""><a href="#">Meal Plan <span class="sr-only">(current)</span></a></li>
+          <li><a href="#">Shopping List</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="#">Sign In</a></li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Account <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="#">Personal Info</a></li>
+              <li role="separator" class="divider"></li>
+              <li><a href="#">Dietary Restrictions</a></li>
+              <li><a href="#">Preferences</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+      <!-- /.navbar-collapse -->
     </div>
+    <!-- /.container-fluid -->
+  </nav>
 
-    {% for breakfast in breakfasts %}
-    <div class="row justify-content-md-center">
+  <div class="container">
+    <div class="row">
+      {% for breakfast in breakfasts %}
+      <div class="col-lg-4">
         <div class="thumbnail">
-            <div class="col-md-4 col-lg-4">
-                <img src={{breakfast.image}}>
-            </div>
-            <div class="container text-center">
-                <font size="6">{{breakfast.title}}</font>
-                <br>
-                <p>Breakfast</p>
-            </div>
-            
-            <div class="container text-center">
-                <font size="6">Rating: {{breakfast.rating}}/5</font>
-                </div>
-            <div class="container text-center">
-                <font size="6">Ready in: {{breakfast.minutes}} minutes</font>
-                </div>
-                <div class="container text-center">
-                        <font size="6">Ingredients:</font>
-                    </div>
+          <p style="text-align:center; font-weight: bold">Breakfast</p>
+          <img src="{{breakfast.image}}">
+          <p>{{breakfast.title}}</p>
+          <input type="button" class="btn btn-primary" value="Show More" onclick="myFunction()"></input>
+          <div id="bye" style="display:none">
+            <p>Rating: {{breakfast.rating}}/5</p>
+            <p>Ready in: {{breakfast.minutes}} minutes</p>
+            <p>Ingredients:</p>
             {% for ingredient in breakfast.ingredients %}
-                <div class="container text-center">
-                    <font size="6">{{ingredient}}</font>
-                </div>
+            <p>{{ingredient}}</p>
             {% endfor %}
-            <div class="container text-center">
-                <font size="6">{{breakfast.instructions}}</font>
-            </div>
+          </div>
         </div>
+      </div>
+      {% endfor %}
     </div>
-    {% endfor %}
-
-    {% for lunch in lunches %}
-    <div class="row justify-content-md-center">
+  </div>
+  <div class="container">
+    <div class="row">
+      {% for lunch in lunches %}
+      <div class="col-lg-4">
         <div class="thumbnail">
-            <div class="col-md-4 col-lg-4">
-                <img src={{lunch.image}}>
-            </div>
-            <div class="container text-center">
-                <font size="6">{{lunch.title}}</font>
-                <br>
-                <p>Lunch</p>
-            </div>
-            <div class="container text-center">
-                <font size="6">Rating: {{lunch.rating}}/5</font>
-                </div>
-            <div class="container text-center">
-                <font size="6">Ready in: {{lunch.minutes}} minutes</font>
-                </div>
-                <div class="container text-center">
-                        <font size="6">Ingredients:</font>
-                    </div>
+          <p style="text-align:center; font-weight: bold">Lunch</p>
+          <img src="{{lunch.image}}">
+          <p>{{lunch.title}}</p>
+          <input type="button" class="btn btn-primary" value="Show More" onclick="myFunction()"></input>
+          <div id="bye" style="display:none">
+            <p>Rating: {{lunch.rating}}/5</p>
+            <p>Ready in: {{lunch.minutes}} minutes</p>
+            <p>Ingredients:</p>
             {% for ingredient in lunch.ingredients %}
-                <div class="container text-center">
-                    <font size="6">{{ingredient}}</font>
-                </div>
+            <p>{{ingredient}}</p>
             {% endfor %}
-            <div class="container text-center">
-                <font size="6">{{lunch.instructions}}</font>
-            </div>
+          </div>
         </div>
+      </div>
+      {% endfor %}
     </div>
-    {% endfor %}
+  </div>
 
-    {% for dinner in dinners %}
-    <div class="row justify-content-md-center">
+  <div class="container">
+    <div class="row">
+      {% for dinner in dinners %}
+      <div class="col-lg-4">
         <div class="thumbnail">
-            <div class="col-md-4 col-lg-4">
-                <img src={{dinner.image}}>
-            </div>
-            <div class="container text-center">
-                <font size="6">{{dinner.title}}</font>
-                <br>
-                <p>Dinner</p>
-            </div>
-            <div class="container text-center">
-                <font size="6">Rating: {{dinner.rating}}/5</font>
-                </div>
-            <div class="container text-center">
-                <font size="6">Reading in: {{dinner.minutes}} minutes</font>
-                </div>
-                <div class="container text-center">
-                        <font size="6">Ingredients:</font>
-                    </div>
+          <p style="text-align:center; font-weight: bold">Lunch</p>
+          <img src="{{dinner.image}}">
+          <p>{{dinner.title}}</p>
+          <input type="button" class="btn btn-primary" value="Show More" onclick="myFunction()"></input>
+          <div id="bye" style="display:none">
+            <p>Rating: {{dinner.rating}}/5</p>
+            <p>Ready in: {{dinner.minutes}} minutes</p>
+            <p>Ingredients:</p>
             {% for ingredient in dinner.ingredients %}
-                <div class="container text-center">
-                    <font size="6">{{ingredient}}</font>
-                </div>
+            <p>{{ingredient}}</p>
             {% endfor %}
-            <div class="container text-center">
-                <font size="6">{{dinner.instructions}}</font>
-            </div>
+          </div>
         </div>
+      </div>
+      {% endfor %}
     </div>
-    {% endfor %}
+  </div>
 </body>
+
 </html>

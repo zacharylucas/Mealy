@@ -79,3 +79,7 @@ pre {
 .preference-title {
   font-size: 1.5em;
 }
+
+#bye {
+  display: none;
+}
