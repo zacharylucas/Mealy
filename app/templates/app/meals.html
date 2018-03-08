@@ -63,15 +63,16 @@
                 <br>
                 <p>Breakfast</p>
             </div>
+            
             <div class="container text-center">
-                <font size="6">{{breakfast.id}}</font>
-            </div>
-            <div class="container text-center">
-                <font size="6">{{breakfast.rating}}</font>
+                <font size="6">Rating: {{breakfast.rating}}/5</font>
                 </div>
             <div class="container text-center">
-                <font size="6">{{breakfast.minutes}}</font>
+                <font size="6">Ready in: {{breakfast.minutes}} minutes</font>
                 </div>
+                <div class="container text-center">
+                        <font size="6">Ingredients:</font>
+                    </div>
             {% for ingredient in breakfast.ingredients %}
                 <div class="container text-center">
                     <font size="6">{{ingredient}}</font>
@@ -96,14 +97,14 @@
                 <p>Lunch</p>
             </div>
             <div class="container text-center">
-                <font size="6">{{lunch.id}}</font>
-            </div>
-            <div class="container text-center">
-                <font size="6">{{lunch.rating}}</font>
+                <font size="6">Rating: {{lunch.rating}}/5</font>
                 </div>
             <div class="container text-center">
-                <font size="6">{{lunch.minutes}}</font>
+                <font size="6">Ready in: {{lunch.minutes}} minutes</font>
                 </div>
+                <div class="container text-center">
+                        <font size="6">Ingredients:</font>
+                    </div>
             {% for ingredient in lunch.ingredients %}
                 <div class="container text-center">
                     <font size="6">{{ingredient}}</font>
@@ -128,14 +129,14 @@
                 <p>Dinner</p>
             </div>
             <div class="container text-center">
-                <font size="6">{{dinner.id}}</font>
-            </div>
-            <div class="container text-center">
-                <font size="6">{{dinner.rating}}</font>
+                <font size="6">Rating: {{dinner.rating}}/5</font>
                 </div>
             <div class="container text-center">
-                <font size="6">{{dinner.minutes}}</font>
+                <font size="6">Reading in: {{dinner.minutes}} minutes</font>
                 </div>
+                <div class="container text-center">
+                        <font size="6">Ingredients:</font>
+                    </div>
             {% for ingredient in dinner.ingredients %}
                 <div class="container text-center">
                     <font size="6">{{ingredient}}</font>
