@@ -35,15 +35,15 @@ def queryWatson(queryString, count = ''):
     recipe_query = dinner_discovery.query(dinner_environment_id, dinner_collection_id, query= queryString, count = count)
     return recipe_query
 
-def queryBreakfast(queryString, count = ''):
+def queryBreakfast(queryString, count = '7'):
     recipe_query = breakfast_discovery.query(breakfast_environment_id, breakfast_collection_id, query= queryString, count = count)
     return recipe_query
 
-def queryLunch(queryString, count = ''):
+def queryLunch(queryString, count = '7'):
     recipe_query = lunch_discovery.query(lunch_environment_id, lunch_collection_id, query= queryString, count = count)
     return recipe_query
 
-def queryDinner(queryString, count = ''):
+def queryDinner(queryString, count = '7'):
     recipe_query = dinner_discovery.query(dinner_environment_id, dinner_collection_id, query= queryString, count = count)
     return recipe_query
 

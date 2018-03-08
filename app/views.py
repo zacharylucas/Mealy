@@ -29,6 +29,17 @@ def search(request):
         data = {'recipes' : recipes}
     return render(request, 'app/search.html', data)
 
+def meals(request):
+    data = {}
+    if request.method == 'POST':
+        preferences = request.session['prefDict']
+        breakfastQueryResults = wQ.prefQueryBreakfast(preferences)
+        lunchQueryResults = wQ.prefQueryLunch(preferences)
+        dinnerQueryResults = wQ.prefQueryDinner(preferences)
+        data = {'breakfasts' : breakfastQueryResults['results'], 'lunches' : lunchQueryResults['results'], 'dinners' : dinnerQueryResults['results']}
+
+    return render(request, 'app/meals.html', data)
+
 def chatbot(request):
     data = {}
     messages = []
@@ -61,3 +72,4 @@ def preferenceSelection(request):
         prefDict = pref.createPreferences(request)
         request.session['prefDict'] = prefDict
     return render(request, 'app/preferenceSelection.html', context)
+
