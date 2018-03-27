@@ -6,6 +6,7 @@ class UserInfo(models.Model):
     weight = models.IntegerField()
     height = models.IntegerField()
     gain_lose_maintain = models.IntegerField()
+    cell = models.CharField(max_length=12,default='')
     
 class Meal(models.Model):
     discoveryId = models.CharField(max_length=128)
