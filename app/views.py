@@ -1,11 +1,15 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
-from .models import User
 from django.template import loader
+from django.contrib.auth import login, authenticate
+
 from .Controllers import watsonQueries as wQ
 from .Controllers import Conversation as con
 from .Controllers import Preference as pref
+from .Controllers import DatabaseController as DB
+from .models import User
+from .Forms.forms import SignUpForm
 
 # Create your views here.
 def search(request):
@@ -27,6 +31,7 @@ def search(request):
             recipe['instructions'] = currentRecipe['instructions']
             recipes.append(recipe)
         data = {'recipes' : recipes}
+        DB.showUser()
     return render(request, 'app/search.html', data)
 
 def meals(request):
@@ -72,3 +77,17 @@ def preferenceSelection(request):
         prefDict = pref.createPreferences(request)
         request.session['prefDict'] = prefDict
     return render(request, 'app/preferenceSelection.html', context)
+
+def signup(request):
+    if request.method == 'POST':
+        form = SignUpForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get('username')
+            raw_password = form.cleaned_data.get('password1')
+            user = authenticate(username=username, password=raw_password)
+            login(request, user)
+            return redirect('index')
+    else:
+        form = SignUpForm()
+    return render(request, 'app/signup.html', {'form': form})
