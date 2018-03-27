@@ -82,7 +82,6 @@
           <img src="{{breakfast.image}}">
           <p>{{breakfast.title}}</p>
           <input type="button" class="btn btn-primary" value="Show More" onclick="myFunction('{{breakfast.title}}')"></input>
-          <input type="button" class="btn btn-success" style="float:right" value="Add Meal" onclick="addMeal(this)"></input>
           <div id="{{breakfast.title}}" style="display:none">
             <p><b>Rating:</b> {{breakfast.rating}}/5</p>
             <p><b>Ready in:</b> {{breakfast.minutes}} minutes</p>
@@ -106,7 +105,6 @@
           <img src="{{lunch.image}}">
           <p>{{lunch.title}}</p>
           <input type="button" class="btn btn-primary" value="Show More" onclick="myFunction('{{lunch.title}}')"></input>
-          <input type="button" class="btn btn-success" style="float:right" value="Add Meal" onclick="addMeal(this)"></input>
           <div id="{{lunch.title}}" style="display:none">
             <p><b>Rating:</b> {{lunch.rating}}/5</p>
             <p><b>Ready in:</b> {{lunch.minutes}} minutes</p>
@@ -130,7 +128,6 @@
           <img src="{{dinner.image}}">
           <p>{{dinner.title}}</p>
           <input type="button" class="btn btn-primary" value="Show More" onclick="myFunction('{{dinner.title}}')"></input>
-          <input type="button" class="btn btn-success" style="float:right" value="Add Meal" onclick="addMeal(this)"></input>
           <div id="{{dinner.title}}" style="display:none">
             <p><b>Rating:</b> {{dinner.rating}}/5</p>
             <p><b>Ready in:</b> {{dinner.minutes}} minutes</p>
