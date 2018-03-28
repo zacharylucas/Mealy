@@ -76,6 +76,7 @@ def preferenceSelection(request):
     if request.method == 'POST':
         prefDict = pref.createPreferences(request)
         request.session['prefDict'] = prefDict
+        return redirect('meals')
     return render(request, 'app/preferenceSelection.html', context)
 
 def signup(request):
