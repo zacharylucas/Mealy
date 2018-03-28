@@ -48,7 +48,9 @@ def queryDinner(queryString, count = '7'):
     return recipe_query
 
 def prefQueryBreakfast(prefDict):
-    proteinLikes = ['eggs']
+    proteinLikes = []
+    if prefDict['proteinDict']['eggs'] != 'dislike':
+        proteinLikes.append('eggs')
     vegetableLikes = addLikes(prefDict['vegetableDict'])
     fruitLikes = addLikes(prefDict['fruitDict'])
     queryString = selectRandom(proteinLikes, vegetableLikes)
@@ -59,6 +61,7 @@ def prefQueryLunch(prefDict):
     proteinLikes = addLikes(prefDict['proteinDict'])
     carbLikes = addLikes(prefDict['carbDict'])
     queryString = selectRandom(proteinLikes, carbLikes)
+    queryString += addExcludes(prefDict['proteinDict'], prefDict['carbDict'])
     return queryLunch(queryString)
 
 def prefQueryDinner(prefDict):
@@ -66,7 +69,17 @@ def prefQueryDinner(prefDict):
     carbLikes = addLikes(prefDict['carbDict'])
     herbLikes = addLikes(prefDict['herbDict'])
     queryString = selectRandom(proteinLikes, carbLikes, herbLikes)
+    queryString += addExcludes(prefDict['proteinDict'], prefDict['carbDict'])
     return queryDinner(queryString)
+
+def addExcludes(*args):
+    queryString = ''
+    for i in range(len(args)):
+        if len(args[i]) != 0:
+            for key in args[i]:
+                if args[i][key] == 'dislike':
+                    queryString += r',ingredients:!"%s"' % key
+    return queryString
 
 def addLikes(ingredientDict):
     likes = []
@@ -78,5 +91,6 @@ def addLikes(ingredientDict):
 def selectRandom(*args):
     queryString = ""
     for i in range(len(args)):
-        queryString += random.choice(args[i]) + " "
+        if len(args[i]) != 0:
+            queryString += random.choice(args[i]) + " "
     return queryString
