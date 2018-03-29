@@ -14,5 +14,6 @@ urlpatterns = [
     path('meals/', views.meals, name="meals"),
     path('login/', auth_views.login, name='login'),
     path('logout/', auth_views.logout, {'next_page': 'index'}, name='logout'),
-    path('signup/', views.signup, name='signup')
+    path('signup/', views.signup, name='signup'),
+    path('userInfo/', views.userInfo, name='userInfo')
 ]

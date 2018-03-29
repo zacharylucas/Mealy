@@ -10,6 +10,7 @@ from .Controllers import Preference as pref
 from .Controllers import DatabaseController as DB
 from .models import User
 from .Forms.forms import SignUpForm
+from .Forms.forms import UserInfoForm
 
 # Create your views here.
 def search(request):
@@ -70,6 +71,16 @@ def index(request):
 def conversation(request):
 	context = {}
 	return render(request, 'app/conversation.html', context)
+
+def userInfo(request):
+    if request.method == 'POST':
+        form = UserInfoForm(request.POST)
+        return redirect('preferenceSelection')
+        #if form.is_valid():
+            #form.save()
+    else:
+        form = UserInfoForm()
+    return render(request, 'app/userInfo.html', {'form' : form})
 
 def preferenceSelection(request):
     context = {}
