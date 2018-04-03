@@ -2,5 +2,41 @@
 {% block title %}Mealy - Dashboard{% endblock %}
 
 {% block content %}
-<h1>Welcome to Mealy :D</h1>
+    <h2>Dashboard</h2>
+    <p>Select one of the cards below to update your user information, modify your meal preferences, and view your custom generated meal plan!</p>
+    <br>
+    <div class="support-grid"></div>
+    <div class="dashBand">
+        <div class="item">
+            <a href="{% url 'userInfo' %}" class="card">
+                <div class="thumb" style="background-image: url(https://www.graphicpear.com/wp-content/uploads/2018/02/Device-Icons-Dark.jpg);"></div>
+                <article>
+                    <h1>User Information</h1>
+                    <p>Update your personal information and set up your phone number to receive reminders!</p>
+                    <span>User Information</span>
+                </article>
+            </a>
+        </div>
+        <div class="item">
+            <a href="{% url 'preferenceSelection' %}" class="card">
+                <div class="thumb" style="background-image: url(https://www.graphicpear.com/wp-content/uploads/2017/06/Food-Icons-2-1.jpg);"></div>
+                <article>
+                    <h1>Ingredient Preferences</h1>
+                    <p>Tell us what ingredients you love, and which ones you hate. We'll generate tailored meals based off of your decisions!</p>
+                    <span>Ingredient Preferences</span>
+                </article>
+            </a>
+        </div>
+        <div class="item">
+            <a href="{% url 'meals' %}" class="card">
+                <div class="thumb" style="background-image: url(https://www.graphicpear.com/wp-content/uploads/2017/05/35ff0051885341.58fdb827aaf01a.jpg);"></div>
+                <article>
+                    <h1>Meal Plan</h1>
+                    <p>Checkout your custom generated weekly meal plan!</p>
+                    <span>Meal Plan</span>
+                </article>
+            </a>
+        </div>
+    </div>
+
 {% endblock %}
