@@ -61,7 +61,8 @@ def prefQueryLunch(prefDict):
     proteinLikes = addLikes(prefDict['proteinDict'])
     carbLikes = addLikes(prefDict['carbDict'])
     queryString = selectRandom(proteinLikes, carbLikes)
-    queryString += addExcludes(prefDict['proteinDict'], prefDict['carbDict'])
+    if queryString is not '':
+        queryString += addExcludes(prefDict['proteinDict'], prefDict['carbDict'])
     return queryLunch(queryString)
 
 def prefQueryDinner(prefDict):
@@ -69,7 +70,8 @@ def prefQueryDinner(prefDict):
     carbLikes = addLikes(prefDict['carbDict'])
     herbLikes = addLikes(prefDict['herbDict'])
     queryString = selectRandom(proteinLikes, carbLikes, herbLikes)
-    queryString += addExcludes(prefDict['proteinDict'], prefDict['carbDict'])
+    if queryString is not '':
+        queryString += addExcludes(prefDict['proteinDict'], prefDict['carbDict'])
     return queryDinner(queryString)
 
 def addExcludes(*args):
