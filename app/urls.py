@@ -9,6 +9,5 @@ urlpatterns = [
 	path('conversation/', views.conversation, name='conversation'),
     path('preferenceSelection/', views.preferenceSelection, name='preferenceSelection'),
     path('chatbot/', views.chatbot, name = 'chatbot'),
-    path('meals/', views.meals, name="meals"),
-    path('sms/', views.sms, name="sms")
+    path('meals/', views.meals, name="meals")
 ]

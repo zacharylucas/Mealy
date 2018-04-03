@@ -73,15 +73,3 @@ def preferenceSelection(request):
         prefDict = pref.createPreferences(request)
         request.session['prefDict'] = prefDict
     return render(request, 'app/preferenceSelection.html', context)
-
-def sms(request):
-    context = {}
-
-    # take user input from request and send to chatbot (need user's phone number for conversation ID)
-    # get chatbot repsonse
-    chatbotResponse = "Chatbot response goes here."
-
-    response = Element('Response')
-    sms = SubElement(response, "Sms")
-    sms.text = chatbotResponse
-    return HttpResponse(tostring(response), content_type='text/xml')
