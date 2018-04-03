@@ -1,577 +1,531 @@
-{% load static %}
-<!DOCTYPE html>
-<html>
-<head>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
-  <!-- jQuery library -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+{% extends 'base.html' %}
+{% block title %}Mealy - Preferences{% endblock %}
 
-  <link rel="stylesheet" type="text/css" href="{% static 'app/styles.css' %}"></link>
-  <script type="text/javascript" src = "{% static 'app/scripts.js' %}"></script>
-</head>
-<body>
-
-<nav class="navbar navbar-default">
-            <div class="container-fluid">
-                <!-- Brand and toggle get grouped for better mobile display -->
-                <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="#">Mealy</a>
-                </div>
-
-                <!-- Collect the nav links, forms, and other content for toggling -->
-                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
-                    <li class=""><a href="#">Meal Plan <span class="sr-only">(current)</span></a></li>
-                    <li><a href="#">Shopping List</a></li>
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#">Sign In</a></li>
-                    <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Account <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">Personal Info</a></li>
-                        <li role="separator" class="divider"></li>
-                        <li><a href="#">Dietary Restrictions</a></li>
-                        <li><a href="#">Preferences</a></li>
-                    </ul>
-                    </li>
-                </ul>
-                </div><!-- /.navbar-collapse -->
-            </div><!-- /.container-fluid -->
-        </nav>
-        <form method="post" action="/app/preferenceSelection/">
-          {% csrf_token %}
-          <div class="container">
-            <div class="row">
-                <div class="col-md-4">
-                <div class="row">
-                  <div class="col-md-4">
-                    <label class="preference-title">Protein:</label>
-                  </div>
-                  <label class="col-md-4">Like</label>
-                  <label class="col-md-4">Dislike</label>
-                </div>
-                <div class="row">
-                  <div class="col-md-4">Chicken:</div>
-                  <div class="col-md-4">
-                    <input class="form-check-input" type="radio" name="radio-group-chicken" value="like">
-                  </div>
-                  <div class="col-md-4">
-                    <input class="form-check-input" type="radio" name="radio-group-chicken" value="dislike">
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-md-4">Steak:</div>
-                  <div class="col-md-4">
-                    <input class="form-check-input" type="radio" name="radio-group-steak" value="like">
-                  </div>
-                  <div class="col-md-4">
-                    <input class="form-check-input" type="radio" name="radio-group-steak" value="dislike">
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-md-4">Beef:</div>
-                  <div class="col-md-4">
-                    <input class="form-check-input" type="radio" name="radio-group-beef" value="like">
-                  </div>
-                  <div class="col-md-4">
-                    <input class="form-check-input" type="radio" name="radio-group-beef" value="dislike">
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-md-4">Pork:</div>
-                  <div class="col-md-4">
-                    <input class="form-check-input" type="radio" name="radio-group-pork" value="like">
-                  </div>
-                  <div class="col-md-4">
-                    <input class="form-check-input" type="radio" name="radio-group-pork" value="dislike">
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-md-4">Eggs:</div>
-                  <div class="col-md-4">
-                    <input class="form-check-input" type="radio" name="radio-group-eggs" value="like">
-                  </div>
-                  <div class="col-md-4">
-                    <input class="form-check-input" type="radio" name="radio-group-eggs" value="dislike">
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-md-4">Beans:</div>
-                  <div class="col-md-4">
-                    <input class="form-check-input" type="radio" name="radio-group-beans" value="like">
-                  </div>
-                  <div class="col-md-4">
-                    <input class="form-check-input" type="radio" name="radio-group-beans" value="dislike">
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-md-4">Tofu:</div>
-                  <div class="col-md-4">
-                    <input class="form-check-input" type="radio" name="radio-group-tofu" value="like">
-                  </div>
-                  <div class="col-md-4">
-                    <input class="form-check-input" type="radio" name="radio-group-tofu" value="dislike">
-                  </div>
-                </div>
-                <div class="row">
-                    <label>&nbsp;</label>
-                </div>
-                <div class="row">
-                    <label>&nbsp;</label>
-                </div>
-                <div class="row">
-                  <label class="col-md-4 preference-title">Carbs:</label>
-                </div>
-                <div class="row">
-                  <div class="col-md-4">Pasta:</div>
-                  <div class="col-md-4">
-                    <input class="form-check-input" type="radio" name="radio-group-pasta" value="like">
-                  </div>
-                  <div class="col-md-4">
-                    <input class="form-check-input" type="radio" name="radio-group-pasta" value="dislike">
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-md-4">White Bread:</div>
-                  <div class="col-md-4">
-                    <input class="form-check-input" type="radio" name="radio-group-white-bread" value="like">
-                  </div>
-                  <div class="col-md-4">
-                    <input class="form-check-input" type="radio" name="radio-group-white-bread" value="dislike">
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-md-4">Wheat Bread:</div>
-                  <div class="col-md-4">
-                    <input class="form-check-input" type="radio" name="radio-group-wheat-bread" value="like">
-                  </div>
-                  <div class="col-md-4">
-                    <input class="form-check-input" type="radio" name="radio-group-wheat-bread" value="dislike">
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-md-4">Rice:</div>
-                  <div class="col-md-4">
-                    <input class="form-check-input" type="radio" name="radio-group-rice" value="like">
-                  </div>
-                  <div class="col-md-4">
-                    <input class="form-check-input" type="radio" name="radio-group-rice" value="dislike">
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-md-4">Quinoa:</div>
-                  <div class="col-md-4">
-                    <input class="form-check-input" type="radio" name="radio-group-quinoa" value="like">
-                  </div>
-                  <div class="col-md-4">
-                    <input class="form-check-input" type="radio" name="radio-group-quinoa" value="dislike">
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-md-4">Whole Grains:</div>
-                  <div class="col-md-4">
-                    <input class="form-check-input" type="radio" name="radio-group-whole-grains" value="like">
-                  </div>
-                  <div class="col-md-4">
-                    <input class="form-check-input" type="radio" name="radio-group-whole-grains" value="dislike">
-                  </div>
-                </div>
-                <div class="row">
-                    <label>&nbsp;</label>
-                </div>
-                <div class="row">
-                    <label>&nbsp;</label>
-                </div>
-                <div class="row">
-                  <label class="col-md-4 preference-title">Fruits:</label>
-                </div>
-                <div class="row">
-                  <div class="col-md-4">Bananas:</div>
-                  <div class="col-md-4">
-                    <input class="form-check-input" type="radio" name="radio-group-bananas" value="like">
-                  </div>
-                  <div class="col-md-4">
-                    <input class="form-check-input" type="radio" name="radio-group-bananas" value="dislike">
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-md-4">Berries:</div>
-                  <div class="col-md-4">
-                    <input class="form-check-input" type="radio" name="radio-group-berries" value="like">
-                  </div>
-                  <div class="col-md-4">
-                    <input class="form-check-input" type="radio" name="radio-group-berries" value="dislike">
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-md-4">Melons:</div>
-                  <div class="col-md-4">
-                    <input class="form-check-input" type="radio" name="radio-group-melons" value="like">
-                  </div>
-                  <div class="col-md-4">
-                    <input class="form-check-input" type="radio" name="radio-group-melons" value="dislike">
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-md-4">Apples:</div>
-                  <div class="col-md-4">
-                    <input class="form-check-input" type="radio" name="radio-group-apples" value="like">
-                  </div>
-                  <div class="col-md-4">
-                    <input class="form-check-input" type="radio" name="radio-group-apples" value="dislike">
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-md-4">Citruses:</div>
-                  <div class="col-md-4">
-                    <input class="form-check-input" type="radio" name="radio-group-citruses" value="like">
-                  </div>
-                  <div class="col-md-4">
-                    <input class="form-check-input" type="radio" name="radio-group-citruses" value="dislike">
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-md-4">Lemons:</div>
-                  <div class="col-md-4">
-                    <input class="form-check-input" type="radio" name="radio-group-lemons" value="like">
-                  </div>
-                  <div class="col-md-4">
-                    <input class="form-check-input" type="radio" name="radio-group-lemons" value="dislike">
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-md-4">Limes:</div>
-                  <div class="col-md-4">
-                    <input class="form-check-input" type="radio" name="radio-group-limes" value="like">
-                  </div>
-                  <div class="col-md-4">
-                    <input class="form-check-input" type="radio" name="radio-group-limes" value="dislike">
-                  </div>
-                </div>
-                <div class="row">
-                    <label>&nbsp;</label>
-                </div>
-                <div class="row">
-                    <label>&nbsp;</label>
-                </div>
-                <div class="row">
-                  <label class="col-md-4 preference-title">Vegetables:</label>
-                </div>
-                <div class="row">
-                  <div class="col-md-4">Carrots:</div>
-                  <div class="col-md-4">
-                    <input class="form-check-input" type="radio" name="radio-group-carrots" value="like">
-                  </div>
-                  <div class="col-md-4">
-                    <input class="form-check-input" type="radio" name="radio-group-carrots" value="dislike">
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-md-4">Squash:</div>
-                  <div class="col-md-4">
-                    <input class="form-check-input" type="radio" name="radio-group-squash" value="like">
-                  </div>
-                  <div class="col-md-4">
-                    <input class="form-check-input" type="radio" name="radio-group-squash" value="dislike">
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-md-4">Cucumbers:</div>
-                  <div class="col-md-4">
-                    <input class="form-check-input" type="radio" name="radio-group-cucumbers" value="like">
-                  </div>
-                  <div class="col-md-4">
-                    <input class="form-check-input" type="radio" name="radio-group-cucumbers" value="dislike">
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-md-4">Peppers:</div>
-                  <div class="col-md-4">
-                    <input class="form-check-input" type="radio" name="radio-group-peppers" value="like">
-                  </div>
-                  <div class="col-md-4">
-                    <input class="form-check-input" type="radio" name="radio-group-peppers" value="dislike">
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-md-4">Onions:</div>
-                  <div class="col-md-4">
-                    <input class="form-check-input" type="radio" name="radio-group-onions" value="like">
-                  </div>
-                  <div class="col-md-4">
-                    <input class="form-check-input" type="radio" name="radio-group-onions" value="dislike">
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-md-4">Celery:</div>
-                  <div class="col-md-4">
-                    <input class="form-check-input" type="radio" name="radio-group-celery" value="like">
-                  </div>
-                  <div class="col-md-4">
-                    <input class="form-check-input" type="radio" name="radio-group-celery" value="dislike">
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-md-4">Leafy Greens:</div>
-                  <div class="col-md-4">
-                    <input class="form-check-input" type="radio" name="radio-group-leafy-greens" value="like">
-                  </div>
-                  <div class="col-md-4">
-                    <input class="form-check-input" type="radio" name="radio-group-leafy-greens" value="dislike">
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-4">
-                &nbsp;
-              </div>
-              <div class="col-md-4">
-                  <div class="row">
-                    <div class="col-md-4">
-                      <label class="preference-title">Dariy:</label>
-                    </div>
-                    <label class="col-md-4">Like</label>
-                    <label class="col-md-4">Dislike</label>
-                  </div>
-                  <div class="row">
-                    <div class="col-md-4">Milk:</div>
-                    <div class="col-md-4">
-                      <input class="form-check-input" type="radio" name="radio-group-milk" value="like">
-                    </div>
-                    <div class="col-md-4">
-                      <input class="form-check-input" type="radio" name="radio-group-milk" value="dislike">
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-md-4">Yogurt:</div>
-                    <div class="col-md-4">
-                      <input class="form-check-input" type="radio" name="radio-group-yogurt" value="like">
-                    </div>
-                    <div class="col-md-4">
-                      <input class="form-check-input" type="radio" name="radio-group-yogurt" value="dislike">
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-md-4">Cheese:</div>
-                    <div class="col-md-4">
-                      <input class="form-check-input" type="radio" name="radio-group-cheese" value="like">
-                    </div>
-                    <div class="col-md-4">
-                      <input class="form-check-input" type="radio" name="radio-group-cheese" value="dislike">
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-md-4">Skim Milk:</div>
-                    <div class="col-md-4">
-                      <input class="form-check-input" type="radio" name="radio-group-skim-milk" value="like">
-                    </div>
-                    <div class="col-md-4">
-                      <input class="form-check-input" type="radio" name="radio-group-skim-milk" value="dislike">
-                    </div>
-                  </div>
-                  <div class="row">
-                      <label>&nbsp;</label>
-                  </div>
-                  <div class="row">
-                      <label>&nbsp;</label>
-                  </div>
-                  <div class="row">
-                    <label class="col-md-4 preference-title">Spices:</label>
-                  </div>
-                  <div class="row">
-                    <div class="col-md-4">Garlic:</div>
-                    <div class="col-md-4">
-                      <input class="form-check-input" type="radio" name="radio-group-garlic" value="like">
-                    </div>
-                    <div class="col-md-4">
-                      <input class="form-check-input" type="radio" name="radio-group-garlic" value="dislike">
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-md-4">Chili Powder:</div>
-                    <div class="col-md-4">
-                      <input class="form-check-input" type="radio" name="radio-group-chili-powder" value="like">
-                    </div>
-                    <div class="col-md-4">
-                      <input class="form-check-input" type="radio" name="radio-group-chili-powder" value="dislike">
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-md-4">Cayenne:</div>
-                    <div class="col-md-4">
-                      <input class="form-check-input" type="radio" name="radio-group-cayenne" value="like">
-                    </div>
-                    <div class="col-md-4">
-                      <input class="form-check-input" type="radio" name="radio-group-cayenne" value="dislike">
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-md-4">Cumin:</div>
-                    <div class="col-md-4">
-                      <input class="form-check-input" type="radio" name="radio-group-cumin" value="like">
-                    </div>
-                    <div class="col-md-4">
-                      <input class="form-check-input" type="radio" name="radio-group-cumin" value="dislike">
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-md-4">Ginger:</div>
-                    <div class="col-md-4">
-                      <input class="form-check-input" type="radio" name="radio-group-ginger" value="like">
-                    </div>
-                    <div class="col-md-4">
-                      <input class="form-check-input" type="radio" name="radio-group-ginger" value="dislike">
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-md-4">Paprika:</div>
-                    <div class="col-md-4">
-                      <input class="form-check-input" type="radio" name="radio-group-paprika" value="like">
-                    </div>
-                    <div class="col-md-4">
-                      <input class="form-check-input" type="radio" name="radio-group-paprika" value="dislike">
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-md-4">Saffron:</div>
-                    <div class="col-md-4">
-                      <input class="form-check-input" type="radio" name="radio-group-saffron" value="like">
-                    </div>
-                    <div class="col-md-4">
-                      <input class="form-check-input" type="radio" name="radio-group-saffron" value="dislike">
-                    </div>
-                  </div>
-                  <div class="row">
-                      <label>&nbsp;</label>
-                  </div>
-                  <div class="row">
-                      <label>&nbsp;</label>
-                  </div>
-                  <div class="row">
-                    <label class="col-md-4 preference-title">Herbs:</label>
-                  </div>
-                  <div class="row">
-                    <div class="col-md-4">Oregano:</div>
-                    <div class="col-md-4">
-                      <input class="form-check-input" type="radio" name="radio-group-oregano" value="like">
-                    </div>
-                    <div class="col-md-4">
-                      <input class="form-check-input" type="radio" name="radio-group-oregano" value="dislike">
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-md-4">Cilantro:</div>
-                    <div class="col-md-4">
-                      <input class="form-check-input" type="radio" name="radio-group-cilantro" value="like">
-                    </div>
-                    <div class="col-md-4">
-                      <input class="form-check-input" type="radio" name="radio-group-cilantro" value="dislike">
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-md-4">Thyme:</div>
-                    <div class="col-md-4">
-                      <input class="form-check-input" type="radio" name="radio-group-thyme" value="like">
-                    </div>
-                    <div class="col-md-4">
-                      <input class="form-check-input" type="radio" name="radio-group-thyme" value="dislike">
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-md-4">Basil:</div>
-                    <div class="col-md-4">
-                      <input class="form-check-input" type="radio" name="radio-group-basil" value="like">
-                    </div>
-                    <div class="col-md-4">
-                      <input class="form-check-input" type="radio" name="radio-group-basil" value="dislike">
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-md-4">Parsley:</div>
-                    <div class="col-md-4">
-                      <input class="form-check-input" type="radio" name="radio-group-parsley" value="like">
-                    </div>
-                    <div class="col-md-4">
-                      <input class="form-check-input" type="radio" name="radio-group-parsley" value="dislike">
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-md-4">Rosemary:</div>
-                    <div class="col-md-4">
-                      <input class="form-check-input" type="radio" name="radio-group-rosemary" value="like">
-                    </div>
-                    <div class="col-md-4">
-                      <input class="form-check-input" type="radio" name="radio-group-rosemary" value="dislike">
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-md-4">Mint:</div>
-                    <div class="col-md-4">
-                      <input class="form-check-input" type="radio" name="radio-group-mint" value="like">
-                    </div>
-                    <div class="col-md-4">
-                      <input class="form-check-input" type="radio" name="radio-group-mint" value="dislike">
-                    </div>
-                  </div>
-                  <div class="row">
-                      <label>&nbsp;</label>
-                  </div>
-                  <div class="row">
-                      <label>&nbsp;</label>
-                  </div>
-                  <div class="row">
-                    <label class="col-md-4 preference-title">Sweets:</label>
-                  </div>
-                  <div class="row">
-                    <div class="col-md-4">Cake:</div>
-                    <div class="col-md-4">
-                      <input class="form-check-input" type="radio" name="radio-group-cake" value="like">
-                    </div>
-                    <div class="col-md-4">
-                      <input class="form-check-input" type="radio" name="radio-group-cake" value="dislike">
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-md-4">Pudding:</div>
-                    <div class="col-md-4">
-                      <input class="form-check-input" type="radio" name="radio-group-pudding" value="like">
-                    </div>
-                    <div class="col-md-4">
-                      <input class="form-check-input" type="radio" name="radio-group-pudding" value="dislike">
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-md-4">Pie:</div>
-                    <div class="col-md-4">
-                      <input class="form-check-input" type="radio" name="radio-group-pie" value="like">
-                    </div>
-                    <div class="col-md-4">
-                      <input class="form-check-input" type="radio" name="radio-group-pie" value="dislike">
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-md-4">Ice Cream:</div>
-                    <div class="col-md-4">
-                      <input class="form-check-input" type="radio" name="radio-group-ice-cream" value="like">
-                    </div>
-                    <div class="col-md-4">
-                      <input class="form-check-input" type="radio" name="radio-group-ice-cream" value="dislike">
-                    </div>
-                  </div>
-                  <div class="col-md-12">
-                    <input type="submit" class="btn btn-info" value="Submit"></input>
-                  </div>
-                </div>
+{% block content %}
+  <form method="post" action="/app/preferenceSelection/">
+    {% csrf_token %}
+    <div class="container">
+      <div class="row">
+          <div class="col-md-4">
+          <div class="row">
+            <div class="col-md-4">
+              <label class="preference-title">Protein:</label>
+            </div>
+            <label class="col-md-4">Like</label>
+            <label class="col-md-4">Dislike</label>
+          </div>
+          <div class="row">
+            <div class="col-md-4">Chicken:</div>
+            <div class="col-md-4">
+              <input class="form-check-input" type="radio" name="radio-group-chicken" value="like">
+            </div>
+            <div class="col-md-4">
+              <input class="form-check-input" type="radio" name="radio-group-chicken" value="dislike">
             </div>
           </div>
-        </form>
-</div>
-</body>
-</html>
+          <div class="row">
+            <div class="col-md-4">Steak:</div>
+            <div class="col-md-4">
+              <input class="form-check-input" type="radio" name="radio-group-steak" value="like">
+            </div>
+            <div class="col-md-4">
+              <input class="form-check-input" type="radio" name="radio-group-steak" value="dislike">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4">Beef:</div>
+            <div class="col-md-4">
+              <input class="form-check-input" type="radio" name="radio-group-beef" value="like">
+            </div>
+            <div class="col-md-4">
+              <input class="form-check-input" type="radio" name="radio-group-beef" value="dislike">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4">Pork:</div>
+            <div class="col-md-4">
+              <input class="form-check-input" type="radio" name="radio-group-pork" value="like">
+            </div>
+            <div class="col-md-4">
+              <input class="form-check-input" type="radio" name="radio-group-pork" value="dislike">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4">Eggs:</div>
+            <div class="col-md-4">
+              <input class="form-check-input" type="radio" name="radio-group-eggs" value="like">
+            </div>
+            <div class="col-md-4">
+              <input class="form-check-input" type="radio" name="radio-group-eggs" value="dislike">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4">Beans:</div>
+            <div class="col-md-4">
+              <input class="form-check-input" type="radio" name="radio-group-beans" value="like">
+            </div>
+            <div class="col-md-4">
+              <input class="form-check-input" type="radio" name="radio-group-beans" value="dislike">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4">Tofu:</div>
+            <div class="col-md-4">
+              <input class="form-check-input" type="radio" name="radio-group-tofu" value="like">
+            </div>
+            <div class="col-md-4">
+              <input class="form-check-input" type="radio" name="radio-group-tofu" value="dislike">
+            </div>
+          </div>
+          <div class="row">
+              <label>&nbsp;</label>
+          </div>
+          <div class="row">
+              <label>&nbsp;</label>
+          </div>
+          <div class="row">
+            <label class="col-md-4 preference-title">Carbs:</label>
+          </div>
+          <div class="row">
+            <div class="col-md-4">Pasta:</div>
+            <div class="col-md-4">
+              <input class="form-check-input" type="radio" name="radio-group-pasta" value="like">
+            </div>
+            <div class="col-md-4">
+              <input class="form-check-input" type="radio" name="radio-group-pasta" value="dislike">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4">White Bread:</div>
+            <div class="col-md-4">
+              <input class="form-check-input" type="radio" name="radio-group-white-bread" value="like">
+            </div>
+            <div class="col-md-4">
+              <input class="form-check-input" type="radio" name="radio-group-white-bread" value="dislike">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4">Wheat Bread:</div>
+            <div class="col-md-4">
+              <input class="form-check-input" type="radio" name="radio-group-wheat-bread" value="like">
+            </div>
+            <div class="col-md-4">
+              <input class="form-check-input" type="radio" name="radio-group-wheat-bread" value="dislike">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4">Rice:</div>
+            <div class="col-md-4">
+              <input class="form-check-input" type="radio" name="radio-group-rice" value="like">
+            </div>
+            <div class="col-md-4">
+              <input class="form-check-input" type="radio" name="radio-group-rice" value="dislike">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4">Quinoa:</div>
+            <div class="col-md-4">
+              <input class="form-check-input" type="radio" name="radio-group-quinoa" value="like">
+            </div>
+            <div class="col-md-4">
+              <input class="form-check-input" type="radio" name="radio-group-quinoa" value="dislike">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4">Whole Grains:</div>
+            <div class="col-md-4">
+              <input class="form-check-input" type="radio" name="radio-group-whole-grains" value="like">
+            </div>
+            <div class="col-md-4">
+              <input class="form-check-input" type="radio" name="radio-group-whole-grains" value="dislike">
+            </div>
+          </div>
+          <div class="row">
+              <label>&nbsp;</label>
+          </div>
+          <div class="row">
+              <label>&nbsp;</label>
+          </div>
+          <div class="row">
+            <label class="col-md-4 preference-title">Fruits:</label>
+          </div>
+          <div class="row">
+            <div class="col-md-4">Bananas:</div>
+            <div class="col-md-4">
+              <input class="form-check-input" type="radio" name="radio-group-bananas" value="like">
+            </div>
+            <div class="col-md-4">
+              <input class="form-check-input" type="radio" name="radio-group-bananas" value="dislike">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4">Berries:</div>
+            <div class="col-md-4">
+              <input class="form-check-input" type="radio" name="radio-group-berries" value="like">
+            </div>
+            <div class="col-md-4">
+              <input class="form-check-input" type="radio" name="radio-group-berries" value="dislike">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4">Melons:</div>
+            <div class="col-md-4">
+              <input class="form-check-input" type="radio" name="radio-group-melons" value="like">
+            </div>
+            <div class="col-md-4">
+              <input class="form-check-input" type="radio" name="radio-group-melons" value="dislike">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4">Apples:</div>
+            <div class="col-md-4">
+              <input class="form-check-input" type="radio" name="radio-group-apples" value="like">
+            </div>
+            <div class="col-md-4">
+              <input class="form-check-input" type="radio" name="radio-group-apples" value="dislike">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4">Citruses:</div>
+            <div class="col-md-4">
+              <input class="form-check-input" type="radio" name="radio-group-citruses" value="like">
+            </div>
+            <div class="col-md-4">
+              <input class="form-check-input" type="radio" name="radio-group-citruses" value="dislike">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4">Lemons:</div>
+            <div class="col-md-4">
+              <input class="form-check-input" type="radio" name="radio-group-lemons" value="like">
+            </div>
+            <div class="col-md-4">
+              <input class="form-check-input" type="radio" name="radio-group-lemons" value="dislike">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4">Limes:</div>
+            <div class="col-md-4">
+              <input class="form-check-input" type="radio" name="radio-group-limes" value="like">
+            </div>
+            <div class="col-md-4">
+              <input class="form-check-input" type="radio" name="radio-group-limes" value="dislike">
+            </div>
+          </div>
+          <div class="row">
+              <label>&nbsp;</label>
+          </div>
+          <div class="row">
+              <label>&nbsp;</label>
+          </div>
+          <div class="row">
+            <label class="col-md-4 preference-title">Vegetables:</label>
+          </div>
+          <div class="row">
+            <div class="col-md-4">Carrots:</div>
+            <div class="col-md-4">
+              <input class="form-check-input" type="radio" name="radio-group-carrots" value="like">
+            </div>
+            <div class="col-md-4">
+              <input class="form-check-input" type="radio" name="radio-group-carrots" value="dislike">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4">Squash:</div>
+            <div class="col-md-4">
+              <input class="form-check-input" type="radio" name="radio-group-squash" value="like">
+            </div>
+            <div class="col-md-4">
+              <input class="form-check-input" type="radio" name="radio-group-squash" value="dislike">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4">Cucumbers:</div>
+            <div class="col-md-4">
+              <input class="form-check-input" type="radio" name="radio-group-cucumbers" value="like">
+            </div>
+            <div class="col-md-4">
+              <input class="form-check-input" type="radio" name="radio-group-cucumbers" value="dislike">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4">Peppers:</div>
+            <div class="col-md-4">
+              <input class="form-check-input" type="radio" name="radio-group-peppers" value="like">
+            </div>
+            <div class="col-md-4">
+              <input class="form-check-input" type="radio" name="radio-group-peppers" value="dislike">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4">Onions:</div>
+            <div class="col-md-4">
+              <input class="form-check-input" type="radio" name="radio-group-onions" value="like">
+            </div>
+            <div class="col-md-4">
+              <input class="form-check-input" type="radio" name="radio-group-onions" value="dislike">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4">Celery:</div>
+            <div class="col-md-4">
+              <input class="form-check-input" type="radio" name="radio-group-celery" value="like">
+            </div>
+            <div class="col-md-4">
+              <input class="form-check-input" type="radio" name="radio-group-celery" value="dislike">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4">Leafy Greens:</div>
+            <div class="col-md-4">
+              <input class="form-check-input" type="radio" name="radio-group-leafy-greens" value="like">
+            </div>
+            <div class="col-md-4">
+              <input class="form-check-input" type="radio" name="radio-group-leafy-greens" value="dislike">
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          &nbsp;
+        </div>
+        <div class="col-md-4">
+            <div class="row">
+              <div class="col-md-4">
+                <label class="preference-title">Dariy:</label>
+              </div>
+              <label class="col-md-4">Like</label>
+              <label class="col-md-4">Dislike</label>
+            </div>
+            <div class="row">
+              <div class="col-md-4">Milk:</div>
+              <div class="col-md-4">
+                <input class="form-check-input" type="radio" name="radio-group-milk" value="like">
+              </div>
+              <div class="col-md-4">
+                <input class="form-check-input" type="radio" name="radio-group-milk" value="dislike">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4">Yogurt:</div>
+              <div class="col-md-4">
+                <input class="form-check-input" type="radio" name="radio-group-yogurt" value="like">
+              </div>
+              <div class="col-md-4">
+                <input class="form-check-input" type="radio" name="radio-group-yogurt" value="dislike">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4">Cheese:</div>
+              <div class="col-md-4">
+                <input class="form-check-input" type="radio" name="radio-group-cheese" value="like">
+              </div>
+              <div class="col-md-4">
+                <input class="form-check-input" type="radio" name="radio-group-cheese" value="dislike">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4">Skim Milk:</div>
+              <div class="col-md-4">
+                <input class="form-check-input" type="radio" name="radio-group-skim-milk" value="like">
+              </div>
+              <div class="col-md-4">
+                <input class="form-check-input" type="radio" name="radio-group-skim-milk" value="dislike">
+              </div>
+            </div>
+            <div class="row">
+                <label>&nbsp;</label>
+            </div>
+            <div class="row">
+                <label>&nbsp;</label>
+            </div>
+            <div class="row">
+              <label class="col-md-4 preference-title">Spices:</label>
+            </div>
+            <div class="row">
+              <div class="col-md-4">Garlic:</div>
+              <div class="col-md-4">
+                <input class="form-check-input" type="radio" name="radio-group-garlic" value="like">
+              </div>
+              <div class="col-md-4">
+                <input class="form-check-input" type="radio" name="radio-group-garlic" value="dislike">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4">Chili Powder:</div>
+              <div class="col-md-4">
+                <input class="form-check-input" type="radio" name="radio-group-chili-powder" value="like">
+              </div>
+              <div class="col-md-4">
+                <input class="form-check-input" type="radio" name="radio-group-chili-powder" value="dislike">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4">Cayenne:</div>
+              <div class="col-md-4">
+                <input class="form-check-input" type="radio" name="radio-group-cayenne" value="like">
+              </div>
+              <div class="col-md-4">
+                <input class="form-check-input" type="radio" name="radio-group-cayenne" value="dislike">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4">Cumin:</div>
+              <div class="col-md-4">
+                <input class="form-check-input" type="radio" name="radio-group-cumin" value="like">
+              </div>
+              <div class="col-md-4">
+                <input class="form-check-input" type="radio" name="radio-group-cumin" value="dislike">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4">Ginger:</div>
+              <div class="col-md-4">
+                <input class="form-check-input" type="radio" name="radio-group-ginger" value="like">
+              </div>
+              <div class="col-md-4">
+                <input class="form-check-input" type="radio" name="radio-group-ginger" value="dislike">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4">Paprika:</div>
+              <div class="col-md-4">
+                <input class="form-check-input" type="radio" name="radio-group-paprika" value="like">
+              </div>
+              <div class="col-md-4">
+                <input class="form-check-input" type="radio" name="radio-group-paprika" value="dislike">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4">Saffron:</div>
+              <div class="col-md-4">
+                <input class="form-check-input" type="radio" name="radio-group-saffron" value="like">
+              </div>
+              <div class="col-md-4">
+                <input class="form-check-input" type="radio" name="radio-group-saffron" value="dislike">
+              </div>
+            </div>
+            <div class="row">
+                <label>&nbsp;</label>
+            </div>
+            <div class="row">
+                <label>&nbsp;</label>
+            </div>
+            <div class="row">
+              <label class="col-md-4 preference-title">Herbs:</label>
+            </div>
+            <div class="row">
+              <div class="col-md-4">Oregano:</div>
+              <div class="col-md-4">
+                <input class="form-check-input" type="radio" name="radio-group-oregano" value="like">
+              </div>
+              <div class="col-md-4">
+                <input class="form-check-input" type="radio" name="radio-group-oregano" value="dislike">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4">Cilantro:</div>
+              <div class="col-md-4">
+                <input class="form-check-input" type="radio" name="radio-group-cilantro" value="like">
+              </div>
+              <div class="col-md-4">
+                <input class="form-check-input" type="radio" name="radio-group-cilantro" value="dislike">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4">Thyme:</div>
+              <div class="col-md-4">
+                <input class="form-check-input" type="radio" name="radio-group-thyme" value="like">
+              </div>
+              <div class="col-md-4">
+                <input class="form-check-input" type="radio" name="radio-group-thyme" value="dislike">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4">Basil:</div>
+              <div class="col-md-4">
+                <input class="form-check-input" type="radio" name="radio-group-basil" value="like">
+              </div>
+              <div class="col-md-4">
+                <input class="form-check-input" type="radio" name="radio-group-basil" value="dislike">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4">Parsley:</div>
+              <div class="col-md-4">
+                <input class="form-check-input" type="radio" name="radio-group-parsley" value="like">
+              </div>
+              <div class="col-md-4">
+                <input class="form-check-input" type="radio" name="radio-group-parsley" value="dislike">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4">Rosemary:</div>
+              <div class="col-md-4">
+                <input class="form-check-input" type="radio" name="radio-group-rosemary" value="like">
+              </div>
+              <div class="col-md-4">
+                <input class="form-check-input" type="radio" name="radio-group-rosemary" value="dislike">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4">Mint:</div>
+              <div class="col-md-4">
+                <input class="form-check-input" type="radio" name="radio-group-mint" value="like">
+              </div>
+              <div class="col-md-4">
+                <input class="form-check-input" type="radio" name="radio-group-mint" value="dislike">
+              </div>
+            </div>
+            <div class="row">
+                <label>&nbsp;</label>
+            </div>
+            <div class="row">
+                <label>&nbsp;</label>
+            </div>
+            <div class="row">
+              <label class="col-md-4 preference-title">Sweets:</label>
+            </div>
+            <div class="row">
+              <div class="col-md-4">Cake:</div>
+              <div class="col-md-4">
+                <input class="form-check-input" type="radio" name="radio-group-cake" value="like">
+              </div>
+              <div class="col-md-4">
+                <input class="form-check-input" type="radio" name="radio-group-cake" value="dislike">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4">Pudding:</div>
+              <div class="col-md-4">
+                <input class="form-check-input" type="radio" name="radio-group-pudding" value="like">
+              </div>
+              <div class="col-md-4">
+                <input class="form-check-input" type="radio" name="radio-group-pudding" value="dislike">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4">Pie:</div>
+              <div class="col-md-4">
+                <input class="form-check-input" type="radio" name="radio-group-pie" value="like">
+              </div>
+              <div class="col-md-4">
+                <input class="form-check-input" type="radio" name="radio-group-pie" value="dislike">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4">Ice Cream:</div>
+              <div class="col-md-4">
+                <input class="form-check-input" type="radio" name="radio-group-ice-cream" value="like">
+              </div>
+              <div class="col-md-4">
+                <input class="form-check-input" type="radio" name="radio-group-ice-cream" value="dislike">
+              </div>
+            </div>
+            <div class="col-md-12">
+              <input type="submit" class="btn btn-info" value="Submit"></input>
+            </div>
+          </div>
+      </div>
+    </div>
+  </form>
+{% endblock %}

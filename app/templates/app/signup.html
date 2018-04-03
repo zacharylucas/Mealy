@@ -1,23 +1,25 @@
 {% extends 'base.html' %}
+{% block title %}Mealy - Sign Up{% endblock %}
 
 {% block content %}
-  <h2>Sign up</h2>
+  <h2>Let's Get Started!</h2>
   <form method="post">
     {% csrf_token %}
     {% for field in form %}
       <p>
-        {{ field.label_tag }}<br>
+        {{ field.label_tag }}
+        <br>
         {{ field }}
         {% if field.help_text %}
-            {% if field.label_tag != "Password:" %}
-                <small style="color: grey">{{ field.help_text|safe }}</small>
-            {% endif %}
+          {% if field.label_tag != "Password:" %}
+            <small style="color: grey">{{ field.help_text|safe }}</small>
+          {% endif %}
         {% endif %}
         {% for error in field.errors %}
-          <p style="color: red">{{ error }}</p>
+          <p style="color: #FF653A">{{ error }}</p>
         {% endfor %}
       </p>
     {% endfor %}
-    <button type="submit">Sign up</button>
+    <button class="buttonRound" type="submit">Sign up</button>
   </form>
 {% endblock %}

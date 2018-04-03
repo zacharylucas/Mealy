@@ -1,124 +1,65 @@
-{% load static %}
-<!DOCTYPE html>
-<html>
+{% extends 'base.html' %}
+{% block title %}Mealy - Meal Plan{% endblock %}
 
-<head>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
-  <!-- jQuery library -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <link rel="stylesheet" type="text/css" href="{% static 'app/styles.css' %}"></link>
-  <script type="text/javascript" src="{% static 'app/scripts.js' %}"></script>
-  <script>
-    function myFunction(a) {
-      var x = document.getElementById(a);
-      if (x.style.display === "none") {
-        x.style.display = "block";
-      } else {
-        x.style.display = "none";
-      }
-    }
-  </script>
+{% block content %}
+  <br>
+  <br>
+  <div class="support-grid"></div>
+  <div class="band">
+    <div class="item"><h3>Monday</h3></div>
+    <div class="item"><h3>Tuesday</h3></div>
+    <div class="item"><h3>Wednesday</h3></div>
+    <div class="item"><h3>Thursday</h3></div>
+    <div class="item"><h3>Friday</h3></div>
+    <div class="item"><h3>Saturday</h3></div>
+    <div class="item"><h3>Sunday</h3></div>
 
-  <script>
-  function addMeal(a) {
-    if(a.value == "Add Meal") {
-      a.value = "Added!";
-      a.style.opacity = 0.5
-    } else {
-      a.value = "Add Meal";
-      a.style.opacity = 1.0
-    }
-
-  }
-  </script>
-
-</head>
-
-<body>
-  <nav class="navbar navbar-default">
-    <div class="container-fluid">
-      <!-- Brand and toggle get grouped for better mobile display -->
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-        <a class="navbar-brand" href="#">Mealy</a>
+    {% for breakfast in breakfasts %}
+      <div class="item">
+        <a href="#" class="card">
+          <div class="thumb" style="background-image: url({{breakfast.image}});"></div>
+          <article>
+            <h1>{{breakfast.title}}</h1>
+            <p>Rating: {{breakfast.rating}}/5
+               Ready in: {{breakfast.minutes}} minutes
+            </p>
+            <span>Breakfast</span>
+          </article>
+        </a>
       </div>
+    {% endfor %}  
 
-      <!-- Collect the nav links, forms, and other content for toggling -->
-      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-        <ul class="nav navbar-nav">
-          <li class=""><a href="#">Meal Plan <span class="sr-only">(current)</span></a></li>
-          <li><a href="#">Shopping List</a></li>
-        </ul>
-        <ul class="nav navbar-nav navbar-right">
-          <li><a href="#">Sign In</a></li>
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Account <span class="caret"></span></a>
-            <ul class="dropdown-menu">
-              <li><a href="#">Personal Info</a></li>
-              <li role="separator" class="divider"></li>
-              <li><a href="#">Dietary Restrictions</a></li>
-              <li><a href="#">Preferences</a></li>
-            </ul>
-          </li>
-        </ul>
+    {% for lunch in lunches %}
+      <div class="item">
+        <a href="#" class="card">
+          <div class="thumb" style="background-image: url({{lunch.image}});"></div>
+          <article>
+            <h1>{{lunch.title}}</h1>
+            <p>Rating: {{lunch.rating}}/5
+                Ready in: {{lunch.minutes}} minutes
+            </p>
+            <span>Lunch</span>
+          </article>
+        </a>
       </div>
-      <!-- /.navbar-collapse -->
-    </div>
-    <!-- /.container-fluid -->
-  </nav>
+    {% endfor %}  
 
-  <div class="container">
-    <div class="row">
-      {% for breakfast in breakfasts %}
-      <div class="col-lg-4">
-        <div class="thumbnail">
-          <p style="text-align:center; font-weight: bold">Breakfast</p>
-          <img src="{{breakfast.image}}">
-          <p>{{breakfast.title}}</p>
-          <input type="button" class="btn btn-primary" value="Show More" onclick="myFunction('{{breakfast.title}}')"></input>
-          <div id="{{breakfast.title}}" style="display:none">
-            <p><b>Rating:</b> {{breakfast.rating}}/5</p>
-            <p><b>Ready in:</b> {{breakfast.minutes}} minutes</p>
-            <p><b>Ingredients:</b></p>
-            {% for ingredient in breakfast.ingredients %}
-            <p>{{ingredient}}</p>
-            {% endfor %}
-          </div>
-          </input>
-        </div>
+    {% for dinner in dinners %}
+      <div class="item">
+        <a href="#" class="card">
+          <div class="thumb" style="background-image: url({{dinner.image}});"></div>
+          <article>
+            <h1>{{dinner.title}}</h1>
+            <p>Rating: {{dinner.rating}}/5
+                Ready in: {{dinner.minutes}} minutes
+            </p>
+            <span>Dinner</span>
+          </article>
+        </a>
       </div>
-      {% endfor %}
-    </div>
+    {% endfor %}  
   </div>
-  <div class="container">
-    <div class="row">
-      {% for lunch in lunches %}
-      <div class="col-lg-4">
-        <div class="thumbnail">
-          <p style="text-align:center; font-weight: bold">Lunch</p>
-          <img src="{{lunch.image}}">
-          <p>{{lunch.title}}</p>
-          <input type="button" class="btn btn-primary" value="Show More" onclick="myFunction('{{lunch.title}}')"></input>
-          <div id="{{lunch.title}}" style="display:none">
-            <p><b>Rating:</b> {{lunch.rating}}/5</p>
-            <p><b>Ready in:</b> {{lunch.minutes}} minutes</p>
-            <p><b>Ingredients:</b></p>
-            {% for ingredient in lunch.ingredients %}
-            <p>{{ingredient}}</p>
-            {% endfor %}
-          </div>
-        </div>
-      </div>
-      {% endfor %}
-    </div>
-  </div>
-
+  <!--
   <div class="container">
     <div class="row">
       {% for dinner in dinners %}
@@ -141,6 +82,6 @@
       {% endfor %}
     </div>
   </div>
-</body>
+-->
+{% endblock %}
 
-</html>

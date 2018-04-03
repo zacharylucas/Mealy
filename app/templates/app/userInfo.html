@@ -1,7 +1,9 @@
 {% extends 'base.html' %}
+{% block title %}Mealy - Information{% endblock %}
 
 {% block content %}
-  <h2>User Info</h2>
+  <h2>First, Some Information</h2>
+  <p>We use this information to make sure you get the exact meals you want at your preferred time of day. We'll even text you a reminder when it's time to start cooking!</p>
   <form method="post">
     {% csrf_token %}
     {% for field in form %}
@@ -9,10 +11,10 @@
         {{ field.label_tag }}<br>
         {{ field }}
         {% for error in field.errors %}
-          <p style="color: red">{{ error }}</p>
+          <p style="color: #FF653A">{{ error }}</p>
         {% endfor %}
       </p>
     {% endfor %}
-    <button type="submit">Next</button>
+    <button class="buttonRound" type="submit">Next</button>
   </form>
 {% endblock %}

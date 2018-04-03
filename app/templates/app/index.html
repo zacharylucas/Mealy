@@ -1,11 +1,6 @@
-{% load static %}
-<!DOCTYPE html>
-<html>
-<head>
-    <link rel="stylesheet" type="text/css" href="{% static 'app/styles.css' %}" />
-    
-</head>
-<body>
-    <h1 >Welcome to Mealy :)</h1>
-</body>
-</html>
+{% extends 'base.html' %}
+{% block title %}Mealy - Dashboard{% endblock %}
+
+{% block content %}
+<h1>Welcome to Mealy :D</h1>
+{% endblock %}
