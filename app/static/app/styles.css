@@ -21,6 +21,10 @@ body {
   text-align: right;
 }
 
+.item {
+  max-width: 160px;
+}
+
 .header h1 {
   margin: 0px;
   text-align: center;
@@ -32,9 +36,8 @@ body {
 
 .main {
   margin: 0 auto;
-  width: 60%;
+  width: 80%;
   padding: 10px;
-  overflow-x: scroll;
 }
 
 .buttonRound {
@@ -54,7 +57,7 @@ body {
 }
 
 .buttonRound:hover {
-  background-color: #68DDDB; 
+  background-color: #68DDDB;
 }
 
 .buttonRound:active {
@@ -108,7 +111,7 @@ body {
 }
 
 .card article {
-  padding: 20px;
+  padding: 10px;
   display: flex;
 
   flex: 1;
@@ -125,11 +128,12 @@ body {
 .card p {
   flex: 1; /* make p grow to fill available space*/
   line-height: 1.4;
+  font-size: 14px;
 }
 
 /* typography */
 .card h1 {
-  font-size: 20px;
+  font-size: 18px;
   margin: 0;
   color: #333;
 }
@@ -140,7 +144,7 @@ body {
   color: #999;
   text-transform: uppercase;
   letter-spacing: .05em;
-  margin: 2em 0 0 0;
+  margin: 0 0 0 0;
 }
 
 

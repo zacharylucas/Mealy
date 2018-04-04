@@ -20,14 +20,14 @@
           <div class="thumb" style="background-image: url({{breakfast.image}});"></div>
           <article>
             <h1>{{breakfast.title}}</h1>
-            <p>Rating: {{breakfast.rating}}/5
-               Ready in: {{breakfast.minutes}} minutes
+            <p>Rating: {{breakfast.rating|floatformat:-2}}/5 <br/>
+               Ready in: {{breakfast.minutes}} min
             </p>
             <span>Breakfast</span>
           </article>
         </a>
       </div>
-    {% endfor %}  
+    {% endfor %}
 
     {% for lunch in lunches %}
       <div class="item">
@@ -35,14 +35,14 @@
           <div class="thumb" style="background-image: url({{lunch.image}});"></div>
           <article>
             <h1>{{lunch.title}}</h1>
-            <p>Rating: {{lunch.rating}}/5
-                Ready in: {{lunch.minutes}} minutes
+            <p>Rating: {{lunch.rating|floatformat:-2}}/5 <br/>
+                Ready in: {{lunch.minutes}} min
             </p>
             <span>Lunch</span>
           </article>
         </a>
       </div>
-    {% endfor %}  
+    {% endfor %}
 
     {% for dinner in dinners %}
       <div class="item">
@@ -50,14 +50,14 @@
           <div class="thumb" style="background-image: url({{dinner.image}});"></div>
           <article>
             <h1>{{dinner.title}}</h1>
-            <p>Rating: {{dinner.rating}}/5
-                Ready in: {{dinner.minutes}} minutes
+            <p>Rating: {{dinner.rating|floatformat:-2}}/5 <br/>
+                Ready in: {{dinner.minutes}} min
             </p>
             <span>Dinner</span>
           </article>
         </a>
       </div>
-    {% endfor %}  
+    {% endfor %}
   </div>
   <!--
   <div class="container">
@@ -84,4 +84,3 @@
   </div>
 -->
 {% endblock %}
-
