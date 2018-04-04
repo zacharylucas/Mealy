@@ -2,5 +2,45 @@
 {% block title %}Mealy - Dashboard{% endblock %}
 
 {% block content %}
-<h1>Welcome to Mealy :D</h1>
+    <h2>Mealy Dashboard</h2>
+    <p>Welcome to Mealy, your cognitive weekly meal planner! Get started by clicking one of the cards below to set up text message meal reminders, update your ingredient preferences, and to view your tailored meal plan!</p>
+    <br>
+    <div class="support-grid"></div>
+    <div class="dashBand">
+        <div class="item">
+            <a href="{% url 'userInfo' %}" class="card">
+                <div class="thumb" style="background-image: url(https://www.graphicpear.com/wp-content/uploads/2018/02/Device-Icons-Dark.jpg);"></div>
+                <article>
+                    <h1>User Info</h1>
+                    <p>Update your personal information and set up your accont to receive sms meal prep reminders!
+                    </p>
+                    <span>User Info</span>
+                </article>
+            </a>
+        </div>
+
+        <div class="item">
+            <a href="{% url 'preferenceSelection' %}" class="card">
+                <div class="thumb" style="background-image: url(https://www.graphicpear.com/wp-content/uploads/2017/06/Food-Icons-2-1.jpg);"></div>
+                <article>
+                    <h1>Ingredient Preferences</h1>
+                    <p>Update your igredient preferences here, and we'll generate customized meal recommendations based on your decisions! 
+                    </p>
+                    <span>Ingredient Preferences</span>
+                </article>
+            </a>
+        </div>
+
+            <div class="item">
+                <a href="{% url 'meals' %}" class="card">
+                    <div class="thumb" style="background-image: url(https://www.graphicpear.com/wp-content/uploads/2017/05/35ff0051885341.58fdb827aaf01a.jpg);"></div>
+                    <article>
+                        <h1>Meal Plan</h1>
+                        <p>Check out some of the custom tailored meals that we've created for you for this week!   
+                        </p>
+                        <span>Meal Plan</span>
+                    </article>
+                </a>
+            </div>
+    </div>
 {% endblock %}

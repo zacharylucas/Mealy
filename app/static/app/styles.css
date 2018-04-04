@@ -1,4 +1,5 @@
 body {
+  background-color: rgb(252, 252, 252);
   margin: 0px;
   padding: 0px;
   font-family: Roboto;
@@ -8,6 +9,7 @@ body {
   margin: 0;
   width: 100%;
   padding-bottom: 4px;
+  background-color: #FFFFFF;
   font-family: Pacifico;
   box-shadow: 0 2px 4px -1px rgba(0,0,0,0.06), 0 4px 5px 0 rgba(0,0,0,0.06), 0 1px 10px 0 rgba(0,0,0,0.08);
   color: #333333;
@@ -71,7 +73,7 @@ body {
 }
 
 /* Cards */
-.band {
+.band, .dashBand {
   width: auto;
   max-width: 1240px;
   margin: 0 auto;
@@ -87,6 +89,12 @@ body {
 @media only screen and (min-width: 850px) {
   .band {
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  }
+}
+
+@media only screen and (min-width: 850px) {
+  .dashBand {
+    grid-template-columns: 1fr 1fr 1fr;
   }
 }
 
