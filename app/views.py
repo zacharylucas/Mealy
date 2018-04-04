@@ -11,6 +11,7 @@ from .Controllers import DatabaseController as DB
 from .models import User
 from .Forms.forms import SignUpForm
 from .Forms.forms import UserInfoForm
+from .Forms.forms import PreferencesForm
 
 # Create your views here.
 def search(request):
@@ -83,12 +84,14 @@ def userInfo(request):
     return render(request, 'app/userInfo.html', {'form' : form})
 
 def preferenceSelection(request):
-    context = {}
     if request.method == 'POST':
-        prefDict = pref.createPreferences(request)
+        form = PreferencesForm(request.POST)
+        prefDict = pref.createPreferences(form)
         request.session['prefDict'] = prefDict
         return redirect('meals')
-    return render(request, 'app/preferenceSelection.html', context)
+    else:
+        form = PreferencesForm()
+    return render(request, 'app/preferenceSelection.html', {'form' : form})
 
 def signup(request):
     if request.method == 'POST':
