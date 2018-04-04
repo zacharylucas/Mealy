@@ -39,10 +39,10 @@ def meals(request):
     data = {}
     if request.method == 'GET':
         preferences = request.session['prefDict']
-        breakfastQueryResults = wQ.prefQueryBreakfast(preferences)
-        lunchQueryResults = wQ.prefQueryLunch(preferences)
-        dinnerQueryResults = wQ.prefQueryDinner(preferences)
-        data = {'breakfasts' : breakfastQueryResults['results'], 'lunches' : lunchQueryResults['results'], 'dinners' : dinnerQueryResults['results']}
+        breakfastQueryResults = wQ.breakfastPlan(preferences)
+        lunchQueryResults = wQ.lunchPlan(preferences)
+        dinnerQueryResults = wQ.dinnerPlan(preferences)
+        data = {'breakfasts' : breakfastQueryResults, 'lunches' : lunchQueryResults, 'dinners' : dinnerQueryResults}
 
     return render(request, 'app/meals.html', data)
 

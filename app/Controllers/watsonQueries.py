@@ -47,15 +47,55 @@ def queryDinner(queryString, count = '7'):
     recipe_query = dinner_discovery.query(dinner_environment_id, dinner_collection_id, query= queryString, count = count)
     return recipe_query
 
-def prefQueryBreakfast(prefDict):
+def makePlan(result1, result2):
+    if(result1['matching_results'] == result2['matching_results']):
+        plan = result1['results'][0:7]
+    else:
+        plan = [result1['results'][0],result2['results'][0],result1['results'][1], result2['results'][1],result1['results'][2],result2['results'][2], result1['results'][3]]
+    return plan
+
+def breakfastPlan(prefDict):
+    result1 = prefQueryBreakfastEgg(prefDict)
+    result2 = prefQueryBreakfastSmooth(prefDict)
+    if(result1['matching_results'] < 4):
+        result1 = queryBreakfast('')
+    if(result2['matching_results'] < 4):
+        result2 = queryBreakfast('')
+
+    return makePlan(result1,result2)
+
+def lunchPlan(prefDict):
+    result1 = prefQueryLunch(prefDict)
+    result2 = prefQueryLunch(prefDict)
+    if(result1['matching_results'] < 4):
+        result1 = prefQueryLunch(prefDict)
+    if(result2['matching_results'] < 4):
+        result2 = prefQueryLunch(prefDict)
+
+    return makePlan(result1,result2)
+
+def dinnerPlan(prefDict):
+    result1 = prefQueryDinner(prefDict)
+    result2 = prefQueryDinner(prefDict)
+    if(result1['matching_results'] < 4):
+        result1 = prefQueryDinner(prefDict)
+    if(result2['matching_results'] < 4):
+        result2 = prefQueryDinner(prefDict)
+
+    return makePlan(result1,result2)
+
+def prefQueryBreakfastEgg(prefDict):
     proteinLikes = []
     if prefDict['proteinDict']['eggs'] != 'dislike':
         proteinLikes.append('eggs')
     vegetableLikes = addLikes(prefDict['vegetableDict'])
-    fruitLikes = addLikes(prefDict['fruitDict'])
     queryString = selectRandom(proteinLikes, vegetableLikes)
-    queryString2 = selectRandom(fruitLikes)
-    return queryBreakfast(random.choice([queryString, queryString2]))
+    return queryBreakfast(queryString)
+
+def prefQueryBreakfastSmooth(prefDict):
+    fruitLikes = addLikes(prefDict['fruitDict'])
+    queryString = selectRandom(fruitLikes)
+    return queryBreakfast(queryString)
 
 def prefQueryLunch(prefDict):
     proteinLikes = addLikes(prefDict['proteinDict'])
