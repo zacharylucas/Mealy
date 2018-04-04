@@ -20,12 +20,12 @@ def createPreferences(form):
     }
     carbDict = {
         'pasta' : form.__dict__['data']['pasta'],
-        'bread' : form.__dict__['data']['wheat-bread'],
+        'bread' : form.__dict__['data']['bread'],
         'rice' : form.__dict__['data']['rice'],
         'quinoa' : form.__dict__['data']['quinoa'],
-        'whole-grain' : form.__dict__['data']['whole-grains'],
-        'whole-wheat' : form.__dict__['data']['whole-wheat'],
-        'tortilla' : form.__dict__['data']['tortillas'],
+        'whole_grain' : form.__dict__['data']['whole_grain'],
+        'whole_wheat' : form.__dict__['data']['whole_wheat'],
+        'tortilla' : form.__dict__['data']['tortilla'],
         'oat' : form.__dict__['data']['oat'],
         'cereal' : form.__dict__['data']['cereal'],
         'pita' : form.__dict__['data']['pita']
@@ -46,15 +46,15 @@ def createPreferences(form):
         'watermelon' : form.__dict__['data']['watermelon'],
         'apple' : form.__dict__['data']['apple'],
         'orange' : form.__dict__['data']['orange'],
-        'lemon' : form.__dict__['data']['lemons'],
+        'lemon' : form.__dict__['data']['lemon'],
         'lime' : form.__dict__['data']['lime']
     }
     vegetableDict = {
         'carrot' : form.__dict__['data']['carrot'],
         'squash' : form.__dict__['data']['squash'],
         'cucumber' : form.__dict__['data']['cucumber'],
-        'bell-pepper' : form.__dict__['data']['bell-pepper'],
-        'onion' : form.__dict__['data']['onions'],
+        'bell_pepper' : form.__dict__['data']['bell_pepper'],
+        'onion' : form.__dict__['data']['onion'],
         'celery' : form.__dict__['data']['celery'],
         'tomato' : form.__dict__['data']['tomato'],
         'potato' : form.__dict__['data']['potato'],
@@ -64,7 +64,7 @@ def createPreferences(form):
         'lettuce' : form.__dict__['data']['lettuce'],
         'spinach' : form.__dict__['data']['spinach'],
         'kale' : form.__dict__['data']['kale'],
-        'sweet-potato' : form.__dict__['data']['sweet-potato'],
+        'sweet_potato' : form.__dict__['data']['sweet_potato'],
         'zucchini' : form.__dict__['data']['zucchini'],
         'cucumber' : form.__dict__['data']['cucumber'],
         'asparagus' : form.__dict__['data']['asparagus']
@@ -73,25 +73,25 @@ def createPreferences(form):
         'milk' : form.__dict__['data']['milk'],
         'yogurt' : form.__dict__['data']['yogurt'],
         'cheese' : form.__dict__['data']['cheese'],
-        'american-cheese' : form.__dict__['data']['american cheese'],
+        'american_cheese' : form.__dict__['data']['american_cheese'],
         'mozzerella' : form.__dict__['data']['mozzerella'],
         'provolone' : form.__dict__['data']['provolone'],
         'swiss' : form.__dict__['data']['swiss'],
-        'goat-cheese' : form.__dict__['data']['goat-cheese'],
-        'blue-cheese' : form.__dict__['data']['blue-cheese'],
-        'skim-milk' : form.__dict__['data']['skim-milk'],
+        'goat_cheese' : form.__dict__['data']['goat_cheese'],
+        'blue_cheese' : form.__dict__['data']['blue_cheese'],
+        'skim_milk' : form.__dict__['data']['skim_milk'],
         'butter' : form.__dict__['data']['butter']
     }
     spiceDict = {
         'garlic' : form.__dict__['data']['garlic'],
-        'chili-powder' : form.__dict__['data']['chili-powder'],
+        'chili_powder' : form.__dict__['data']['chili_powder'],
         'cayenne' : form.__dict__['data']['cayenne'],
         'cumin' : form.__dict__['data']['cumin'],
         'ginger' : form.__dict__['data']['ginger'],
         'paprika' : form.__dict__['data']['paprika'],
         'saffron' : form.__dict__['data']['saffron'],
-        'cinnamon' : form.__dict__['data']['cinammon'],
-        'curry-powder' : form.__dict__['data']['curry-powder'],
+        'cinnamon' : form.__dict__['data']['cinnamon'],
+        'curry_powder' : form.__dict__['data']['curry_powder'],
         'tumeric' : form.__dict__['data']['tumeric'],
         'ginger' : form.__dict__['data']['ginger']
     }
@@ -104,7 +104,7 @@ def createPreferences(form):
         'rosemary' : form.__dict__['data']['rosemary'],
         'mint' : form.__dict__['data']['mint'],
         'sage' : form.__dict__['data']['sage'],
-        'bay-leaf' : form.__dict__['data']['bay-leaf']
+        'bay_leaf' : form.__dict__['data']['bay_leaf']
     }
     prefDict = {
         'proteinDict' : proteinDict,
