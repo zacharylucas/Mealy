@@ -1,19 +1,31 @@
 {% extends 'base.html' %}
 {% block title %}Mealy - Information{% endblock %}
 
+
 {% block content %}
-  <h2>Blah lbah lbah</h2>
+  <h2>Preferences</h2>
+  <p>For each of the following items, please select whether you like, dislike, or are neutral about meals containing that item
   <form method="post">
+    <div class="preference-wrapper">
     {% csrf_token %}
+    <ul class="preference-title">
+      <li><label>Like</label></li>
+      <li><label>Neutral</label></li>
+      <li><label>Dislike</label></li>
+    <ul>
+    </div>
+    <div class="preference-wrapper">
     {% for field in form %}
       <p>
         {{ field.label_tag }}
-        {{ field }}
+        {{field}}
+
         {% for error in field.errors %}
           <p style="color: #FF653A">{{ error }}</p>
         {% endfor %}
       </p>
     {% endfor %}
+    </div>
     <button class="buttonRound" type="submit">Next</button>
   </form>
 {% endblock %}

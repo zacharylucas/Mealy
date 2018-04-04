@@ -2,6 +2,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.forms import ModelForm
+from django.utils.safestring import mark_safe
 
 
 
@@ -34,9 +35,9 @@ class UserInfoForm(forms.Form):
 
 
 CHOICES = [
-    ('like','Like'),
-    ('','Neutral'),
-    ('dislike','Dislike')
+    ('like',''),
+    ('',''),
+    ('dislike','')
 ]
 
 class PreferencesForm(forms.Form):
