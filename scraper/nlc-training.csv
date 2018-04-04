@@ -4,11 +4,22 @@ Chili,Dinner
 Pulled Pork,Dinner
 Beef Brisket,Dinner
 Short Ribs,Dinner
+Collard Greens,Dinner
 Pork Shoulder,Dinner
+Game Hen,Dinner
+Squirrel,Dinner
 Tortellini Bake,Dinner
+French fries,Dinner
+Lobster,Dinner
+Crab,Dinner
+Baked potato,Dinner
+Sweet potato,Dinner
+Shrimp,Dinner
+Scallops,Dinner
 Spiral Ham,Dinner
 Honey Ham,Dinner
 Pot Roast,Dinner
+Corn,Dinner
 Pork Chili,Dinner
 Bacon Chili,Dinner
 Bean Chili,Dinner
@@ -175,6 +186,10 @@ BLT,Lunch
 Reuben,Lunch
 Grilled Cheese,Lunch
 Hoagie,Lunch
+Chicken Quesadilla,Lunch
+Cheese Quesadilla,Lunch
+Ham and Cheese Sandwich,Lunch
+Cheese Sandwich,Lunch
 Sub,Lunch
 Gyro,Lunch
 Panini,Lunch
@@ -192,8 +207,10 @@ Veggie Pizza,Lunch
 Pepperoni Pizza,Lunch
 Meat Pizza,Lunch
 Cheese Pizza,Lunch
+Peanut Butter & Jelly Sandwich,Lunch
 Calzone,Lunch
 Wrap,Lunch
+Melange,Lunch
 Lettuce Wrap,Lunch
 Chicken Wrap,Lunch
 Tuna Wrap,Lunch
@@ -244,7 +261,6 @@ Full breakfast ,Breakfast
 Goetta ,Breakfast
 Griddle scone ,Breakfast
 Grits ,Breakfast
-Ham ,Breakfast
 Ham and eggs,Breakfast
 Hash ,Breakfast
 Hash browns ,Breakfast
@@ -270,7 +286,6 @@ Poached egg ,Breakfast
 Pop-Tarts ,Breakfast
 Popcorn cereal,Breakfast
 Porridge ,Breakfast
-Potato scone ,Breakfast
 Protein bar ,Breakfast
 Quiche,Breakfast
 Cinnamon Raisin bread ,Breakfast
@@ -297,7 +312,13 @@ Blueberry smoothie,Breakfast
 Strawberry smoothie,Breakfast
 Raspberry smoothie,Breakfast
 Cookie,Dessert
+Oatmeal raisin cookie,Dessert
+Chocolate chip,Dessert
+Chocolate chip cookie,Dessert
+Peanut butter cookie,Dessert
 Devil's Food Cake,Dessert
+Peach cobbler,Dessert
+Apple cobbler,Dessert
 Dirt Cake,Dessert
 Angel Food Cake,Dessert
 Cake,Dessert
@@ -336,7 +357,9 @@ Vanilla Icing,Dessert
 Vanilla Frosting,Dessert
 Chocolate Icing,Dessert
 Vanilla Glaze,Dessert
+Lemon Bars,Dessert
 Chocolate Frosting,Dessert
+Strawberry tart,Dessert
 Kolache,Dessert
 Fruitcake,Dessert
 Gingerbread,Dessert
@@ -355,6 +378,7 @@ Banana Bread,Bread
 Sourdough Bread,Bread
 Herb Bread,Bread
 Garlic Bread,Bread
+Farls,Bread
 Sweet Bread,Bread
 Rice Bread,Bread
 Black Bread,Bread
@@ -412,3 +436,27 @@ Tortilla,Bread
 Cheese Loaf,Bread
 Naan,Bread
 Lefse,Bread
+Barbecue,Dinner
+Sweet and Sour,Dinner
+Yum Yum,Dinner
+Tomato Sauce,Dinner
+Salsa,Lunch
+Tomato Salsa,Lunch
+Hot Salsa,Lunch
+Cranberry sauce,Dessert
+Tartar sauce,Dinner
+Buffalo sauce,Dinner
+Buffalo dip,Lunch
+Corn dip,Lunch
+Cheese dip,Lunch
+Dip,Lunch
+French onion dip,Lunch
+Martini,Drink
+Mimosa,Drink
+Manhattan,Drink
+Margarita,Drink
+Daiquiri,Drink
+Mojito,Drink
+Bloody Mary,Drink
+Mint Julep,Drink
+Pina Colada,Drink

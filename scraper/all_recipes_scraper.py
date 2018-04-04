@@ -40,7 +40,7 @@ natural_language_classifier = NaturalLanguageClassifierV1(
     password='bjOVSchN64CM'
 )
 # ID of the trained NLC (must be updated every time a new NLC is trained)
-classifier_id = '8fc193x296-nlc-3501'
+classifier_id = '842c77x336-nlc-269'
 
 completed = 0 # number of completed recipes found
 skipped = 0 # number of recipes skipped
@@ -140,7 +140,7 @@ while len(ids)>0:
         print('  Class: ' + classification)
 
         # Create a file for this recipe in JSON
-        recipe_object = ({"title": title, "rating": float(rating), "minutes": ready_in_minutes, "ingredients": ingredients_list, "instructions": instructions_list, "image": image_url})
+        recipe_object = ({"title": title, "rating": float(rating), "calories": calorie_count, "minutes": ready_in_minutes, "ingredients": ingredients_list, "instructions": instructions_list, "image": image_url})
         completed += 1
         filename = 'recipes/' + classification + '/recipe' + str(id) + '.json'
         print("  File: " + filename)
