@@ -16,6 +16,26 @@ class UserInfo(models.Model):
     prefDict = models.TextField(default='')
     mealDict = models.TextField(default='')
 
+def updateAllDB(uid, newPrefDict, newMealDict, userDict):
+    u = UserInfo(userId=uid)
+    s = json.dumps(newMealDict)
+    s2 = json.dumps(newPrefDict)
+    u.userId = uid
+    u.mealDict = s
+    u.prefDict = s2
+    if userDict != None:
+        u.weight = userDict['weight']
+        u.height = userDict['height']
+        u.gain_lose_maintain = userDict['glm']
+        #u.cell = phone
+        #u.breakTime = btime
+        #u.lunchTime = ltime
+        #u.dinnerTime = dtime
+        u.dietRestrict = userDict['restrict']
+        u.allergies = userDict['allergy']
+    u.save(force_update=True)
+
+    u.save(force_update=True)
 def getPrefDict(uid):
     res = UserInfo.objects.raw('select * from app_userinfo ui where ui.userId_id == %s', [uid.id])[0]
     if str(res.prefDict) == '':
