@@ -47,7 +47,7 @@ def newMealPlan(request):
     data = {'breakfasts' : breakfastQueryResults, 'lunches' : lunchQueryResults, 'dinners' : dinnerQueryResults}
     request.session['mealDict'] = data
     if str(request.user) != 'AnonymousUser':
-        m.updateMealDict(request.user,data)
+        m.updateMealDict(request.user,data, preferences)
     return data
 
 def meals(request):
@@ -81,6 +81,7 @@ def chatbot(request):
     return render(request, 'app/chatbot.html', data)
 
 def index(request):
+    #print(str(request.user))
     context = {}
     if str(request.user) != 'AnonymousUser':
         prefDict = m.getPrefDict(request.user)
@@ -114,7 +115,7 @@ def userInfo(request):
                 glma = 1
             m.updateUserInfo(request.user,  w=wi, h=hi, glm=glma, phone=p, btime=b,
                    ltime=l, dtime=d, restrict=r, allergy=a)
-        return redirect('preferenceSelection')
+        return redirect('index')
         #if form.is_valid():
             #form.save()
     else:
@@ -130,7 +131,10 @@ def preferenceSelection(request):
             m.updatePrefDict(request.user, prefDict)
         return redirect('meals')
     else:
-        form = PreferencesForm()
+        if str(request.user) != 'AnonymousUser' and request.session.get('prefDict') != None and request.session.get('prefDict') != {}:
+            form = pref.populatePreferences(request)
+        else:
+            form = PreferencesForm()
     return render(request, 'app/preferenceSelection.html', {'form' : form})
 
 def signup(request):

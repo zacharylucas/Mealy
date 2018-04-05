@@ -1,3 +1,4 @@
+from ..Forms.forms import PreferencesForm
 
 def createPreferences(form):
     proteinDict = {
@@ -66,7 +67,6 @@ def createPreferences(form):
         'kale' : form.__dict__['data']['kale'],
         'sweet_potato' : form.__dict__['data']['sweet_potato'],
         'zucchini' : form.__dict__['data']['zucchini'],
-        'cucumber' : form.__dict__['data']['cucumber'],
         'asparagus' : form.__dict__['data']['asparagus']
     }
     dairyDict = {
@@ -116,3 +116,106 @@ def createPreferences(form):
         'herbDict' : herbDict,
     }
     return prefDict
+
+def populatePreferences(request):
+    form = PreferencesForm(initial={
+    'chicken':request.session['prefDict']['proteinDict']['chicken'],
+    'steak':request.session['prefDict']['proteinDict']['steak'],
+    'beef':request.session['prefDict']['proteinDict']['beef'],
+    'pork':request.session['prefDict']['proteinDict']['pork'],
+    'bacon':request.session['prefDict']['proteinDict']['bacon'],
+    'sausage':request.session['prefDict']['proteinDict']['sausage'],
+    'ham':request.session['prefDict']['proteinDict']['ham'],
+    'turkey':request.session['prefDict']['proteinDict']['turkey'],
+    'lamb':request.session['prefDict']['proteinDict']['lamb'],
+    'eggs':request.session['prefDict']['proteinDict']['eggs'],
+    'beans':request.session['prefDict']['proteinDict']['beans'],
+    'tofu':request.session['prefDict']['proteinDict']['tofu'],
+    'fish':request.session['prefDict']['proteinDict']['fish'],
+    'salmon':request.session['prefDict']['proteinDict']['salmon'],
+    'tilapia':request.session['prefDict']['proteinDict']['tilapia'],
+    'tuna':request.session['prefDict']['proteinDict']['tuna'],
+
+    'pasta':request.session['prefDict']['carbDict']['pasta'],
+    'bread':request.session['prefDict']['carbDict']['bread'],
+    'rice':request.session['prefDict']['carbDict']['rice'],
+    'quinoa':request.session['prefDict']['carbDict']['quinoa'],
+    'whole_grain':request.session['prefDict']['carbDict']['whole_grain'],
+    'whole_wheat':request.session['prefDict']['carbDict']['whole_wheat'],
+    'tortilla':request.session['prefDict']['carbDict']['tortilla'],
+    'oat':request.session['prefDict']['carbDict']['oat'],
+    'cereal':request.session['prefDict']['carbDict']['cereal'],
+    'pita':request.session['prefDict']['carbDict']['pita'],
+
+    'banana':request.session['prefDict']['fruitDict']['banana'],
+    'strawberry':request.session['prefDict']['fruitDict']['strawberry'],
+    'raspberry':request.session['prefDict']['fruitDict']['raspberry'],
+    'blueberry':request.session['prefDict']['fruitDict']['blueberry'],
+    'cantelope':request.session['prefDict']['fruitDict']['cantelope'],
+    'pineapple':request.session['prefDict']['fruitDict']['pineapple'],
+    'coconut':request.session['prefDict']['fruitDict']['coconut'],
+    'grape':request.session['prefDict']['fruitDict']['grape'],
+    'mango':request.session['prefDict']['fruitDict']['mango'],
+    'pear':request.session['prefDict']['fruitDict']['pear'],
+    'plum':request.session['prefDict']['fruitDict']['plum'],
+    'peach':request.session['prefDict']['fruitDict']['peach'],
+    'watermelon':request.session['prefDict']['fruitDict']['watermelon'],
+    'apple':request.session['prefDict']['fruitDict']['apple'],
+    'orange':request.session['prefDict']['fruitDict']['orange'],
+    'lemon':request.session['prefDict']['fruitDict']['lemon'],
+    'lime':request.session['prefDict']['fruitDict']['lime'],
+
+    'carrot':request.session['prefDict']['vegetableDict']['carrot'],
+    'squash':request.session['prefDict']['vegetableDict']['squash'],
+    'cucumber':request.session['prefDict']['vegetableDict']['cucumber'],
+    'bell_pepper':request.session['prefDict']['vegetableDict']['bell_pepper'],
+    'onion':request.session['prefDict']['vegetableDict']['onion'],
+    'celery':request.session['prefDict']['vegetableDict']['celery'],
+    'tomato':request.session['prefDict']['vegetableDict']['tomato'],
+    'potato':request.session['prefDict']['vegetableDict']['potato'],
+    'broccoli':request.session['prefDict']['vegetableDict']['broccoli'],
+    'corn':request.session['prefDict']['vegetableDict']['corn'],
+    'mushroom':request.session['prefDict']['vegetableDict']['mushroom'],
+    'lettuce':request.session['prefDict']['vegetableDict']['lettuce'],
+    'spinach':request.session['prefDict']['vegetableDict']['spinach'],
+    'kale':request.session['prefDict']['vegetableDict']['kale'],
+    'sweet_potato':request.session['prefDict']['vegetableDict']['sweet_potato'],
+    'zucchini':request.session['prefDict']['vegetableDict']['zucchini'],
+    'asparagus':request.session['prefDict']['vegetableDict']['asparagus'],
+
+    'milk':request.session['prefDict']['dairyDict']['milk'],
+    'yogurt':request.session['prefDict']['dairyDict']['yogurt'],
+    'cheese':request.session['prefDict']['dairyDict']['cheese'],
+    'american_cheese':request.session['prefDict']['dairyDict']['american_cheese'],
+    'mozzerella':request.session['prefDict']['dairyDict']['mozzerella'],
+    'provolone':request.session['prefDict']['dairyDict']['provolone'],
+    'swiss':request.session['prefDict']['dairyDict']['swiss'],
+    'goat_cheese':request.session['prefDict']['dairyDict']['goat_cheese'],
+    'blue_cheese':request.session['prefDict']['dairyDict']['blue_cheese'],
+    'skim_milk':request.session['prefDict']['dairyDict']['skim_milk'],
+    'butter':request.session['prefDict']['dairyDict']['butter'],
+
+    'garlic':request.session['prefDict']['spiceDict']['garlic'],
+    'chili_powder':request.session['prefDict']['spiceDict']['chili_powder'],
+    'cayenne':request.session['prefDict']['spiceDict']['cayenne'],
+    'cumin':request.session['prefDict']['spiceDict']['cumin'],
+    'ginger':request.session['prefDict']['spiceDict']['ginger'],
+    'paprika':request.session['prefDict']['spiceDict']['paprika'],
+    'saffron':request.session['prefDict']['spiceDict']['saffron'],
+    'cinnamon':request.session['prefDict']['spiceDict']['cinnamon'],
+    'curry_powder':request.session['prefDict']['spiceDict']['curry_powder'],
+    'tumeric':request.session['prefDict']['spiceDict']['tumeric'],
+    'ginger':request.session['prefDict']['spiceDict']['ginger'],
+
+    'oregano':request.session['prefDict']['herbDict']['oregano'],
+    'cilantro':request.session['prefDict']['herbDict']['cilantro'],
+    'thyme':request.session['prefDict']['herbDict']['thyme'],
+    'basil':request.session['prefDict']['herbDict']['basil'],
+    'parsley':request.session['prefDict']['herbDict']['parsley'],
+    'rosemary':request.session['prefDict']['herbDict']['rosemary'],
+    'mint':request.session['prefDict']['herbDict']['mint'],
+    'sage':request.session['prefDict']['herbDict']['sage'],
+    'bay_leaf':request.session['prefDict']['herbDict']['bay_leaf'],
+
+    })
+    return form

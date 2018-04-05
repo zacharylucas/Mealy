@@ -15,7 +15,7 @@ class UserInfo(models.Model):
     allergies = models.CharField(max_length=100,default='')
     prefDict = models.TextField(default='')
     mealDict = models.TextField(default='')
-    
+
 def getPrefDict(uid):
     res = UserInfo.objects.raw('select * from app_userinfo ui where ui.userId_id == %s', [uid.id])[0]
     if str(res.prefDict) == '':
@@ -28,24 +28,26 @@ def updatePrefDict(uid, newPrefDict):
     u.userId = uid
     u.prefDict = s
     u.save(force_update=True)
-    
+
 def getMealDict(uid):
     res = UserInfo.objects.raw('select * from app_userinfo ui where ui.userId_id == %s', [uid.id])[0]
     if str(res.mealDict) == '':
         return {}
     return json.loads(str(res.mealDict))
 
-def updateMealDict(uid, newMealDict):
+def updateMealDict(uid, newMealDict, newPrefDict):
     u = UserInfo(userId=uid)
     s = json.dumps(newMealDict)
+    s2 = json.dumps(newPrefDict)
     u.userId = uid
     u.mealDict = s
+    u.prefDict = s2
     u.save(force_update=True)
-    
+
 def createUserInfo(uid):
     ui = UserInfo(userId=uid)
     ui.save();
-    
+
 def updateUserInfo(uid, w=0, h=0, glm=3, phone='', btime=None,
                    ltime=None, dtime=None, restrict='', allergy=''):
     u = UserInfo(userId=uid)
