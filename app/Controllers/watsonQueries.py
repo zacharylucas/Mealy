@@ -54,9 +54,9 @@ def makePlan(result1, result2):
         plan = [result1['results'][0],result2['results'][0],result1['results'][1], result2['results'][1],result1['results'][2],result2['results'][2], result1['results'][3]]
     return plan
 
-def breakfastPlan(prefDict):
-    result1 = prefQueryBreakfastEgg(prefDict)
-    result2 = prefQueryBreakfastSmooth(prefDict)
+def breakfastPlan(prefDict,alleg):
+    result1 = prefQueryBreakfastEgg(prefDict,alleg)
+    result2 = prefQueryBreakfastSmooth(prefDict,alleg)
     if(result1['matching_results'] < 4):
         result1 = queryBreakfast('')
     if(result2['matching_results'] < 4):
@@ -64,9 +64,9 @@ def breakfastPlan(prefDict):
 
     return makePlan(result1,result2)
 
-def lunchPlan(prefDict):
-    result1 = prefQueryLunch(prefDict)
-    result2 = prefQueryLunch(prefDict)
+def lunchPlan(prefDict,alleg):
+    result1 = prefQueryLunch(prefDict,alleg)
+    result2 = prefQueryLunch(prefDict,alleg)
     if(result1['matching_results'] < 4):
         result1 = prefQueryLunch(prefDict)
     if(result2['matching_results'] < 4):
@@ -74,9 +74,9 @@ def lunchPlan(prefDict):
 
     return makePlan(result1,result2)
 
-def dinnerPlan(prefDict):
-    result1 = prefQueryDinner(prefDict)
-    result2 = prefQueryDinner(prefDict)
+def dinnerPlan(prefDict,alleg):
+    result1 = prefQueryDinner(prefDict,alleg)
+    result2 = prefQueryDinner(prefDict,alleg)
     if(result1['matching_results'] < 4):
         result1 = prefQueryDinner(prefDict)
     if(result2['matching_results'] < 4):
@@ -84,7 +84,7 @@ def dinnerPlan(prefDict):
 
     return makePlan(result1,result2)
 
-def prefQueryBreakfastEgg(prefDict):
+def prefQueryBreakfastEgg(prefDict,alleg):
     proteinLikes = []
     if prefDict == {}:
         return queryBreakfast('')
@@ -92,16 +92,20 @@ def prefQueryBreakfastEgg(prefDict):
         proteinLikes.append('eggs')
     vegetableLikes = addLikes(prefDict['vegetableDict'])
     queryString = selectRandom(proteinLikes, vegetableLikes)
+    if queryString is not '':
+        queryString += addAllergies(alleg)
     return queryBreakfast(queryString)
 
-def prefQueryBreakfastSmooth(prefDict):
+def prefQueryBreakfastSmooth(prefDict,alleg):
     if prefDict == {}:
         return queryBreakfast('')
     fruitLikes = addLikes(prefDict['fruitDict'])
     queryString = selectRandom(fruitLikes)
+    if queryString is not '':
+        queryString += addAllergies(alleg)
     return queryBreakfast(queryString)
 
-def prefQueryLunch(prefDict):
+def prefQueryLunch(prefDict,alleg):
     if prefDict == {}:
         return queryLunch('')
     proteinLikes = addLikes(prefDict['proteinDict'])
@@ -109,9 +113,10 @@ def prefQueryLunch(prefDict):
     queryString = selectRandom(proteinLikes, carbLikes)
     if queryString is not '':
         queryString += addExcludes(prefDict['proteinDict'], prefDict['carbDict'])
+        queryString += addAllergies(alleg)
     return queryLunch(queryString)
 
-def prefQueryDinner(prefDict):
+def prefQueryDinner(prefDict,alleg):
     if prefDict == {}:
         return queryDinner('')
     proteinLikes = addLikes(prefDict['proteinDict'])
@@ -120,7 +125,14 @@ def prefQueryDinner(prefDict):
     queryString = selectRandom(proteinLikes, carbLikes, herbLikes)
     if queryString is not '':
         queryString += addExcludes(prefDict['proteinDict'], prefDict['carbDict'])
+        queryString += addAllergies(alleg)
     return queryDinner(queryString)
+
+def addAllergies(alleg):
+    queryString = ''
+    for i in range(len(alleg)):
+        queryString += r',ingredients:!"%s"' % alleg[i]
+    return queryString
 
 def addExcludes(*args):
     queryString = ''

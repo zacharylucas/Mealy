@@ -13,6 +13,7 @@ from .Forms.forms import SignUpForm
 from .Forms.forms import UserInfoForm
 from .Forms.forms import PreferencesForm
 from . import models as m
+import re
 
 # Create your views here.
 def search(request):
@@ -41,9 +42,17 @@ def newMealPlan(request):
     if request.session.get('prefDict') != None:
         preferences = request.session['prefDict']
 
-    breakfastQueryResults = wQ.breakfastPlan(preferences)
-    lunchQueryResults = wQ.lunchPlan(preferences)
-    dinnerQueryResults = wQ.dinnerPlan(preferences)
+    alleg = []
+    if str(request.user) != 'AnonymousUser':
+        dicti = m.getUserInfo(request.user)
+        if dicti['allergies'] != None and dicti['allergies'] != {}:
+            print(dictic['allergies'])
+            if re.match('^[A-Za-z, ]*$', dicti['allergies']):
+                alleg = re.split(', ',dicti['allergies'])
+
+    breakfastQueryResults = wQ.breakfastPlan(preferences,alleg)
+    lunchQueryResults = wQ.lunchPlan(preferences,alleg)
+    dinnerQueryResults = wQ.dinnerPlan(preferences,alleg)
     data = {'breakfasts' : breakfastQueryResults, 'lunches' : lunchQueryResults, 'dinners' : dinnerQueryResults}
     request.session['mealDict'] = data
     if str(request.user) != 'AnonymousUser':
