@@ -6,16 +6,82 @@
   <h2>Preferences</h2>
   <p>For each of the following items, please select whether you like, dislike, or are neutral about meals containing that item
   <form method="post">
-    <div class="preference-wrapper">
     {% csrf_token %}
-    <ul class="preference-title">
+    <div class="support-grid"></div>
+    <div class="preferenceBand">
+    <div class="item preference-wrapper">
+    <ul class="preference-title selection-options">
       <li><label>Like</label></li>
       <li><label>Neutral</label></li>
       <li><label>Dislike</label></li>
-    <ul>
-    </div>
-    <div class="preference-wrapper">
+    </ul>
     {% for field in form %}
+    {% if forloop.counter == 27 or forloop.counter == 61%}
+    </div>
+
+    <div class="item preference-wrapper">
+      <ul class="preference-title selection-options">
+        <li><label>Like</label></li>
+        <li><label>Neutral</label></li>
+        <li><label>Dislike</label></li>
+      </ul>
+      {% endif %}
+    {% if forloop.counter == 1 %}
+    <ul class="preference-title">
+      <li><label>Proteins:</label></li>
+      <li><label>&nbsp</label></li>
+      <li><label>&nbsp</label></li>
+    </ul>
+    <hr>
+    {% endif %}
+    {% if forloop.counter == 16 %}
+    <ul class="preference-title">
+      <li><label>Carbs:</label></li>
+      <li><label>&nbsp</label></li>
+      <li><label>&nbsp</label></li>
+    </ul>
+    <hr>
+    {% endif %}
+    {% if forloop.counter == 27 %}
+    <ul class="preference-title">
+      <li><label>Fruits:</label></li>
+      <li><label>&nbsp</label></li>
+      <li><label>&nbsp</label></li>
+    </ul>
+    <hr>
+    {% endif %}
+    {% if forloop.counter == 44 %}
+    <ul class="preference-title">
+      <li><label>Veggies:</label></li>
+      <li><label>&nbsp</label></li>
+      <li><label>&nbsp</label></li>
+    </ul>
+    <hr>
+    {% endif %}
+    {% if forloop.counter == 61 %}
+    <ul class="preference-title">
+      <li><label>Dairy:</label></li>
+      <li><label>&nbsp</label></li>
+      <li><label>&nbsp</label></li>
+    </ul>
+    <hr>
+    {% endif %}
+    {% if forloop.counter == 72 %}
+    <ul class="preference-title">
+      <li><label>Spices:</label></li>
+      <li><label>&nbsp</label></li>
+      <li><label>&nbsp</label></li>
+    </ul>
+    <hr>
+    {% endif %}
+    {% if forloop.counter == 83 %}
+    <ul class="preference-title">
+      <li><label>Herbs:</label></li>
+      <li><label>&nbsp</label></li>
+      <li><label>&nbsp</label></li>
+    </ul>
+    <hr>
+    {% endif %}
       <p>
         {{ field.label_tag }}
         {{field}}
@@ -26,6 +92,7 @@
       </p>
     {% endfor %}
     </div>
+  </div>
     <button class="buttonRound" type="submit">Next</button>
   </form>
 {% endblock %}

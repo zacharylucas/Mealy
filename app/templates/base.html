@@ -17,6 +17,11 @@
         <h1>mealy</h1>
     </span>
   </div>
+
+  <br>
+  <br>
+  <br>
+
   <div class="headerLogin">
     {% if user.is_authenticated %}
       Hi {{ user.username }}!
@@ -29,6 +34,14 @@
   <div class="main">
   {% block content %}
   {% endblock %}
-  </div>  
+  </div> 
+  
+  <br>
+  <br>
+  <br>
+
+  <div class="footer">
+    <p><span class="logoFont white">mealy</span> | made with <i class="fas fa-heart red"></i> by Brain, Zack D, Zach L, Zach W, and Sean</p>
+  </div>
 </body>
 </html>

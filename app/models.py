@@ -13,8 +13,8 @@ class UserInfo(models.Model):
     dinnerTime = models.TimeField(blank=True,null=True)
     dietRestrict = models.CharField(max_length=100,default='')
     allergies = models.CharField(max_length=100,default='')
-    prefDict = models.CharField(max_length=10000,default='')
-    mealDict = models.CharField(max_length=10000,default='')
+    prefDict = models.TextField(default='')
+    mealDict = models.TextField(default='')
     
 def getPrefDict(uid):
     res = UserInfo.objects.raw('select * from app_userinfo ui where ui.userId_id == %s', [uid.id])[0]
