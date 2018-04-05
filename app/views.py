@@ -40,11 +40,17 @@ def search(request):
 def meals(request):
     data = {}
     if request.method == 'GET':
-        preferences = request.session['prefDict']
-        breakfastQueryResults = wQ.breakfastPlan(preferences)
-        lunchQueryResults = wQ.lunchPlan(preferences)
-        dinnerQueryResults = wQ.dinnerPlan(preferences)
-        data = {'breakfasts' : breakfastQueryResults, 'lunches' : lunchQueryResults, 'dinners' : dinnerQueryResults}
+        if request.session['mealDict'] == {}:
+            preferences = request.session['prefDict']
+            breakfastQueryResults = wQ.breakfastPlan(preferences)
+            lunchQueryResults = wQ.lunchPlan(preferences)
+            dinnerQueryResults = wQ.dinnerPlan(preferences)
+            data = {'breakfasts' : breakfastQueryResults, 'lunches' : lunchQueryResults, 'dinners' : dinnerQueryResults}
+            request.session['mealDict'] = data
+            if str(request.user) != 'AnonymousUser':
+                m.updateMealDict(request.user,data)
+        else:
+            data = request.session['mealDict']        
 
     return render(request, 'app/meals.html', data)
 
@@ -74,7 +80,7 @@ def index(request):
         mealDict = m.getMealDict(request.user)
         request.session['mealDict'] = mealDict
         print(prefDict)
-        
+
     return render(request, 'app/index.html', context)
 
 def conversation(request):
@@ -124,7 +130,7 @@ def signup(request):
     if request.method == 'POST':
         form = SignUpForm(request.POST)
         if form.is_valid():
-            form.save()           
+            form.save()
             username = form.cleaned_data.get('username')
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=raw_password)
@@ -133,5 +139,5 @@ def signup(request):
             return redirect('index')
     else:
         form = SignUpForm()
-        
+
     return render(request, 'app/signup.html', {'form': form})
