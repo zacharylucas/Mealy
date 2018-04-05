@@ -17,6 +17,11 @@
         <h1>mealy</h1>
     </span>
   </div>
+
+  <br>
+  <br>
+  <br>
+
   <div class="headerLogin">
     {% if user.is_authenticated %}
       Hi {{ user.username }}!
@@ -25,10 +30,6 @@
       <a href="{% url 'login' %}">login</a>
     {% endif %}
   </div>
-
-  <br>
-  <br>
-  <br>
 
   <div class="main">
   {% block content %}
