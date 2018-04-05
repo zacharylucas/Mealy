@@ -37,20 +37,29 @@ def search(request):
         DB.showUser()
     return render(request, 'app/search.html', data)
 
+def newMealPlan(request):
+    preferences = {}
+    if request.session.get('prefDict') != None:
+        preferences = request.session['prefDict']
+
+    breakfastQueryResults = wQ.breakfastPlan(preferences)
+    lunchQueryResults = wQ.lunchPlan(preferences)
+    dinnerQueryResults = wQ.dinnerPlan(preferences)
+    data = {'breakfasts' : breakfastQueryResults, 'lunches' : lunchQueryResults, 'dinners' : dinnerQueryResults}
+    request.session['mealDict'] = data
+    if str(request.user) != 'AnonymousUser':
+        m.updateMealDict(request.user,data)
+    return data
+
 def meals(request):
     data = {}
     if request.method == 'GET':
-        if request.session['mealDict'] == {}:
-            preferences = request.session['prefDict']
-            breakfastQueryResults = wQ.breakfastPlan(preferences)
-            lunchQueryResults = wQ.lunchPlan(preferences)
-            dinnerQueryResults = wQ.dinnerPlan(preferences)
-            data = {'breakfasts' : breakfastQueryResults, 'lunches' : lunchQueryResults, 'dinners' : dinnerQueryResults}
-            request.session['mealDict'] = data
-            if str(request.user) != 'AnonymousUser':
-                m.updateMealDict(request.user,data)
+        if request.session.get('mealDict') == None or request.session.get('mealDict') == {}:
+            data = newMealPlan(request)
         else:
-            data = request.session['mealDict']        
+            data = request.session['mealDict']
+    elif request.method == 'POST':
+        data = newMealPlan(request)
 
     return render(request, 'app/meals.html', data)
 
