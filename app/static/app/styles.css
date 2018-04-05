@@ -231,15 +231,35 @@ body {
   transition: all .1s ease-in;
 }
 
+.preferenceBand {
+  width: auto;
+  max-width: 1240px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: auto;
+  grid-gap: 20px;
+}
+
+.preference-title li {
+    margin: 20px 0 5px 0;
+}
+
 .preference-title li label {
   font-size: 20px;
+  font-weight: bold;
+}
+
+.preference-title.selection-options li label {
+  font-size: 14px;
+  font-weight: bold;
 }
 
 .preference-wrapper ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
-    overflow: hidden;
+    overflow: visible;
 }
 
 .preference-wrapper ul li {
@@ -250,16 +270,7 @@ body {
 .preference-wrapper ul li label {
   display: block;
   text-align: center;
-  padding: 16px;
   text-decoration: none;
-}
-
-.ibmColor {
-  color: rgb(115, 144, 223);
-}
-
-.allRecipesColor {
-  color: rgb(221, 156, 119);
 }
 
 .red {
@@ -270,6 +281,14 @@ body {
   color: white;
 }
 
+.item.preference-wrapper {
+  max-width:225px;
+}
+
+.item.preference-wrapper p {
+  font-size: 14px;
+  font-weight: bold;
+}
 /* Chatbot */
 /*
 body {
