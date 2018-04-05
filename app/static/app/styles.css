@@ -155,15 +155,20 @@ body {
   margin: 0 0 0 0;
 }
 
+.preference-title li {
+    margin: 20px 0 5px 0;
+}
+
 .preference-title li label {
   font-size: 20px;
+  font-weight: bold;
 }
 
 .preference-wrapper ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
-    overflow: hidden;
+    overflow: visible;
 }
 
 .preference-wrapper ul li {
@@ -174,10 +179,17 @@ body {
 .preference-wrapper ul li label {
   display: block;
   text-align: center;
-  padding: 16px;
   text-decoration: none;
 }
 
+.item.preference-wrapper {
+  max-width:225px;
+}
+
+.item.preference-wrapper p {
+  font-size: 14px;
+  font-weight: bold;
+}
 /* Chatbot */
 /*
 body {

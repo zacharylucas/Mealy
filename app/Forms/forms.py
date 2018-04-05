@@ -3,6 +3,10 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.forms import ModelForm
 from django.utils.safestring import mark_safe
+from django.core import validators
+from django.core.validators import RegexValidator
+from django.core.exceptions import ValidationError
+from django.utils.translation import gettext_lazy as _
 
 
 
@@ -22,16 +26,25 @@ DIET_PLAN_CHOICES = [
     ('gainWeight', "Gain Weight")
 ]
 
+def validate_phone_number(value):
+    if value % 2 != 0:
+        raise ValidationError(
+            _('%(value)s is not an even number'),
+            params={'value': value},
+        )
+
+
 class UserInfoForm(forms.Form):
     dietary_restrictions = forms.CharField(max_length=100, required=False)
     food_allergies = forms.CharField(max_length=100, required=False)
     height = forms.IntegerField(label="Height (Inches)", required=True)
     weight = forms.IntegerField(label="Weight (Pounds)", required=True)
     diet_plan = forms.CharField(widget=forms.Select(choices=DIET_PLAN_CHOICES))
-    phone_number = forms.RegexField(regex=r'^\+?1?\d{9,15}$')
-    preferred_breakfast_time = forms.TimeField(widget=forms.TimeInput(format='%H:%M'))
-    preferred_lunch_time = forms.TimeField(widget=forms.TimeInput(format='%H:%M'))
-    preferred_dinner_time = forms.TimeField(widget=forms.TimeInput(format='%H:%M'))
+    #phone_number = forms.RegexField(regex=r'^\+?1?\d{9,15}$')
+    #phone_number = forms.CharField
+    preferred_breakfast_time = forms.RegexField(regex=r'^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$')
+    preferred_lunch_time = forms.RegexField(regex=r'^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$')
+    preferred_dinner_time = forms.RegexField(regex=r'^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$')
 
 
 CHOICES = [
@@ -39,6 +52,8 @@ CHOICES = [
     ('',''),
     ('dislike','')
 ]
+
+
 
 class PreferencesForm(forms.Form):
     chicken = forms.ChoiceField(choices=CHOICES, widget=forms.RadioSelect(), required=False)
