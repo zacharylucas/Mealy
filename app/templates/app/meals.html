@@ -28,11 +28,10 @@
     <div class="mealPlanBanner">
       <h1>This Week's Meals</h1>
       <p>Here is your weekly meal plan! Select a meal to see what ingredients you need and how to prepare it. If you'd like to return to the dashboard, click the dashboard button below. When you want to generate a new meal plan for another week, or if you're unhappy with the current meal plan, hit the new meals button below.</p>
-      <form class="" action="" method="POST">     
-      <a href="{% url 'index' %}" class="buttonRound">Dashboard</a>   
+      <form class="" action="" method="POST">
       {% csrf_token %}
       {{ form.as_p }}
-      <button class="buttonRound" type="submit" name="newMeals">New Meals</button> 
+      <button class="buttonRound" type="submit" name="newMeals">New Meals</button>
       </form>
     </div>
 
@@ -52,7 +51,7 @@
             <h1>{{breakfast.title}}</h1>
             <p><i class="far fa-star"></i> Rating: {{breakfast.rating|floatformat:-2}}/5 <br/>
                <i class="far fa-clock"></i> Ready in: {{breakfast.minutes}} min<br/>
-               <i class="fab fa-gripfire"></i> Cals: 
+               <i class="fab fa-gripfire"></i> Cals:
             </p>
             <span>Breakfast</span>
           </article>
@@ -84,7 +83,7 @@
             <h1>{{lunch.title}}</h1>
             <p><i class="far fa-star"></i>Rating: {{lunch.rating|floatformat:-2}}/5 <br/>
                <i class="far fa-clock"></i>Ready in: {{lunch.minutes}} min<br/>
-               <i class="fab fa-gripfire"></i> Cals: 
+               <i class="fab fa-gripfire"></i> Cals:
             </p>
             <span>Lunch</span>
           </article>
@@ -116,7 +115,7 @@
             <h1>{{dinner.title}}</h1>
             <p><i class="far fa-star"></i>Rating: {{dinner.rating|floatformat:-2}}/5 <br/>
               <i class="far fa-clock"></i>Ready in: {{dinner.minutes}} min<br />
-              <i class="fab fa-gripfire"></i> Cals: 
+              <i class="fab fa-gripfire"></i> Cals:
             </p>
             <span>Dinner</span>
           </article>

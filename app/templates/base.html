@@ -14,7 +14,16 @@
 <body>
   <div class="header">
     <span>
-        <h1>mealy</h1>
+      <a href="{% url 'index' %}" class="header-login"><h1>mealy</h1></a>
+    </span>
+    <span class="headerLogin">
+      {% if user.is_authenticated %}
+        Hi {{ user.username }}! |
+        <a href="{% url 'logout' %}">logout</a>
+      {% else %}
+        <a href="{% url 'login' %}">login</a>
+      {% endif %}
+      &nbsp&nbsp
     </span>
   </div>
 
@@ -22,20 +31,11 @@
   <br>
   <br>
 
-  <div class="headerLogin">
-    {% if user.is_authenticated %}
-      Hi {{ user.username }}!
-      <a href="{% url 'logout' %}">logout</a>
-    {% else %}
-      <a href="{% url 'login' %}">login</a>
-    {% endif %}
-  </div>
-
   <div class="main">
   {% block content %}
   {% endblock %}
-  </div> 
-  
+  </div>
+
   <br>
   <br>
   <br>

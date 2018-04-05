@@ -56,7 +56,13 @@ def newMealPlan(request):
     data = {'breakfasts' : breakfastQueryResults, 'lunches' : lunchQueryResults, 'dinners' : dinnerQueryResults}
     request.session['mealDict'] = data
     if str(request.user) != 'AnonymousUser':
-        m.updateMealDict(request.user,data, preferences)
+
+        newUserDict = {}
+        if request.session.get('userDict') != None or request.session.get('userDict') != {}:
+                newUserDict =  request.session.get('userDict')
+
+        m.updateAllDB(request.user, preferences, data, newUserDict)
+
     return data
 
 def meals(request):
@@ -113,17 +119,32 @@ def userInfo(request):
             hi = form.__dict__['data']['height']
             wi = form.__dict__['data']['weight']
             g = form.__dict__['data']['diet_plan']
-            p = form.__dict__['data']['phone_number']
-            b = form.__dict__['data']['preferred_breakfast_time']
-            l = form.__dict__['data']['preferred_lunch_time']
-            d = form.__dict__['data']['preferred_dinner_time']
+            #p = form.__dict__['data']['phone_number']
+            #b = form.__dict__['data']['preferred_breakfast_time']
+            #l = form.__dict__['data']['preferred_lunch_time']
+            #d = form.__dict__['data']['preferred_dinner_time']
             glma = 3
             if g == 'loseWeight':
                 glma = 2
             elif g == 'gainWeight':
                 glma = 1
-            m.updateUserInfo(request.user,  w=wi, h=hi, glm=glma, phone=p, btime=b,
-                   ltime=l, dtime=d, restrict=r, allergy=a)
+            #m.updateUserInfo(request.user,  w=wi, h=hi, glm=glma, phone=p, btime=b,
+                    #ltime=l, dtime=d, restrict=r, allergy=a)
+            newPrefDict = {}
+            newMealDict = {}
+            if request.session.get('mealDict') != None or request.session.get('mealDict') != {}:
+                    newMealDict = request.session.get('mealDict')
+            if request.session.get('prefDict') != None or request.session.get('prefDict') != {}:
+                    newPrefDict =  request.session.get('prefDict')
+            request.session['userDict'] = {
+                'weight' : wi,
+                'height' : hi,
+                'glm' : glma,
+                'restrict' : r,
+                'allergy' : a
+            }
+            m.updateAllDB(request.user, newPrefDict, newMealDict, request.session['userDict'])
+
         return redirect('index')
         #if form.is_valid():
             #form.save()
@@ -143,10 +164,10 @@ def userInfo(request):
                     'height':dicti['height'],
                     'weight':dicti['weight'],
                     'diet_plan':s,
-                    'phone_number':dicti['cell'],
-                    'preferred_breakfast_time':dicti['breakTime'],
-                    'preferred_lunch_time':dicti['lunchTime'],
-                    'preferred_dinner_time':dicti['dinnerTime']
+                    #'phone_number':dicti['cell'],
+                    #'preferred_breakfast_time':dicti['breakTime'],
+                    #'preferred_lunch_time':dicti['lunchTime'],
+                    #'preferred_dinner_time':dicti['dinnerTime']
                 })
     return render(request, 'app/userInfo.html', {'form' : form})
 
@@ -156,7 +177,16 @@ def preferenceSelection(request):
         prefDict = pref.createPreferences(form)
         request.session['prefDict'] = prefDict
         if str(request.user) != 'AnonymousUser':
-            m.updatePrefDict(request.user, prefDict)
+
+            newUserDict = {}
+            newMealDict = {}
+            if request.session.get('mealDict') != None or request.session.get('mealDict') != {}:
+                    newMealDict = request.session.get('mealDict')
+            if request.session.get('userDict') != None or request.session.get('userDict') != {}:
+                    newUserDict =  request.session.get('userDict')
+
+            m.updateAllDB(request.user, prefDict, newMealDict, newUserDict)
+
         return redirect('meals')
     else:
         if str(request.user) != 'AnonymousUser' and request.session.get('prefDict') != None and request.session.get('prefDict') != {}:
