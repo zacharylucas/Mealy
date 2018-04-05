@@ -104,17 +104,18 @@ def userInfo(request):
             hi = form.__dict__['data']['height']
             wi = form.__dict__['data']['weight']
             g = form.__dict__['data']['diet_plan']
-            p = form.__dict__['data']['phone_number']
-            b = form.__dict__['data']['preferred_breakfast_time']
-            l = form.__dict__['data']['preferred_lunch_time']
-            d = form.__dict__['data']['preferred_dinner_time']
+            #p = form.__dict__['data']['phone_number']
+            #b = form.__dict__['data']['preferred_breakfast_time']
+            #l = form.__dict__['data']['preferred_lunch_time']
+            #d = form.__dict__['data']['preferred_dinner_time']
             glma = 3
             if g == 'loseWeight':
                 glma = 2
             elif g == 'gainWeight':
                 glma = 1
-            m.updateUserInfo(request.user,  w=wi, h=hi, glm=glma, phone=p, btime=b,
-                   ltime=l, dtime=d, restrict=r, allergy=a)
+            #m.updateUserInfo(request.user,  w=wi, h=hi, glm=glma, phone=p, btime=b,
+                    #ltime=l, dtime=d, restrict=r, allergy=a)
+            m.updateUserInfo(request.user,  w=wi, h=hi, glm=glma, restrict=r, allergy=a)
         return redirect('index')
         #if form.is_valid():
             #form.save()
@@ -134,10 +135,10 @@ def userInfo(request):
                     'height':dicti['height'],
                     'weight':dicti['weight'],
                     'diet_plan':s,
-                    'phone_number':dicti['cell'],
-                    'preferred_breakfast_time':dicti['breakTime'],
-                    'preferred_lunch_time':dicti['lunchTime'],
-                    'preferred_dinner_time':dicti['dinnerTime']
+                    #'phone_number':dicti['cell'],
+                    #'preferred_breakfast_time':dicti['breakTime'],
+                    #'preferred_lunch_time':dicti['lunchTime'],
+                    #'preferred_dinner_time':dicti['dinnerTime']
                 })
     return render(request, 'app/userInfo.html', {'form' : form})
 

@@ -31,6 +31,12 @@ body {
   text-align: right;
 }
 
+.header .headerLogin {
+  position: relative;
+  float:right;
+}
+
+
 .footer {
   text-align: center;
   position: fixed;
@@ -45,9 +51,14 @@ body {
   max-width: 160px;
 }
 
-.header h1 {
+.header a h1 {
   margin: 0px;
   text-align: center;
+}
+
+.header a {
+  text-decoration: none;
+  color: black;
 }
 
 .headerLogin p {
@@ -70,7 +81,7 @@ body {
     cursor: pointer;
 
     background-color: white;
-    color: 333333;
+    color: #333333;
     border: 2px solid #333333; /* Blue */
 
     -webkit-transition-duration: 0.2s; /* Safari */
