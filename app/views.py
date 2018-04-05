@@ -44,11 +44,9 @@ def newMealPlan(request):
 
     alleg = []
     if str(request.user) != 'AnonymousUser':
-        dicti = m.getUserInfo(request.user)
-        if dicti['allergies'] != None and dicti['allergies'] != {}:
-            print(dictic['allergies'])
-            if re.match('^[A-Za-z, ]*$', dicti['allergies']):
-                alleg = re.split(', ',dicti['allergies'])
+        if request.session.get('userDict') != None or request.session.get('userDict') != {}:
+            if re.match('^[A-Za-z, ]*$', request.session['userDict']['allergy']):
+                alleg = re.split(', ',request.session['userDict']['allergy'])
 
     breakfastQueryResults = wQ.breakfastPlan(preferences,alleg)
     lunchQueryResults = wQ.lunchPlan(preferences,alleg)

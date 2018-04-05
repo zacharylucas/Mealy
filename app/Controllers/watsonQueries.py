@@ -57,9 +57,9 @@ def makePlan(result1, result2):
 def breakfastPlan(prefDict,alleg):
     result1 = prefQueryBreakfastEgg(prefDict,alleg)
     result2 = prefQueryBreakfastSmooth(prefDict,alleg)
-    if(result1['matching_results'] < 4):
+    if(result1['matching_results'] < 8):
         result1 = queryBreakfast('')
-    if(result2['matching_results'] < 4):
+    if(result2['matching_results'] < 8):
         result2 = queryBreakfast('')
 
     return makePlan(result1,result2)
@@ -67,20 +67,20 @@ def breakfastPlan(prefDict,alleg):
 def lunchPlan(prefDict,alleg):
     result1 = prefQueryLunch(prefDict,alleg)
     result2 = prefQueryLunch(prefDict,alleg)
-    if(result1['matching_results'] < 4):
-        result1 = prefQueryLunch(prefDict)
-    if(result2['matching_results'] < 4):
-        result2 = prefQueryLunch(prefDict)
+    if(result1['matching_results'] < 8):
+        result1 = queryLunch('')
+    if(result2['matching_results'] < 8):
+        result2 = queryLunch('')
 
     return makePlan(result1,result2)
 
 def dinnerPlan(prefDict,alleg):
     result1 = prefQueryDinner(prefDict,alleg)
     result2 = prefQueryDinner(prefDict,alleg)
-    if(result1['matching_results'] < 4):
-        result1 = prefQueryDinner(prefDict)
-    if(result2['matching_results'] < 4):
-        result2 = prefQueryDinner(prefDict)
+    if(result1['matching_results'] < 8):
+        result1 = queryDinner('')
+    if(result2['matching_results'] < 8):
+        result2 = queryDinner('')
 
     return makePlan(result1,result2)
 
@@ -126,6 +126,7 @@ def prefQueryDinner(prefDict,alleg):
     if queryString is not '':
         queryString += addExcludes(prefDict['proteinDict'], prefDict['carbDict'])
         queryString += addAllergies(alleg)
+    print(queryString)
     return queryDinner(queryString)
 
 def addAllergies(alleg):
