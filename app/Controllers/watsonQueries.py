@@ -91,7 +91,10 @@ def prefQueryBreakfastEgg(prefDict,alleg):
     if prefDict['proteinDict']['eggs'] != 'dislike':
         proteinLikes.append('eggs')
     vegetableLikes = addLikes(prefDict['vegetableDict'])
-    queryString = selectRandom(proteinLikes, vegetableLikes)
+    herbLikes = addLikes(prefDict['herbDict'])
+    dairyLikes = addLikes(prefDict['dairyDict'])
+    carbLikes = addLikes(prefDict['carbDict'])
+    queryString = selectRandom(proteinLikes, vegetableLikes, herbLikes, dairyLikes, carbLikes)
     if queryString is not '':
         queryString += addAllergies(alleg)
     return queryBreakfast(queryString)
@@ -110,9 +113,12 @@ def prefQueryLunch(prefDict,alleg):
         return queryLunch('')
     proteinLikes = addLikes(prefDict['proteinDict'])
     carbLikes = addLikes(prefDict['carbDict'])
-    queryString = selectRandom(proteinLikes, carbLikes)
+    vegetableLikes = addLikes(prefDict['vegetableDict'])
+    herbLikes = addLikes(prefDict['herbDict'])
+    dairyLikes = addLikes(prefDict['dairyDict'])
+    queryString = selectRandom(proteinLikes, carbLikes, vegetableLikes, herbLikes, dairyLikes)
     if queryString is not '':
-        queryString += addExcludes(prefDict['proteinDict'], prefDict['carbDict'])
+        queryString += addExcludes(prefDict['proteinDict'], prefDict['carbDict'], prefDict['vegetableDict'])
         queryString += addAllergies(alleg)
     return queryLunch(queryString)
 
@@ -122,9 +128,11 @@ def prefQueryDinner(prefDict,alleg):
     proteinLikes = addLikes(prefDict['proteinDict'])
     carbLikes = addLikes(prefDict['carbDict'])
     herbLikes = addLikes(prefDict['herbDict'])
-    queryString = selectRandom(proteinLikes, carbLikes, herbLikes)
+    vegetableLikes = addLikes(prefDict['vegetableDict'])
+    spiceLikes = addLikes(prefDict['spiceDict'])
+    queryString = selectRandom(proteinLikes, carbLikes, herbLikes, vegetableLikes, spiceLikes)
     if queryString is not '':
-        queryString += addExcludes(prefDict['proteinDict'], prefDict['carbDict'])
+        queryString += addExcludes(prefDict['proteinDict'], prefDict['carbDict'], prefDict['vegetableDict'])
         queryString += addAllergies(alleg)
     print(queryString)
     return queryDinner(queryString)
