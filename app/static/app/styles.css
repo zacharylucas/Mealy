@@ -36,6 +36,15 @@ body {
   float:right;
 }
 
+.headerBand {
+  width: -webkit-fill-available;
+  max-width: 100%;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: auto;
+  grid-gap: 20px;
+}
 
 .footer {
   text-align: center;
@@ -61,8 +70,24 @@ body {
   color: black;
 }
 
-.headerLogin p {
-  float: right;
+.item.headerItem.headerTitle {
+  text-align: center;
+  font-size: 30px;
+}
+
+.item.headerItem.headerLogin  {
+  text-align: right;
+  position: relative;
+}
+
+.item.headerItem.headerLogin span {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+
+.item.headerItem {
+  max-width: 100%;
 }
 
 .main {
