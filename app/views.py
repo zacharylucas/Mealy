@@ -12,6 +12,7 @@ from .models import User
 from .Forms.forms import SignUpForm
 from .Forms.forms import UserInfoForm
 from .Forms.forms import PreferencesForm
+from . import models as m
 
 # Create your views here.
 def search(request):
@@ -67,6 +68,13 @@ def chatbot(request):
 
 def index(request):
     context = {}
+    if str(request.user) != 'AnonymousUser':
+        prefDict = m.getPrefDict(request.user)
+        request.session['prefDict'] = prefDict
+        mealDict = m.getMealDict(request.user)
+        request.session['mealDict'] = mealDict
+        print(prefDict)
+        
     return render(request, 'app/index.html', context)
 
 def conversation(request):
@@ -76,6 +84,23 @@ def conversation(request):
 def userInfo(request):
     if request.method == 'POST':
         form = UserInfoForm(request.POST)
+        if  str(request.user) != 'AnonymousUser':
+            r = form.__dict__['data']['dietary_restrictions']
+            a = form.__dict__['data']['food_allergies']
+            hi = form.__dict__['data']['height']
+            wi = form.__dict__['data']['weight']
+            g = form.__dict__['data']['diet_plan']
+            p = form.__dict__['data']['phone_number']
+            b = form.__dict__['data']['preferred_breakfast_time']
+            l = form.__dict__['data']['preferred_lunch_time']
+            d = form.__dict__['data']['preferred_dinner_time']
+            glma = 3
+            if g == 'loseWeight':
+                glma = 2
+            elif g == 'gainWeight':
+                glma = 1
+            m.updateUserInfo(request.user,  w=wi, h=hi, glm=glma, phone=p, btime=b,
+                   ltime=l, dtime=d, restrict=r, allergy=a)
         return redirect('preferenceSelection')
         #if form.is_valid():
             #form.save()
@@ -88,6 +113,8 @@ def preferenceSelection(request):
         form = PreferencesForm(request.POST)
         prefDict = pref.createPreferences(form)
         request.session['prefDict'] = prefDict
+        if str(request.user) != 'AnonymousUser':
+            m.updatePrefDict(request.user, prefDict)
         return redirect('meals')
     else:
         form = PreferencesForm()
@@ -97,12 +124,14 @@ def signup(request):
     if request.method == 'POST':
         form = SignUpForm(request.POST)
         if form.is_valid():
-            form.save()
+            form.save()           
             username = form.cleaned_data.get('username')
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=raw_password)
             login(request, user)
+            m.createUserInfo(user)
             return redirect('index')
     else:
         form = SignUpForm()
+        
     return render(request, 'app/signup.html', {'form': form})
