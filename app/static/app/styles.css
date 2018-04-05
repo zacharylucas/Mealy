@@ -3,6 +3,7 @@ body {
   margin: 0px;
   padding: 0px;
   font-family: Roboto;
+  overflow-y: scroll;
 }
 
 .logoFont {
@@ -11,6 +12,8 @@ body {
 }
 
 .header {
+  position: fixed;
+  z-index: 10;
   margin: 0;
   width: 100%;
   padding-bottom: 4px;
@@ -26,6 +29,16 @@ body {
 
 .header .loginStatus {
   text-align: right;
+}
+
+.footer {
+  text-align: center;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: #333333;
+  color: white;
 }
 
 .item {
@@ -182,7 +195,7 @@ body {
 .modal {
   display: none; /* Hidden by default */
   position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
+  z-index: 100; /* Sit on top */
   padding-top: 100px; /* Location of the box */
   left: 0;
   top: 0;
@@ -239,6 +252,22 @@ body {
   text-align: center;
   padding: 16px;
   text-decoration: none;
+}
+
+.ibmColor {
+  color: rgb(115, 144, 223);
+}
+
+.allRecipesColor {
+  color: rgb(221, 156, 119);
+}
+
+.red {
+  color: #d69494;
+}
+
+.white {
+  color: white;
 }
 
 /* Chatbot */
