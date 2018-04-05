@@ -7,7 +7,7 @@ class UserInfo(models.Model):
     weight = models.IntegerField(default=0)
     height = models.IntegerField(default=0)
     gain_lose_maintain = models.IntegerField(default=3)
-    #cell = models.CharField(max_length=12,default='')
+    cell = models.CharField(max_length=12,default='')
     #breakTime = models.TimeField(blank=True,null=True)
     #lunchTime = models.TimeField(blank=True,null=True)
     #dinnerTime = models.TimeField(blank=True,null=True)
