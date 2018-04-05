@@ -2,8 +2,28 @@
 {% block title %}Mealy - Meal Plan{% endblock %}
 
 {% block content %}
+  <script>
+    function mealClick(id){
+      var modal = document.getElementById(id);
+      if(modal.style.display == "none"){
+        modal.style.display = "block";
+      } else {
+        modal.style.display = "none";
+      }
+    }
+  </script>
+
+  <script>
+    function closeModal(id){
+      var modal = document.getElementById(id);
+      modal.style.display = "none";
+    }
+  </script>
+
+
   <br>
   <br>
+
   <div class="support-grid"></div>
   <div class="band">
     <div class="item"><h3>Monday</h3></div>
@@ -15,8 +35,8 @@
     <div class="item"><h3>Sunday</h3></div>
 
     {% for breakfast in breakfasts %}
-      <div class="item">
-        <a href="#" class="card">
+      <div onclick="mealClick('{{breakfast.id}}')" class="item">
+        <a class="card">
           <div class="thumb" style="background-image: url({{breakfast.image}});"></div>
           <article>
             <h1>{{breakfast.title}}</h1>
@@ -27,11 +47,27 @@
           </article>
         </a>
       </div>
+
+      <div class="modal" id="{{breakfast.id}}">
+        <div class="modal-content">
+          <span onclick="closeModal('{{breakfast.id}}')" class="close"><i class="far fa-times-circle"></i></span>
+          <h1><i class="fas fa-utensils"></i> {{breakfast.title}}</h1>
+          <p><i class="far fa-star"></i> Rating: {{breakfast.rating|floatformat:-2}}/5<br><i class="far fa-clock"></i> Ready in: {{breakfast.minutes}} minutes</p>
+          <h2><i class="fas fa-list-ul"></i> Ingredients</h2>
+          <ul>
+            {% for ingredient in breakfast.ingredients %}
+              <li>{{ingredient}}</li>
+            {% endfor %}
+          </ul>
+          <h2><i class="fas fa-align-left"></i> Directions</h2>
+          <p>{{breakfast.instructions}}</p>
+        </div>  
+      </div>
     {% endfor %}
 
     {% for lunch in lunches %}
-      <div class="item">
-        <a href="#" class="card">
+      <div onclick="mealClick('{{lunch.id}}')" class="item">
+        <a class="card">
           <div class="thumb" style="background-image: url({{lunch.image}});"></div>
           <article>
             <h1>{{lunch.title}}</h1>
@@ -42,11 +78,27 @@
           </article>
         </a>
       </div>
+
+      <div class="modal" id="{{lunch.id}}">
+          <div class="modal-content">
+            <span onclick="closeModal('{{lunch.id}}')" class="close"><i class="far fa-times-circle"></i></span>
+            <h1><i class="fas fa-utensils"></i> {{lunch.title}}</h1>
+            <p><i class="far fa-star"></i> Rating: {{lunch.rating|floatformat:-2}}/5<br><i class="far fa-clock"></i> Ready in: {{lunch.minutes}} minutes</p>
+            <h2><i class="fas fa-list-ul"></i> Ingredients</h2>
+            <ul>
+              {% for ingredient in lunch.ingredients %}
+                <li>{{ingredient}}</li>
+              {% endfor %}
+            </ul>
+            <h2><i class="fas fa-align-left"></i> Directions</h2>
+            <p>{{lunch.instructions}}</p>
+          </div>  
+        </div>
     {% endfor %}
 
     {% for dinner in dinners %}
-      <div class="item">
-        <a href="#" class="card">
+      <div onclick="mealClick('{{dinner.id}}')" class="item">
+        <a class="card">
           <div class="thumb" style="background-image: url({{dinner.image}});"></div>
           <article>
             <h1>{{dinner.title}}</h1>
@@ -57,6 +109,22 @@
           </article>
         </a>
       </div>
+
+      <div class="modal" id="{{dinner.id}}">
+          <div class="modal-content">
+            <span onclick="closeModal('{{dinner.id}}')" class="close"><i class="far fa-times-circle"></i></span>
+            <h1><i class="fas fa-utensils"></i> {{dinner.title}}</h1>
+            <p><i class="far fa-star"></i> Rating: {{dinner.rating|floatformat:-2}}/5<br><i class="far fa-clock"></i> Ready in: {{dinner.minutes}} minutes</p>
+            <h2><i class="fas fa-list-ul"></i> Ingredients</h2>
+            <ul>
+              {% for ingredient in dinner.ingredients %}
+                <li>{{ingredient}}</li>
+              {% endfor %}
+            </ul>
+            <h2><i class="fas fa-align-left"></i> Directions</h2>
+            <p>{{dinner.instructions}}</p>
+          </div>  
+        </div>
     {% endfor %}
   </div>
   <!--
