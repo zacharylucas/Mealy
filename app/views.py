@@ -23,7 +23,6 @@ def search(request):
         #numResults = int(query['matching_results'])
         recipes = []
         for currentRecipe in query['results']:
-            print(currentRecipe)
             recipe = {}
             recipe['image'] = currentRecipe['image']
             recipe['title'] = currentRecipe['title']
@@ -79,7 +78,6 @@ def index(request):
         request.session['prefDict'] = prefDict
         mealDict = m.getMealDict(request.user)
         request.session['mealDict'] = mealDict
-        print(prefDict)
 
     return render(request, 'app/index.html', context)
 
