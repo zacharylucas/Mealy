@@ -27,7 +27,7 @@
   <div class="band">
     <div class="mealPlanBanner">
       <h1>This Week's Meals</h1>
-      <p>Here is your weekly meal plan! Select a meal to see what ingredients you need and how to prepare it. If you'd like to return to the dashboard, click the dashboard button below. When you want to generate a new meal plan for another week, or if you're unhappy with the current meal plan, hit the new meals button below.</p>
+      <p>Here is your weekly meal plan! Select a meal to see what ingredients you need and how to prepare it. When you want to generate a new meal plan for another week, or if you're unhappy with the current meal plan, hit the new meals button below.</p>
       <form class="" action="" method="POST">
       {% csrf_token %}
       {{ form.as_p }}
@@ -51,7 +51,6 @@
             <h1>{{breakfast.title}}</h1>
             <p><i class="far fa-star"></i> Rating: {{breakfast.rating|floatformat:-2}}/5 <br/>
                <i class="far fa-clock"></i> Ready in: {{breakfast.minutes}} min<br/>
-               <i class="fab fa-gripfire"></i> Cals:
             </p>
             <span>Breakfast</span>
           </article>
@@ -62,7 +61,7 @@
         <div class="modal-content">
           <span onclick="closeModal('{{breakfast.id}}')" class="close"><i class="far fa-times-circle"></i></span>
           <h1><i class="fas fa-utensils"></i> {{breakfast.title}}</h1>
-          <p><i class="far fa-star"></i> Rating: {{breakfast.rating|floatformat:-2}}/5<br><i class="far fa-clock"></i> Ready in: {{breakfast.minutes}} minutes<br /><i class="fab fa-gripfire"></i> Calories: </p>
+          <p><i class="far fa-star"></i> Rating: {{breakfast.rating|floatformat:-2}}/5<br><i class="far fa-clock"></i> Ready in: {{breakfast.minutes}} minutes<br /></p>
           <h2><i class="fas fa-list-ul"></i> Ingredients</h2>
           <ul>
             {% for ingredient in breakfast.ingredients %}
@@ -83,7 +82,6 @@
             <h1>{{lunch.title}}</h1>
             <p><i class="far fa-star"></i>Rating: {{lunch.rating|floatformat:-2}}/5 <br/>
                <i class="far fa-clock"></i>Ready in: {{lunch.minutes}} min<br/>
-               <i class="fab fa-gripfire"></i> Cals:
             </p>
             <span>Lunch</span>
           </article>
@@ -94,7 +92,7 @@
           <div class="modal-content">
             <span onclick="closeModal('{{lunch.id}}')" class="close"><i class="far fa-times-circle"></i></span>
             <h1><i class="fas fa-utensils"></i> {{lunch.title}}</h1>
-            <p><i class="far fa-star"></i> Rating: {{lunch.rating|floatformat:-2}}/5<br><i class="far fa-clock"></i> Ready in: {{lunch.minutes}} minutes<br /><i class="fab fa-gripfire"></i> Calories: </p>
+            <p><i class="far fa-star"></i> Rating: {{lunch.rating|floatformat:-2}}/5<br><i class="far fa-clock"></i> Ready in: {{lunch.minutes}} minutes<br /></p>
             <h2><i class="fas fa-list-ul"></i> Ingredients</h2>
             <ul>
               {% for ingredient in lunch.ingredients %}
@@ -115,7 +113,6 @@
             <h1>{{dinner.title}}</h1>
             <p><i class="far fa-star"></i>Rating: {{dinner.rating|floatformat:-2}}/5 <br/>
               <i class="far fa-clock"></i>Ready in: {{dinner.minutes}} min<br />
-              <i class="fab fa-gripfire"></i> Cals:
             </p>
             <span>Dinner</span>
           </article>
@@ -126,7 +123,7 @@
           <div class="modal-content">
             <span onclick="closeModal('{{dinner.id}}')" class="close"><i class="far fa-times-circle"></i></span>
             <h1><i class="fas fa-utensils"></i> {{dinner.title}}</h1>
-            <p><i class="far fa-star"></i> Rating: {{dinner.rating|floatformat:-2}}/5<br><i class="far fa-clock"></i> Ready in: {{dinner.minutes}} minutes<br /><i class="fab fa-gripfire"></i> Calories: </p>
+            <p><i class="far fa-star"></i> Rating: {{dinner.rating|floatformat:-2}}/5<br><i class="far fa-clock"></i> Ready in: {{dinner.minutes}} minutes<br /></p>
             <h2><i class="fas fa-list-ul"></i> Ingredients</h2>
             <ul>
               {% for ingredient in dinner.ingredients %}
