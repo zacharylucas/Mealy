@@ -12,11 +12,14 @@
   <title>{% block title %}Mealy{% endblock %}</title>
 </head>
 <body>
-  <div class="header">
-    <span>
-      <a href="{% url 'index' %}" class="header-login"><h1>mealy</h1></a>
-    </span>
-    <span class="headerLogin">
+  <div class="support-grid"></div>
+  <div class="headerBand header">
+    <div class="item headerItem">&nbsp</div>
+    <div class="item headerItem headerTitle">
+      <a href="{% url 'index' %}" class="header-login"><span>mealy</span></a>
+    </div>
+    <div class="item headerItem headerLogin ">
+      <span>
       {% if user.is_authenticated %}
         Hi {{ user.username }}! |
         <a href="{% url 'logout' %}">logout</a>
@@ -25,6 +28,7 @@
       {% endif %}
       &nbsp&nbsp
     </span>
+    </div>
   </div>
 
   <br>
