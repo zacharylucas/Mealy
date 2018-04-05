@@ -137,28 +137,6 @@
         </div>
     {% endfor %}
   </div>
-  <!--
-  <div class="container">
-    <div class="row">
-      {% for dinner in dinners %}
-      <div class="col-lg-4">
-        <div class="thumbnail">
-          <p style="text-align:center; font-weight: bold">Dinner</p>
-          <img src="{{dinner.image}}">
-          <p>{{dinner.title}}</p>
-          <input type="button" class="btn btn-primary" value="Show More" onclick="myFunction('{{dinner.title}}')"></input>
-          <div id="{{dinner.title}}" style="display:none">
-            <p><b>Rating:</b> {{dinner.rating}}/5</p>
-            <p><b>Ready in:</b> {{dinner.minutes}} minutes</p>
-            <p><b>Ingredients:</b></p>
-            {% for ingredient in dinner.ingredients %}
-            <p>{{ingredient}}</p>
-            {% endfor %}
-          </div>
-        </div>
-      </div>
-      {% endfor %}
-    </div>
-  </div>
--->
+  <br>
+  <br>
 {% endblock %}
