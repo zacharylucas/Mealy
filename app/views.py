@@ -45,8 +45,9 @@ def newMealPlan(request):
     alleg = []
     if str(request.user) != 'AnonymousUser':
         if request.session.get('userDict') != None or request.session.get('userDict') != {}:
-            if re.match('^[A-Za-z, ]*$', request.session['userDict']['allergy']):
-                alleg = re.split(', ',request.session['userDict']['allergy'])
+            if request.session.get('userDict') != None:
+                if re.match('^[A-Za-z, ]*$', request.session['userDict']['allergy']):
+                    alleg = re.split(', ',request.session['userDict']['allergy'])
 
     breakfastQueryResults = wQ.breakfastPlan(preferences,alleg)
     lunchQueryResults = wQ.lunchPlan(preferences,alleg)
@@ -178,7 +179,7 @@ def userInfo(request):
             s = 'loseWeight'
         else:
             s = 'gainWeight'
-        
+
         form = UserInfoForm(
                 initial= {
                     'dietary_restrictions': dicti['dietRestrict'],

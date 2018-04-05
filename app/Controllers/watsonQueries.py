@@ -140,7 +140,8 @@ def prefQueryDinner(prefDict,alleg):
 def addAllergies(alleg):
     queryString = ''
     for i in range(len(alleg)):
-        queryString += r',ingredients:!"%s"' % alleg[i]
+        if alleg[i] != "":
+            queryString += r',ingredients:!"%s"' % alleg[i]
     return queryString
 
 def addExcludes(*args):
