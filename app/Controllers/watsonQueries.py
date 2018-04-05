@@ -86,6 +86,8 @@ def dinnerPlan(prefDict):
 
 def prefQueryBreakfastEgg(prefDict):
     proteinLikes = []
+    if prefDict == {}:
+        return queryBreakfast('')
     if prefDict['proteinDict']['eggs'] != 'dislike':
         proteinLikes.append('eggs')
     vegetableLikes = addLikes(prefDict['vegetableDict'])
@@ -93,11 +95,15 @@ def prefQueryBreakfastEgg(prefDict):
     return queryBreakfast(queryString)
 
 def prefQueryBreakfastSmooth(prefDict):
+    if prefDict == {}:
+        return queryBreakfast('')
     fruitLikes = addLikes(prefDict['fruitDict'])
     queryString = selectRandom(fruitLikes)
     return queryBreakfast(queryString)
 
 def prefQueryLunch(prefDict):
+    if prefDict == {}:
+        return queryLunch('')
     proteinLikes = addLikes(prefDict['proteinDict'])
     carbLikes = addLikes(prefDict['carbDict'])
     queryString = selectRandom(proteinLikes, carbLikes)
@@ -106,6 +112,8 @@ def prefQueryLunch(prefDict):
     return queryLunch(queryString)
 
 def prefQueryDinner(prefDict):
+    if prefDict == {}:
+        return queryDinner('')
     proteinLikes = addLikes(prefDict['proteinDict'])
     carbLikes = addLikes(prefDict['carbDict'])
     herbLikes = addLikes(prefDict['herbDict'])
