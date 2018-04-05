@@ -5,6 +5,11 @@ body {
   font-family: Roboto;
 }
 
+.logoFont {
+  font-family: Pacifico;
+  color: #333333;
+}
+
 .header {
   margin: 0;
   width: 100%;
@@ -49,6 +54,7 @@ body {
     border-radius: 3px;
     display: inline-block;
     font-size: 16px;
+    cursor: pointer;
 
     background-color: white;
     color: 333333;
@@ -59,12 +65,14 @@ body {
 }
 
 .buttonRound:hover {
-  background-color: #68DDDB;
+  background-color: #333333;
+  color: white;
 }
 
 .buttonRound:active {
   transition-duration: .05s;
-  background-color: #14FCF8;
+  background-color: #999999;
+  color: white;
 }
 
 .createAccont, .form-container{
@@ -93,11 +101,23 @@ body {
   .band {
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
   }
+
+  .mealPlanBanner {
+    grid-column: 1/ span 7;
+  }
 }
 
 @media only screen and (min-width: 850px) {
   .dashBand {
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  }
+
+  .itemWide {
+    grid-column: 1/ span 3;
+  }
+
+  .dashBanner {
+    grid-column: 1/ span 6;
   }
 }
 

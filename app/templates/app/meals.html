@@ -26,6 +26,13 @@
 
   <div class="support-grid"></div>
   <div class="band">
+    <div class="mealPlanBanner">
+      <h1>This Week's Meals</h1>
+      <p>Here is your weekly meal plan! Select a meal to see what ingredients you need and how to prepare it. If you'd like to return to the dashboard, click the dashboard button below. When you want to generate a new meal plan for another week, or if you're unhappy with the current meal plan, hit the new meals button below.</p>
+      <a href="{% url 'index' %}" class="buttonRound" type="submit">Dashboard</a>
+      <button class="buttonRound" type="submit" name="newMeals">New Meals</button>
+    </div>
+
     <div class="item"><h3>Monday</h3></div>
     <div class="item"><h3>Tuesday</h3></div>
     <div class="item"><h3>Wednesday</h3></div>
