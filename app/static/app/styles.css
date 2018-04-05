@@ -162,8 +162,8 @@ body {
   flex: 1;
   justify-content: space-between;
   flex-direction: column;
-
 }
+
 .card .thumb {
   padding-bottom: 60%;
   background-size: cover;
