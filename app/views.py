@@ -119,7 +119,26 @@ def userInfo(request):
         #if form.is_valid():
             #form.save()
     else:
-        form = UserInfoForm()
+        dicti = m.getUserInfo(request.user)
+        if dicti['gain_lose_maintain'] == 3:
+            s = 'maintainWeight'
+        elif dicti['gain_lose_maintain'] == 2:
+            s = 'loseWeight'
+        else:
+            s = 'gainWeight'
+        if str(request.user) != 'AnonymousUser':
+            form = UserInfoForm(
+                initial= {
+                    'dietary_restrictions': dicti['dietRestrict'],
+                    'food_allergies':dicti['allergies'],
+                    'height':dicti['height'],
+                    'weight':dicti['weight'],
+                    'diet_plan':s,
+                    'phone_number':dicti['cell'],
+                    'preferred_breakfast_time':dicti['breakTime'],
+                    'preferred_lunch_time':dicti['lunchTime'],
+                    'preferred_dinner_time':dicti['dinnerTime']
+                })
     return render(request, 'app/userInfo.html', {'form' : form})
 
 def preferenceSelection(request):

@@ -2,10 +2,14 @@
 {% block title %}Mealy - Login{% endblock %}
 
 {% block content %}
-  <h2>Login</h2>
+  <h1 class="logoFont">mealy</h1>
+  <p>Welcome to Mealy, the cognitive meal-planning solution of the future.<br>Mealy is powered by IBM Watson and AllRecipes.com.</p>
+  <h3>Login or sign up to get started</h3>
   <form method="post">
     {% csrf_token %}
     {{ form.as_p }}
+    <br>
     <button class="buttonRound" type="submit">Login</button>
+    <a class="buttonRound" href="{% url 'signup' %}">Sign Up</a>
   </form>
 {% endblock %}

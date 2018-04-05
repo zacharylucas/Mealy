@@ -62,3 +62,16 @@ def updateUserInfo(uid, w=0, h=0, glm=3, phone='', btime=None,
     u.dietRestrict = restrict
     u.allergies = allergy
     u.save(force_update=True)
+
+def getUserInfo(uid):
+    res = UserInfo.objects.raw('select * from app_userinfo ui where ui.userId_id == %s', [uid.id])[0]
+    dic = {'cell':res.cell,
+           'weight':res.weight,
+            'height':res.height,
+            'gain_lose_maintain': res.gain_lose_maintain,
+            'breakTime':res.breakTime,
+            'lunchTime': res.lunchTime,
+            'dinnerTime': res.dinnerTime,
+            'dietRestrict':res.dietRestrict,
+            'allergies': res.allergies }
+    return dic
