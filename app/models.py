@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 import json
 
 class UserInfo(models.Model):
-    userId = models.ForeignKey(User, on_delete=models.CASCADE)
+    userId = models.ForeignKey(User, on_delete=models.CASCADE, primary_key=True)
     weight = models.IntegerField(default=0)
     height = models.IntegerField(default=0)
     gain_lose_maintain = models.IntegerField(default=3)
@@ -13,28 +13,34 @@ class UserInfo(models.Model):
     dinnerTime = models.TimeField(blank=True,null=True)
     dietRestrict = models.CharField(max_length=100,default='')
     allergies = models.CharField(max_length=100,default='')
-    prefDict = models.CharField(max_length=2048,default='')
-    mealDict = models.CharField(max_length=2048,default='')
+    prefDict = models.CharField(max_length=10000,default='')
+    mealDict = models.CharField(max_length=10000,default='')
     
 def getPrefDict(uid):
-    u = UserInfo(userId=uid)
-    return json.load(u.prefDict)
+    res = UserInfo.objects.raw('select * from app_userinfo ui where ui.userId_id == %s', [uid.id])[0]
+    if str(res.prefDict) == '':
+        return {}
+    return json.loads(str(res.prefDict))
 
 def updatePrefDict(uid, newPrefDict):
-    u = u = UserInfo(userId=uid)
+    u = UserInfo(userId=uid)
     s = json.dumps(newPrefDict)
+    u.userId = uid
     u.prefDict = s
-    u.save()
+    u.save(force_update=True)
     
 def getMealDict(uid):
-    u = UserInfo(userId=uid)
-    return json.load(u.mealDict)
+    res = UserInfo.objects.raw('select * from app_userinfo ui where ui.userId_id == %s', [uid.id])[0]
+    if str(res.mealDict) == '':
+        return {}
+    return json.loads(str(res.mealDict))
 
 def updateMealDict(uid, newMealDict):
     u = UserInfo(userId=uid)
     s = json.dumps(newMealDict)
+    u.userId = uid
     u.mealDict = s
-    u.save()
+    u.save(force_update=True)
     
 def createUserInfo(uid):
     ui = UserInfo(userId=uid)
@@ -43,6 +49,7 @@ def createUserInfo(uid):
 def updateUserInfo(uid, w=0, h=0, glm=3, phone='', btime=None,
                    ltime=None, dtime=None, restrict='', allergy=''):
     u = UserInfo(userId=uid)
+    u.userId = uid
     u.weight = w
     u.height = h
     u.gain_lose_maintain = glm
@@ -52,4 +59,4 @@ def updateUserInfo(uid, w=0, h=0, glm=3, phone='', btime=None,
     u.dinnerTime = dtime
     u.dietRestrict = restrict
     u.allergies = allergy
-    u.save()
+    u.save(force_update=True)

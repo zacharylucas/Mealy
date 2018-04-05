@@ -8,9 +8,9 @@
   <form method="post">
     {% csrf_token %}
     <div class="support-grid"></div>
-    <div class="dashBand">
+    <div class="preferenceBand">
     <div class="item preference-wrapper">
-    <ul class="preference-title">
+    <ul class="preference-title selection-options">
       <li><label>Like</label></li>
       <li><label>Neutral</label></li>
       <li><label>Dislike</label></li>
@@ -20,7 +20,7 @@
     </div>
 
     <div class="item preference-wrapper">
-      <ul class="preference-title">
+      <ul class="preference-title selection-options">
         <li><label>Like</label></li>
         <li><label>Neutral</label></li>
         <li><label>Dislike</label></li>
@@ -32,6 +32,7 @@
       <li><label>&nbsp</label></li>
       <li><label>&nbsp</label></li>
     </ul>
+    <hr>
     {% endif %}
     {% if forloop.counter == 16 %}
     <ul class="preference-title">
@@ -39,6 +40,7 @@
       <li><label>&nbsp</label></li>
       <li><label>&nbsp</label></li>
     </ul>
+    <hr>
     {% endif %}
     {% if forloop.counter == 27 %}
     <ul class="preference-title">
@@ -46,6 +48,7 @@
       <li><label>&nbsp</label></li>
       <li><label>&nbsp</label></li>
     </ul>
+    <hr>
     {% endif %}
     {% if forloop.counter == 44 %}
     <ul class="preference-title">
@@ -53,6 +56,7 @@
       <li><label>&nbsp</label></li>
       <li><label>&nbsp</label></li>
     </ul>
+    <hr>
     {% endif %}
     {% if forloop.counter == 61 %}
     <ul class="preference-title">
@@ -60,6 +64,7 @@
       <li><label>&nbsp</label></li>
       <li><label>&nbsp</label></li>
     </ul>
+    <hr>
     {% endif %}
     {% if forloop.counter == 72 %}
     <ul class="preference-title">
@@ -67,6 +72,7 @@
       <li><label>&nbsp</label></li>
       <li><label>&nbsp</label></li>
     </ul>
+    <hr>
     {% endif %}
     {% if forloop.counter == 83 %}
     <ul class="preference-title">
@@ -74,6 +80,7 @@
       <li><label>&nbsp</label></li>
       <li><label>&nbsp</label></li>
     </ul>
+    <hr>
     {% endif %}
       <p>
         {{ field.label_tag }}

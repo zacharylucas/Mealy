@@ -5,6 +5,11 @@ body {
   font-family: Roboto;
 }
 
+.logoFont {
+  font-family: Pacifico;
+  color: #333333;
+}
+
 .header {
   margin: 0;
   width: 100%;
@@ -49,6 +54,7 @@ body {
     border-radius: 3px;
     display: inline-block;
     font-size: 16px;
+    cursor: pointer;
 
     background-color: white;
     color: 333333;
@@ -59,12 +65,14 @@ body {
 }
 
 .buttonRound:hover {
-  background-color: #68DDDB;
+  background-color: #333333;
+  color: white;
 }
 
 .buttonRound:active {
   transition-duration: .05s;
-  background-color: #14FCF8;
+  background-color: #999999;
+  color: white;
 }
 
 .createAccont, .form-container{
@@ -83,18 +91,33 @@ body {
   grid-template-columns: 1fr;
   grid-template-rows: auto;
   grid-gap: 20px;
+}
 
+.cardIngredients{
+  display: none;
 }
 
 @media only screen and (min-width: 850px) {
   .band {
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
   }
+
+  .mealPlanBanner {
+    grid-column: 1/ span 7;
+  }
 }
 
 @media only screen and (min-width: 850px) {
   .dashBand {
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  }
+
+  .itemWide {
+    grid-column: 1/ span 3;
+  }
+
+  .dashBanner {
+    grid-column: 1/ span 6;
   }
 }
 
@@ -111,6 +134,7 @@ body {
   position: relative;
   top: 0;
   transition: all .1s ease-in;
+  cursor: pointer;
 }
 
 .card:hover {
@@ -155,12 +179,66 @@ body {
   margin: 0 0 0 0;
 }
 
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 5% auto; /* 15% from the top and centered */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%; /* Could be more or less, depending on screen size */
+}
+
+/* The Close Button */
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  transition: all .1s ease-in;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all .1s ease-in;
+}
+
+.preferenceBand {
+  width: auto;
+  max-width: 1240px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: auto;
+  grid-gap: 20px;
+}
+
 .preference-title li {
     margin: 20px 0 5px 0;
 }
 
 .preference-title li label {
   font-size: 20px;
+  font-weight: bold;
+}
+
+.preference-title.selection-options li label {
+  font-size: 14px;
   font-weight: bold;
 }
 
