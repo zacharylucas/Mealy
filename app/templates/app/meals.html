@@ -20,7 +20,6 @@
     }
   </script>
 
-
   <br>
   <br>
 
@@ -29,11 +28,11 @@
     <div class="mealPlanBanner">
       <h1>This Week's Meals</h1>
       <p>Here is your weekly meal plan! Select a meal to see what ingredients you need and how to prepare it. If you'd like to return to the dashboard, click the dashboard button below. When you want to generate a new meal plan for another week, or if you're unhappy with the current meal plan, hit the new meals button below.</p>
-      <a href="{% url 'index' %}" class="buttonRound" type="submit">Dashboard</a>
-      <form class="" action="" method="POST">
+      <form class="" action="" method="POST">     
+      <a href="{% url 'index' %}" class="buttonRound">Dashboard</a>   
       {% csrf_token %}
       {{ form.as_p }}
-      <button class="buttonRound" type="submit" name="newMeals">New Meals</button>
+      <button class="buttonRound" type="submit" name="newMeals">New Meals</button> 
       </form>
     </div>
 
