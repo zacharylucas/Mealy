@@ -5,8 +5,9 @@ from Mealy.celery import app
 
 from twilio.rest import Client
 from twilio.twiml.messaging_response import Body, Message, Redirect, MessagingResponse
+from . import models
  
- 
+
 @app.task
 def send_recipe_reminder():
     try:
@@ -16,9 +17,11 @@ def send_recipe_reminder():
 
         client = Client(account_sid, auth_token)
 
+        users = models.UserInfo.objects.all()
+
         message = client.messages.create(
             to='+14403966072', 
             from_="+12166665780",
-            body="Hey there! It's time to start preparing you meal from Mealy! Here is the link to your recipe: https://www.allrecipes.com/recipe/31087/")
-    except UserModel.DoesNotExist:
+            body="Hey there! It's time to start preparing you meal from Mealy! Here is your recipe:\n\n")
+    except:
         logging.warning("Tried to send text message user but failed")
