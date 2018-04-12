@@ -234,6 +234,7 @@ def preferenceSelection(request):
         form = PreferencesForm(request.POST)
         prefDict = pref.createPreferences(form)
         request.session['prefDict'] = prefDict
+<<<<<<< fc5295d924c21c663dc7e22d69b361d06bc4b1d6
         if str(request.user) != 'AnonymousUser':
 
             newUserDict = {}
@@ -268,3 +269,18 @@ def signup(request):
         form = SignUpForm()
 
     return render(request, 'app/signup.html', {'form': form})
+=======
+    return render(request, 'app/preferenceSelection.html', context)
+
+def sms(request):
+    context = {}
+
+    # take user input from request and send to chatbot (need user's phone number for conversation ID)
+    # get chatbot repsonse
+    chatbotResponse = "Chatbot response goes here."
+
+    response = Element('Response')
+    sms = SubElement(response, "Sms")
+    sms.text = chatbotResponse
+    return HttpResponse(tostring(response), content_type='text/xml')
+>>>>>>> added route for twilio response handling
