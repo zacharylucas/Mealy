@@ -40,10 +40,10 @@ class UserInfoForm(forms.Form):
     height = forms.IntegerField(label="Height (Inches)", required=True)
     weight = forms.IntegerField(label="Weight (Pounds)", required=True)
     diet_plan = forms.CharField(widget=forms.Select(choices=DIET_PLAN_CHOICES))
-    #phone_number = forms.RegexField(regex=r'^\+?1?\d{9,15}$', help_text="Ex: 1234567890")
-    #preferred_breakfast_time = forms.RegexField(regex=r'^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$', help_text="HH:MM")
-    #preferred_lunch_time = forms.RegexField(regex=r'^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$', help_text="HH:MM")
-    #preferred_dinner_time = forms.RegexField(regex=r'^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$',help_text="HH:MM")
+    phone_number = forms.RegexField(regex=r'^\+?1?\d{9,15}$', help_text="Ex: 1234567890")
+    preferred_breakfast_time = forms.RegexField(regex=r'^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$', help_text="HH:MM")
+    preferred_lunch_time = forms.RegexField(regex=r'^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$', help_text="HH:MM")
+    preferred_dinner_time = forms.RegexField(regex=r'^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$',help_text="HH:MM")
 
 
 CHOICES = [

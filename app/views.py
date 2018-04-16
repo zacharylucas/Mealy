@@ -118,17 +118,17 @@ def userInfo(request):
             hi = form.__dict__['data']['height']
             wi = form.__dict__['data']['weight']
             g = form.__dict__['data']['diet_plan']
-            #p = form.__dict__['data']['phone_number']
-            #b = form.__dict__['data']['preferred_breakfast_time']
-            #l = form.__dict__['data']['preferred_lunch_time']
-            #d = form.__dict__['data']['preferred_dinner_time']
+            p = form.__dict__['data']['phone_number']
+            b = form.__dict__['data']['preferred_breakfast_time']
+            l = form.__dict__['data']['preferred_lunch_time']
+            d = form.__dict__['data']['preferred_dinner_time']
             glma = 3
             if g == 'loseWeight':
                 glma = 2
             elif g == 'gainWeight':
                 glma = 1
-            #m.updateUserInfo(request.user,  w=wi, h=hi, glm=glma, phone=p, btime=b,
-                    #ltime=l, dtime=d, restrict=r, allergy=a)
+            m.updateUserInfo(request.user,  w=wi, h=hi, glm=glma, phone=p, btime=b,
+                    ltime=l, dtime=d, restrict=r, allergy=a)
             newPrefDict = {}
             newMealDict = {}
             if request.session.get('mealDict') != None or request.session.get('mealDict') != {}:
@@ -140,7 +140,11 @@ def userInfo(request):
                 'height' : hi,
                 'glm' : glma,
                 'restrict' : r,
-                'allergy' : a
+                'allergy' : a,
+                'phone' : p,
+                'btime' : b,
+                'ltime' : l,
+                'dtime' : d
             }
             m.updateAllDB(request.user, newPrefDict, newMealDict, request.session['userDict'])
         else:
@@ -149,23 +153,27 @@ def userInfo(request):
             hi = form.__dict__['data']['height']
             wi = form.__dict__['data']['weight']
             g = form.__dict__['data']['diet_plan']
-            #p = form.__dict__['data']['phone_number']
-            #b = form.__dict__['data']['preferred_breakfast_time']
-            #l = form.__dict__['data']['preferred_lunch_time']
-            #d = form.__dict__['data']['preferred_dinner_time']
+            p = form.__dict__['data']['phone_number']
+            b = form.__dict__['data']['preferred_breakfast_time']
+            l = form.__dict__['data']['preferred_lunch_time']
+            d = form.__dict__['data']['preferred_dinner_time']
             glma = 3
             if g == 'loseWeight':
                 glma = 2
             elif g == 'gainWeight':
                 glma = 1
-            #m.updateUserInfo(request.user,  w=wi, h=hi, glm=glma, phone=p, btime=b,
-                    #ltime=l, dtime=d, restrict=r, allergy=a)
+            m.updateUserInfo(request.user,  w=wi, h=hi, glm=glma, phone=p, btime=b,
+                    ltime=l, dtime=d, restrict=r, allergy=a)
             request.session['userDict'] = {
                 'weight' : wi,
                 'height' : hi,
                 'glm' : glma,
                 'restrict' : r,
-                'allergy' : a
+                'allergy' : a,
+                'phone' : p,
+                'btime' : b,
+                'ltime' : l,
+                'dtime' : d
             }
 
         return redirect('index')
@@ -187,10 +195,10 @@ def userInfo(request):
                     'height':dicti['height'],
                     'weight':dicti['weight'],
                     'diet_plan':s,
-                    #'phone_number':dicti['cell'],
-                    #'preferred_breakfast_time':dicti['breakTime'],
-                    #'preferred_lunch_time':dicti['lunchTime'],
-                    #'preferred_dinner_time':dicti['dinnerTime']
+                    'phone_number':dicti['cell'],
+                    'preferred_breakfast_time':dicti['breakTime'],
+                    'preferred_lunch_time':dicti['lunchTime'],
+                    'preferred_dinner_time':dicti['dinnerTime']
                     })
     elif request.session.get('userDict') != None or request.session.get('userDict') != {}:
         if request.session.get('userDict') != None:
@@ -208,6 +216,10 @@ def userInfo(request):
                         'height':request.session['userDict'] ['height'],
                         'weight':request.session['userDict'] ['weight'],
                         'diet_plan':s,
+                        'phone_number':request.session['userDict']['cell'],
+                        'preferred_breakfast_time':request.session['userDict']['breakTime'],
+                        'preferred_lunch_time':request.session['userDict']['lunchTime'],
+                        'preferred_dinner_time':request.session['userDict']['dinnerTime']
                         })
         else:
             form = UserInfoForm(

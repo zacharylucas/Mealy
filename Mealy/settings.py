@@ -122,6 +122,10 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+CELERY_IMPORTS = (
+    'app.tasks',
+)
+
 # REDIS related settings 
 REDIS_HOST = 'localhost'
 REDIS_PORT = '6379'
