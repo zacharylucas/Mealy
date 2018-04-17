@@ -23,13 +23,13 @@ dinner_discovery = DiscoveryV1(
 )
 
 breakfast_environment_id = '9eca8cd5-10d4-47f4-b2f0-6c5987717d48'
-breakfast_collection_id = 'dd40dded-24af-4444-a77d-36454cf954a5'
+breakfast_collection_id = '53ec59e8-23fb-4bf1-a80e-c17014f1f682'
 
 lunch_environment_id = 'e8a03832-1ad4-4c57-a8a9-4d4b3ae99d6e'
-lunch_collection_id = '0d504254-4cb3-43e9-bb20-12b44faa3f76'
+lunch_collection_id = '6b24da5f-e3e9-4af4-8870-b6630080566d'
 
 dinner_environment_id = '6a487cbb-3a04-4f03-9f06-88084e3c2b6d'
-dinner_collection_id = 'f8d8da1b-414c-4ec6-b8d8-3082e25462f0'
+dinner_collection_id = '72774984-1525-46a6-8e65-5eafd837ce83'
 
 def queryWatson(queryString, count = ''):
     recipe_query = dinner_discovery.query(dinner_environment_id, dinner_collection_id, query= queryString, count = count)
