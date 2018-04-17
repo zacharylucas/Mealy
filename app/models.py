@@ -23,7 +23,7 @@ def updateAllDB(uid, newPrefDict, newMealDict, userDict):
     u.userId = uid
     u.mealDict = s
     u.prefDict = s2
-    if userDict != None:
+    if userDict != None and userDict != {}:
         u.weight = userDict['weight']
         u.height = userDict['height']
         u.gain_lose_maintain = userDict['glm']
@@ -33,6 +33,16 @@ def updateAllDB(uid, newPrefDict, newMealDict, userDict):
         u.dinnerTime = userDict['dtime']
         u.dietRestrict = userDict['restrict']
         u.allergies = userDict['allergy']
+    else:
+        u.weight = u.weight
+        u.height = u.height
+        u.gain_lose_maintain = u.gain_lose_maintain
+        u.cell = u.cell
+        u.breakTime = u.breakTime
+        u.lunchTime = u.lunchTime
+        u.dinnerTime = u.dinnerTime
+        u.dietRestrict = u.dietRestrict
+        u.allergies =  u.allergies
     u.save(force_update=True)
 
     u.save(force_update=True)

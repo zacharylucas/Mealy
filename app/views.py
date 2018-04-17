@@ -41,6 +41,11 @@ def newMealPlan(request):
     preferences = {}
     if request.session.get('prefDict') != None:
         preferences = request.session['prefDict']
+        print(preferences)
+    newUserDict = {}
+    if request.session.get('userDict') != None:
+        newUserDict =  request.session['userDict']
+        print(newUserDict)
 
     alleg = []
     if str(request.user) != 'AnonymousUser':
@@ -55,11 +60,6 @@ def newMealPlan(request):
     data = {'breakfasts' : breakfastQueryResults, 'lunches' : lunchQueryResults, 'dinners' : dinnerQueryResults}
     request.session['mealDict'] = data
     if str(request.user) != 'AnonymousUser':
-
-        newUserDict = {}
-        if request.session.get('userDict') != None or request.session.get('userDict') != {}:
-                newUserDict =  request.session.get('userDict')
-
         m.updateAllDB(request.user, preferences, data, newUserDict)
 
     return data
@@ -162,8 +162,6 @@ def userInfo(request):
                 glma = 2
             elif g == 'gainWeight':
                 glma = 1
-            m.updateUserInfo(request.user,  w=wi, h=hi, glm=glma, phone=p, btime=b,
-                    ltime=l, dtime=d, restrict=r, allergy=a)
             request.session['userDict'] = {
                 'weight' : wi,
                 'height' : hi,
@@ -216,10 +214,10 @@ def userInfo(request):
                         'height':request.session['userDict'] ['height'],
                         'weight':request.session['userDict'] ['weight'],
                         'diet_plan':s,
-                        'phone_number':request.session['userDict']['cell'],
-                        'preferred_breakfast_time':request.session['userDict']['breakTime'],
-                        'preferred_lunch_time':request.session['userDict']['lunchTime'],
-                        'preferred_dinner_time':request.session['userDict']['dinnerTime']
+                        'phone_number':request.session['userDict']['phone'],
+                        'preferred_breakfast_time':request.session['userDict']['btime'],
+                        'preferred_lunch_time':request.session['userDict']['ltime'],
+                        'preferred_dinner_time':request.session['userDict']['dtime']
                         })
         else:
             form = UserInfoForm(
