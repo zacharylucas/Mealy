@@ -72,6 +72,6 @@ def send_text_message(phoneNumber, mealDict, mealName):
 
     # Send message with meal info
     message = client.messages.create(
-        to='+' + phoneNumber, 
+        to='+1' + phoneNumber, 
         from_="+12166665780",
-        body="Hey there! It's time to start preparing your " + mealName + " from Mealy! Here is your recipe:\n\n" + str(mealDict))
+        body="Hey there! It's time to start preparing your %s from Mealy! Here is your recipe:\n\n%s\n\n%s calories\nReady in %d minutes.\n\nIngredients:\n%s\n\nInstructions:\n%s" % (mealName, mealDict['title'], mealDict['calories'], mealDict['minutes'], str(mealDict['ingredients']).replace('[','-').replace('"', '').replace('\']','').replace(']','').replace("\', \'",'\n-').replace(", \'",'\n-'), mealDict['instructions'] ))
