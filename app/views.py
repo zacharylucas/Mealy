@@ -178,8 +178,8 @@ def userInfo(request):
             elif g == 'gainWeight':
                 glma = 1
 
-           activity_level_zach_lucas_is_a_dumbass = 2
-           if activity_level == 'sedentary':
+           #activity_level_zach_lucas_is_a_dumbass = 2
+            if activity_level == 'sedentary':
                activity_level_zach_lucas_is_a_dumbass = 1
             elif activity_level == 'lightlyActive':
                 activity_level_zach_lucas_is_a_dumbass = 2
@@ -231,7 +231,7 @@ def userInfo(request):
                     'height':dicti['height'],
                     'weight':dicti['weight'],
                     'diet_plan':s,
-                    'activity_level': al
+                    'activity_level': al,
                     'phone_number':dicti['cell'],
                     'preferred_breakfast_time':dicti['breakTime'],
                     'preferred_lunch_time':dicti['lunchTime'],
@@ -263,7 +263,7 @@ def userInfo(request):
                         'height':request.session['userDict'] ['height'],
                         'weight':request.session['userDict'] ['weight'],
                         'diet_plan':s,
-                        'activity_level':al
+                        'activity_level':al,
                         'phone_number':request.session['userDict']['cell'],
                         'preferred_breakfast_time':request.session['userDict']['breakTime'],
                         'preferred_lunch_time':request.session['userDict']['lunchTime'],
@@ -287,7 +287,7 @@ def userInfo(request):
                     'height':0,
                     'weight':0,
                     'diet_plan':'maintainWeight',
-                    'activity_level','lightlyActive',
+                    'activity_level':'lightlyActive',
                     })
     return render(request, 'app/userInfo.html', {'form' : form})
 

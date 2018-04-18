@@ -23,18 +23,18 @@ class SignUpForm(UserCreationForm):
 DIET_PLAN_CHOICES = [
     ('loseWeight', 'Lose Weight'),
     ('maintainWeight', 'Maintain Weight'),
-    ('gainWeight', "Gain Weight")
+    ('gainWeight', 'Gain Weight')
 ]
 
 ACTIVITY_LEVEL_CHOICES = [
-    ('sedentary', 'Sedentary')
-    ('lightlyActive'),'Lightly Active'
-    ('moderatelyActive', 'Moderately Active')
+    ('sedentary', 'Sedentary'),
+    ('lightlyActive','Lightly Active'),
+    ('moderatelyActive', 'Moderately Active'),
     ('heavilyActive', 'Heavily Active')
 ]
 
 SEX_CHOICE = [
-    ('male', 'Male')
+    ('male', 'Male'),
     ('female', 'Female')
 ]
 
@@ -53,8 +53,8 @@ class UserInfoForm(forms.Form):
     weight = forms.IntegerField(label="Weight (Pounds)", required=True)
     age = forms.IntegerField(label="Age",required=True)
     diet_plan = forms.CharField(widget=forms.Select(choices=DIET_PLAN_CHOICES))
-    activity_level = forms.CharField(widget=forms.Select(choice=ACTIVITY_LEVEL_CHOICES))
-    sex = forms.CharField(widget=forms.Select(choice=SEX_CHOICE))
+    activity_level = forms.CharField(widget=forms.Select(choices=ACTIVITY_LEVEL_CHOICES))
+    sex = forms.CharField(widget=forms.Select(choices=SEX_CHOICE))
     phone_number = forms.RegexField(regex=r'^\+?1?\d{9,15}$', help_text="Ex: 1234567890")
     preferred_breakfast_time = forms.RegexField(regex=r'^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$', help_text="HH:MM")
     preferred_lunch_time = forms.RegexField(regex=r'^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$', help_text="HH:MM")
