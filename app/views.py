@@ -43,11 +43,31 @@ def newMealPlan(request):
         preferences = request.session['prefDict']
 
     alleg = []
+    TDEE = 0
     if str(request.user) != 'AnonymousUser':
         if request.session.get('userDict') != None or request.session.get('userDict') != {}:
             if request.session.get('userDict') != None:
                 if re.match('^[A-Za-z, ]*$', request.session['userDict']['allergy']):
                     alleg = re.split(', ',request.session['userDict']['allergy'])
+                if request.session['userDict']['sex'] == "male":
+                    TDEE = 655+ (9.6 * (2.2 * int(request.session['userDict']['weight']))) + (1.8 * (2.54 * int(requst.session['userDict']['height']))) - 4.7*int(request.session['userDict']['age'])
+                else:
+                    TDEE = 66+ (13.7 * (2.2 * int(request.session['userDict']['weight']))) + (5 * (2.54 * int(requst.session['userDict']['height']))) - 6.8*int(request.session['userDict']['age'])
+
+    activity = [1.2, 1.375, 1.55, 1.725]
+    TDEE = TDEE * activity[request.session['userDict']['activity_level']]
+    calRange = []
+    if request.session['userDict']['diet_plan'] == "lose_weight":
+        calRange = [0, TDEE - 300]
+    elif request.session['userDict']['diet_plan'] == "maintain_weight":
+        calRange = [TDEE - 300, TDEE + 300]
+    else:
+        calRange = [TDEE + 300, TDEE +2000]
+
+    breakfastCalRange = [x * .25 for x in calRange]
+    lunchCalRange = [x * .35 for x in calRange]
+    dinnerCalRange = [x * .40 for x in calRange]
+
 
     breakfastQueryResults = wQ.breakfastPlan(preferences,alleg)
     lunchQueryResults = wQ.lunchPlan(preferences,alleg)
