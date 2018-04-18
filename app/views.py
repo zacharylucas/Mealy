@@ -41,11 +41,6 @@ def newMealPlan(request):
     preferences = {}
     if request.session.get('prefDict') != None:
         preferences = request.session['prefDict']
-        print(preferences)
-    newUserDict = {}
-    if request.session.get('userDict') != None:
-        newUserDict =  request.session['userDict']
-        print(newUserDict)
 
     alleg = []
     if str(request.user) != 'AnonymousUser':
@@ -60,6 +55,11 @@ def newMealPlan(request):
     data = {'breakfasts' : breakfastQueryResults, 'lunches' : lunchQueryResults, 'dinners' : dinnerQueryResults}
     request.session['mealDict'] = data
     if str(request.user) != 'AnonymousUser':
+
+        newUserDict = {}
+        if request.session.get('userDict') != None or request.session.get('userDict') != {}:
+                newUserDict =  request.session.get('userDict')
+
         m.updateAllDB(request.user, preferences, data, newUserDict)
 
     return data
@@ -118,6 +118,7 @@ def userInfo(request):
             hi = form.__dict__['data']['height']
             wi = form.__dict__['data']['weight']
             g = form.__dict__['data']['diet_plan']
+            activity_level = form.__dict__['data']['diet_plan']
             p = form.__dict__['data']['phone_number']
             b = form.__dict__['data']['preferred_breakfast_time']
             l = form.__dict__['data']['preferred_lunch_time']
@@ -127,7 +128,19 @@ def userInfo(request):
                 glma = 2
             elif g == 'gainWeight':
                 glma = 1
-            m.updateUserInfo(request.user,  w=wi, h=hi, glm=glma, phone=p, btime=b,
+
+            activity_level_zach_lucas_is_a_dumbass = 2
+            if activity_level == 'sedentary':
+                activity_level_zach_lucas_is_a_dumbass = 1
+            elif activity_level == 'lightlyActive':
+                activity_level_zach_lucas_is_a_dumbass = 2
+            elif activity_level == 'moderatelyActive':
+                activity_level_zach_lucas_is_a_dumbass = 3
+            elif activity_level == 'heavilyActive':
+                activity_level_zach_lucas_is_a_dumbass = 4
+
+
+            m.updateUserInfo(request.user,  w=wi, h=hi, activity_level=activity_level_zach_lucas_is_a_dumbass, glm=glma, phone=p, btime=b,
                     ltime=l, dtime=d, restrict=r, allergy=a)
             newPrefDict = {}
             newMealDict = {}
@@ -139,6 +152,7 @@ def userInfo(request):
                 'weight' : wi,
                 'height' : hi,
                 'glm' : glma,
+                'activity' : activity_level_zach_lucas_is_a_dumbass,
                 'restrict' : r,
                 'allergy' : a,
                 'phone' : p,
@@ -152,6 +166,7 @@ def userInfo(request):
             a = form.__dict__['data']['food_allergies']
             hi = form.__dict__['data']['height']
             wi = form.__dict__['data']['weight']
+            activity_level = form.__dict__['data']['activity_level']
             g = form.__dict__['data']['diet_plan']
             p = form.__dict__['data']['phone_number']
             b = form.__dict__['data']['preferred_breakfast_time']
@@ -162,10 +177,24 @@ def userInfo(request):
                 glma = 2
             elif g == 'gainWeight':
                 glma = 1
+
+           #activity_level_zach_lucas_is_a_dumbass = 2
+            if activity_level == 'sedentary':
+               activity_level_zach_lucas_is_a_dumbass = 1
+            elif activity_level == 'lightlyActive':
+                activity_level_zach_lucas_is_a_dumbass = 2
+            elif activity_level == 'moderatelyActive':
+                activity_level_zach_lucas_is_a_dumbass = 3
+            elif activity_level == 'heavilyActive':
+                activity_level_zach_lucas_is_a_dumbass = 4
+
+            m.updateUserInfo(request.user,  w=wi, h=hi, activity_level=activity_level_zach_lucas_is_a_dumbass ,glm=glma, phone=p, btime=b,
+                    ltime=l, dtime=d, restrict=r, allergy=a)
             request.session['userDict'] = {
                 'weight' : wi,
                 'height' : hi,
                 'glm' : glma,
+                'activity_level' : activity_level_zach_lucas_is_a_dumbass,
                 'restrict' : r,
                 'allergy' : a,
                 'phone' : p,
@@ -186,6 +215,15 @@ def userInfo(request):
         else:
             s = 'gainWeight'
 
+        if dicti['activity_level'] == 1:
+            al = 'sedentary'
+        elif dicti['activity_level'] == 2:
+            al = 'lightlyActive'
+        elif dicti['activity_level'] == 3:
+            al = 'moderatelyActive'
+        else:
+            al = 'heavilyActive'
+
         form = UserInfoForm(
                 initial= {
                     'dietary_restrictions': dicti['dietRestrict'],
@@ -193,6 +231,7 @@ def userInfo(request):
                     'height':dicti['height'],
                     'weight':dicti['weight'],
                     'diet_plan':s,
+                    'activity_level': al,
                     'phone_number':dicti['cell'],
                     'preferred_breakfast_time':dicti['breakTime'],
                     'preferred_lunch_time':dicti['lunchTime'],
@@ -207,6 +246,16 @@ def userInfo(request):
                 s = 'loseWeight'
             else:
                 s = 'gainWeight'
+
+            activity_level_zach_lucas_is_a_dumbass = request.session['userDict']['activiti']
+            if activity_level_zach_lucas_is_a_dumbass == 'sedentary':
+                al = 1
+            elif activity_level_zach_lucas_is_a_dumbass == 'lightlyActive':
+                al = 2
+            elif activity_level_zach_lucas_is_a_dumbass == 'moderatelyActive':
+                al = 3
+            elif activity_level_zach_lucas_is_a_dumbass == 'heavilyActive':
+                al = 4
             form = UserInfoForm(
                     initial= {
                         'dietary_restrictions': request.session['userDict'] ['restrict'],
@@ -214,10 +263,11 @@ def userInfo(request):
                         'height':request.session['userDict'] ['height'],
                         'weight':request.session['userDict'] ['weight'],
                         'diet_plan':s,
-                        'phone_number':request.session['userDict']['phone'],
-                        'preferred_breakfast_time':request.session['userDict']['btime'],
-                        'preferred_lunch_time':request.session['userDict']['ltime'],
-                        'preferred_dinner_time':request.session['userDict']['dtime']
+                        'activity_level':al,
+                        'phone_number':request.session['userDict']['cell'],
+                        'preferred_breakfast_time':request.session['userDict']['breakTime'],
+                        'preferred_lunch_time':request.session['userDict']['lunchTime'],
+                        'preferred_dinner_time':request.session['userDict']['dinnerTime']
                         })
         else:
             form = UserInfoForm(
@@ -227,6 +277,7 @@ def userInfo(request):
                     'height':0,
                     'weight':0,
                     'diet_plan':'maintainWeight',
+                    'activity_level':'lightlyActive'
                     })
     else:
         form = UserInfoForm(
@@ -236,6 +287,7 @@ def userInfo(request):
                     'height':0,
                     'weight':0,
                     'diet_plan':'maintainWeight',
+                    'activity_level':'lightlyActive',
                     })
     return render(request, 'app/userInfo.html', {'form' : form})
 
