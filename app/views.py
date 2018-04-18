@@ -102,7 +102,23 @@ def index(request):
         request.session['prefDict'] = prefDict
         mealDict = m.getMealDict(request.user)
         request.session['mealDict'] = mealDict
-
+        dicti = m.getUserInfo(request.user)
+        if(dicti['breakTime'] != None):
+            print('loading ud')
+            request.session['userDict'] = {
+                    'weight' : dicti['weight'],
+                    'height' : dicti['height'],
+                    'glm' : dicti['gain_lose_maintain'] ,
+                    'activity_level' : dicti['activity_level'],
+                    'restrict' : dicti['dietRestrict'],
+                    'allergy' : dicti['allergies'],
+                    'phone' : dicti['cell'],
+                    'btime' : dicti['breakTime'].isoformat(),
+                    'ltime' : dicti['lunchTime'].isoformat(),
+                    'dtime' : dicti['dinnerTime'].isoformat(),
+                    'mf' : dicti['mf'],
+                    'age' :dicti['age']
+                }
     return render(request, 'app/index.html', context)
 
 def conversation(request):
@@ -112,46 +128,44 @@ def conversation(request):
 def userInfo(request):
     if request.method == 'POST':
         form = UserInfoForm(request.POST)
+        r = form.__dict__['data']['dietary_restrictions']
+        a = form.__dict__['data']['food_allergies']
+        hi = form.__dict__['data']['height']
+        wi = form.__dict__['data']['weight']
+        g = form.__dict__['data']['diet_plan']
+        activity_level = form.__dict__['data']['activity_level']
+        p = form.__dict__['data']['phone_number']
+        b = form.__dict__['data']['preferred_breakfast_time']
+        l = form.__dict__['data']['preferred_lunch_time']
+        d = form.__dict__['data']['preferred_dinner_time']
+        se = form.__dict__['data']['sex']
+        ag = form.__dict__['data']['age']
+        glma = 3
+        if g == 'loseWeight':
+            glma = 2
+        elif g == 'gainWeight':
+            glma = 1
+           
+        mf = 'M'
+        if se == 'female':
+            mf = 'F'
+        al = 2
+        if activity_level == 'sedentary':
+            al = 1
+        elif activity_level == 'moderatelyActive':
+            al = 3
+        elif activity_level == 'heavilyActive':
+            al = 4
+            
         if  str(request.user) != 'AnonymousUser':
-            r = form.__dict__['data']['dietary_restrictions']
-            a = form.__dict__['data']['food_allergies']
-            hi = form.__dict__['data']['height']
-            wi = form.__dict__['data']['weight']
-            g = form.__dict__['data']['diet_plan']
-            activity_level = form.__dict__['data']['activity_level']
-            p = form.__dict__['data']['phone_number']
-            b = form.__dict__['data']['preferred_breakfast_time']
-            l = form.__dict__['data']['preferred_lunch_time']
-            d = form.__dict__['data']['preferred_dinner_time']
-            se = form.__dict__['data']['sex']
-            ag = form.__dict__['data']['age']
-            glma = 3
-            if g == 'loseWeight':
-                glma = 2
-            elif g == 'gainWeight':
-                glma = 1
-                
-            mf = 'M'
-            if se == 'female':
-                mf = 'F'
-
-            al = 2
-            if activity_level == 'sedentary':
-                al = 1
-            elif activity_level == 'moderatelyActive':
-                al = 3
-            elif activity_level == 'heavilyActive':
-                al = 4
-
-
             m.updateUserInfo(request.user,  w=wi, h=hi, activity_level=al, glm=glma, phone=p, btime=b,
                     ltime=l, dtime=d, restrict=r, allergy=a)
             newPrefDict = {}
             newMealDict = {}
             if request.session.get('mealDict') != None or request.session.get('mealDict') != {}:
-                    newMealDict = request.session.get('mealDict')
+                newMealDict = request.session.get('mealDict')
             if request.session.get('prefDict') != None or request.session.get('prefDict') != {}:
-                    newPrefDict =  request.session.get('prefDict')
+                newPrefDict =  request.session.get('prefDict')
             request.session['userDict'] = {
                 'weight' : wi,
                 'height' : hi,
@@ -167,35 +181,7 @@ def userInfo(request):
                 'age' : ag
             }
             m.updateAllDB(request.user, newPrefDict, newMealDict, request.session['userDict'])
-        else:
-            r = form.__dict__['data']['dietary_restrictions']
-            a = form.__dict__['data']['food_allergies']
-            hi = form.__dict__['data']['height']
-            wi = form.__dict__['data']['weight']
-            activity_level = form.__dict__['data']['activity_level']
-            g = form.__dict__['data']['diet_plan']
-            p = form.__dict__['data']['phone_number']
-            b = form.__dict__['data']['preferred_breakfast_time']
-            l = form.__dict__['data']['preferred_lunch_time']
-            d = form.__dict__['data']['preferred_dinner_time']
-            se = form.__dict__['data']['sex']
-            ag = form.__dict__['data']['age']
-            glma = 3
-            if g == 'loseWeight':
-                glma = 2
-            elif g == 'gainWeight':
-                glma = 1
-            mf = 'M'
-            if se == 'female':
-                mf = 'F'
-            al = 2
-            if activity_level == 'sedentary':
-               al = 1
-            elif activity_level == 'moderatelyActive':
-                al = 3
-            elif activity_level == 'heavilyActive':
-                al = 4
-
+        else:          
             request.session['userDict'] = {
                 'weight' : wi,
                 'height' : hi,
@@ -214,7 +200,7 @@ def userInfo(request):
         return redirect('index')
         #if form.is_valid():
             #form.save()
-    elif str(request.user) != 'AnonymousUser':
+    elif str(request.user) != 'AnonymousUser' and (request.session.get('userDict') == None or request.session.get('userDict') == {}): #GET
         dicti = m.getUserInfo(request.user)
         if dicti['gain_lose_maintain'] == 3:
             s = 'maintainWeight'
@@ -251,7 +237,7 @@ def userInfo(request):
                     'sex':mf,
                     'age':dicti['age']
                     })
-    elif request.session.get('userDict') != None or request.session.get('userDict') != {}:
+    elif str(request.user) != 'AnonymousUser'  and (request.session.get('userDict') != None or request.session.get('userDict') != {}): #GET
         if request.session.get('userDict') != None:
             s = 'gainWeight'
             glma = request.session['userDict']['glm']
