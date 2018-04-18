@@ -16,6 +16,8 @@ class UserInfo(models.Model):
     allergies = models.CharField(max_length=100,default='')
     prefDict = models.TextField(default='')
     mealDict = models.TextField(default='')
+    mf = models.CharField(max_length=1, default='M')
+    age = models.IntegerField(default=0)
 
 def updateAllDB(uid, newPrefDict, newMealDict, userDict):
     u = UserInfo(userId=uid)
@@ -35,19 +37,10 @@ def updateAllDB(uid, newPrefDict, newMealDict, userDict):
         u.dinnerTime = userDict['dtime']
         u.dietRestrict = userDict['restrict']
         u.allergies = userDict['allergy']
-    else:
-        u.weight = u.weight
-        u.height = u.height
-        u.gain_lose_maintain = u.gain_lose_maintain
-        u.cell = u.cell
-        u.breakTime = u.breakTime
-        u.lunchTime = u.lunchTime
-        u.dinnerTime = u.dinnerTime
-        u.dietRestrict = u.dietRestrict
-        u.allergies =  u.allergies
+        u.mf = userDict['mf']
+        u.age = userDict['age']
     u.save(force_update=True)
 
-    u.save(force_update=True)
 def getPrefDict(uid):
     res = UserInfo.objects.raw('select * from app_userinfo ui where ui.userId_id == %s', [uid.id])[0]
     if str(res.prefDict) == '':
