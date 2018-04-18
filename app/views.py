@@ -152,13 +152,15 @@ def userInfo(request):
                 'weight' : wi,
                 'height' : hi,
                 'glm' : glma,
-                'activity' : activity_level_zach_lucas_is_a_dumbass,
+                'activity_level' : activity_level_zach_lucas_is_a_dumbass,
                 'restrict' : r,
                 'allergy' : a,
                 'phone' : p,
                 'btime' : b,
                 'ltime' : l,
-                'dtime' : d
+                'dtime' : d,
+                'mf':'M',
+                'age':0
             }
             m.updateAllDB(request.user, newPrefDict, newMealDict, request.session['userDict'])
         else:
@@ -198,7 +200,9 @@ def userInfo(request):
                 'phone' : p,
                 'btime' : b,
                 'ltime' : l,
-                'dtime' : d
+                'dtime' : d,
+                'mf':'M',
+                'age':0
             }
 
         return redirect('index')
