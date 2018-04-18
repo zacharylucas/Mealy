@@ -49,17 +49,18 @@ def newMealPlan(request):
             if request.session.get('userDict') != None:
                 if re.match('^[A-Za-z, ]*$', request.session['userDict']['allergy']):
                     alleg = re.split(', ',request.session['userDict']['allergy'])
-                if request.session['userDict']['sex'] == "male":
-                    TDEE = 655+ (9.6 * (2.2 * int(request.session['userDict']['weight']))) + (1.8 * (2.54 * int(requst.session['userDict']['height']))) - 4.7*int(request.session['userDict']['age'])
+                if request.session['userDict']['mf'] == "M":
+                    TDEE = 655+ (9.6 * (0.453592 * int(request.session['userDict']['weight']))) + (1.8 * (2.54 * int(request.session['userDict']['height']))) - (4.7*int(request.session['userDict']['age']))
                 else:
-                    TDEE = 66+ (13.7 * (2.2 * int(request.session['userDict']['weight']))) + (5 * (2.54 * int(requst.session['userDict']['height']))) - 6.8*int(request.session['userDict']['age'])
+                    TDEE = 66+ (13.7 * (0.453592 * int(request.session['userDict']['weight']))) + (5 * (2.54 * int(request.session['userDict']['height']))) - (6.8*int(request.session['userDict']['age']))
 
-    activity = [1.2, 1.375, 1.55, 1.725]
-    TDEE = TDEE * activity[request.session['userDict']['activity_level']]
+    activity = [1.1, 1.2, 1.35, 1.45]
+    TDEE *= activity[request.session['userDict']['activity_level']-1]
     calRange = []
-    if request.session['userDict']['diet_plan'] == "lose_weight":
+    
+    if request.session['userDict']['glm'] == "lose_weight":
         calRange = [0, TDEE - 300]
-    elif request.session['userDict']['diet_plan'] == "maintain_weight":
+    elif request.session['userDict']['glm'] == "maintain_weight":
         calRange = [TDEE - 300, TDEE + 300]
     else:
         calRange = [TDEE + 300, TDEE +2000]
@@ -165,7 +166,7 @@ def userInfo(request):
             glma = 2
         elif g == 'gainWeight':
             glma = 1
-           
+
         mf = 'M'
         if se == 'female':
             mf = 'F'
@@ -176,7 +177,7 @@ def userInfo(request):
             al = 3
         elif activity_level == 'heavilyActive':
             al = 4
-            
+
         if  str(request.user) != 'AnonymousUser':
             m.updateUserInfo(request.user,  w=wi, h=hi, activity_level=al, glm=glma, phone=p, btime=b,
                     ltime=l, dtime=d, restrict=r, allergy=a)
@@ -201,7 +202,7 @@ def userInfo(request):
                 'age' : ag
             }
             m.updateAllDB(request.user, newPrefDict, newMealDict, request.session['userDict'])
-        else:          
+        else:
             request.session['userDict'] = {
                 'weight' : wi,
                 'height' : hi,
@@ -241,7 +242,7 @@ def userInfo(request):
         mf = 'male'
         if dicti['mf'] == 'F':
             mf = 'female'
-        
+
         form = UserInfoForm(
                 initial= {
                     'dietary_restrictions': dicti['dietRestrict'],
@@ -264,8 +265,8 @@ def userInfo(request):
             if glma == 3:
                 s = 'maintainWeight'
             elif glma == 2:
-                s = 'loseWeight'                
-            
+                s = 'loseWeight'
+
             mf = request.session['userDict']['mf']
             mfs = 'male'
             if mf == 'F':
@@ -279,7 +280,7 @@ def userInfo(request):
                 als = 'moderatelyActive'
             elif al == 4:
                 als = 'heavilyActive'
-                
+
             form = UserInfoForm(
                     initial= {
                         'dietary_restrictions': request.session['userDict'] ['restrict'],

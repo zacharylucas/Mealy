@@ -57,8 +57,8 @@ def makePlan(result1, result2):
 def addCals(calRange):
     queryString = ''
     if calRange != [] and calRange[0] >= 0 and calRange[1] >= 0:
-        queryString += r',calories::>%d' % calRange[0]
-        queryString += r',calories::<%d' % calRange[1]
+        queryString += r',calories>%d' % calRange[0]
+        queryString += r',calories<%d' % calRange[1]
     return queryString
 
 def breakfastPlan(prefDict,alleg,calRange):
