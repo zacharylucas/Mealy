@@ -188,8 +188,6 @@ def userInfo(request):
             elif activity_level == 'heavilyActive':
                 activity_level_zach_lucas_is_a_dumbass = 4
 
-            m.updateUserInfo(request.user,  w=wi, h=hi, activity_level=activity_level_zach_lucas_is_a_dumbass ,glm=glma, phone=p, btime=b,
-                    ltime=l, dtime=d, restrict=r, allergy=a)
             request.session['userDict'] = {
                 'weight' : wi,
                 'height' : hi,
@@ -247,7 +245,8 @@ def userInfo(request):
             else:
                 s = 'gainWeight'
 
-            activity_level_zach_lucas_is_a_dumbass = request.session['userDict']['activiti']
+            activity_level_zach_lucas_is_a_dumbass = request.session['userDict']['activity_level']
+            print(activity_level_zach_lucas_is_a_dumbass)
             if activity_level_zach_lucas_is_a_dumbass == 'sedentary':
                 al = 1
             elif activity_level_zach_lucas_is_a_dumbass == 'lightlyActive':
@@ -263,11 +262,11 @@ def userInfo(request):
                         'height':request.session['userDict'] ['height'],
                         'weight':request.session['userDict'] ['weight'],
                         'diet_plan':s,
-                        'activity_level':al,
-                        'phone_number':request.session['userDict']['cell'],
-                        'preferred_breakfast_time':request.session['userDict']['breakTime'],
-                        'preferred_lunch_time':request.session['userDict']['lunchTime'],
-                        'preferred_dinner_time':request.session['userDict']['dinnerTime']
+                        'activity_level':request.session['userDict']['activity_level'],
+                        'phone_number':request.session['userDict']['phone'],
+                        'preferred_breakfast_time':request.session['userDict']['btime'],
+                        'preferred_lunch_time':request.session['userDict']['ltime'],
+                        'preferred_dinner_time':request.session['userDict']['dtime']
                         })
         else:
             form = UserInfoForm(
