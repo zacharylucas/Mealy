@@ -7,6 +7,7 @@ class UserInfo(models.Model):
     weight = models.IntegerField(default=0)
     height = models.IntegerField(default=0)
     gain_lose_maintain = models.IntegerField(default=3)
+    activity_level = models.IntegerField(default=2)
     cell = models.CharField(max_length=12,default='')
     breakTime = models.TimeField(blank=True,null=True)
     lunchTime = models.TimeField(blank=True,null=True)
@@ -27,6 +28,7 @@ def updateAllDB(uid, newPrefDict, newMealDict, userDict):
         u.weight = userDict['weight']
         u.height = userDict['height']
         u.gain_lose_maintain = userDict['glm']
+        u.activity_level = userDict['activity_level']
         u.cell = userDict['phone']
         u.breakTime = userDict['btime']
         u.lunchTime = userDict['ltime']
@@ -68,12 +70,13 @@ def createUserInfo(uid):
     ui = UserInfo(userId=uid)
     ui.save();
 
-def updateUserInfo(uid, w=0, h=0, glm=3, phone='', btime=None, ltime=None, dtime=None, restrict='', allergy=''):
+def updateUserInfo(uid, w=0, h=0, glm=3, activity_level=2, phone='', btime=None, ltime=None, dtime=None, restrict='', allergy=''):
     u = UserInfo(userId=uid)
     u.userId = uid
     u.weight = w
     u.height = h
     u.gain_lose_maintain = glm
+    u.activity_level = activity_level
     u.cell = phone
     u.breakTime = btime
     u.lunchTime = ltime
@@ -87,6 +90,7 @@ def getUserInfo(uid):
     dic = {'cell':res.cell,
            'weight':res.weight,
             'height':res.height,
+            'activity_level':rest.activity_level,
             'gain_lose_maintain': res.gain_lose_maintain,
             'breakTime':res.breakTime,
             'lunchTime': res.lunchTime,
