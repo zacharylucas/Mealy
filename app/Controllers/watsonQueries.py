@@ -29,7 +29,7 @@ lunch_environment_id = 'e8a03832-1ad4-4c57-a8a9-4d4b3ae99d6e'
 lunch_collection_id = '6b24da5f-e3e9-4af4-8870-b6630080566d'
 
 dinner_environment_id = '6a487cbb-3a04-4f03-9f06-88084e3c2b6d'
-dinner_collection_id = '72774984-1525-46a6-8e65-5eafd837ce83'
+dinner_collection_id = 'e32f6689-d733-42e2-814d-bf26b84d123d'
 
 def queryWatson(queryString, count = ''):
     recipe_query = dinner_discovery.query(dinner_environment_id, dinner_collection_id, query= queryString, count = count)
@@ -54,9 +54,16 @@ def makePlan(result1, result2):
         plan = [result1['results'][0],result2['results'][0],result1['results'][1], result2['results'][1],result1['results'][2],result2['results'][2], result1['results'][3]]
     return plan
 
-def breakfastPlan(prefDict,alleg):
-    result1 = prefQueryBreakfastEgg(prefDict,alleg)
-    result2 = prefQueryBreakfastSmooth(prefDict,alleg)
+def addCals(calRange):
+    queryString = ''
+    if calRange != [] and calRange[0] >= 0 and calRange[1] >= 0:
+        queryString += r',calories::>%d' % calRange[0]
+        queryString += r',calories::<%d' % calRange[1]
+    return queryString
+
+def breakfastPlan(prefDict,alleg,calRange):
+    result1 = prefQueryBreakfastEgg(prefDict,alleg,calRange)
+    result2 = prefQueryBreakfastSmooth(prefDict,alleg,calRange)
     if(result1['matching_results'] < 8):
         result1 = queryBreakfast('')
     if(result2['matching_results'] < 8):
@@ -64,9 +71,9 @@ def breakfastPlan(prefDict,alleg):
 
     return makePlan(result1,result2)
 
-def lunchPlan(prefDict,alleg):
-    result1 = prefQueryLunch(prefDict,alleg)
-    result2 = prefQueryLunch(prefDict,alleg)
+def lunchPlan(prefDict,alleg,calRange):
+    result1 = prefQueryLunch(prefDict,alleg,calRange)
+    result2 = prefQueryLunch(prefDict,alleg,calRange)
     if(result1['matching_results'] < 8):
         result1 = queryLunch('')
     if(result2['matching_results'] < 8):
@@ -74,9 +81,9 @@ def lunchPlan(prefDict,alleg):
 
     return makePlan(result1,result2)
 
-def dinnerPlan(prefDict,alleg):
-    result1 = prefQueryDinner(prefDict,alleg)
-    result2 = prefQueryDinner(prefDict,alleg)
+def dinnerPlan(prefDict,alleg,calRange):
+    result1 = prefQueryDinner(prefDict,alleg,calRange)
+    result2 = prefQueryDinner(prefDict,alleg,calRange)
     if(result1['matching_results'] < 8):
         result1 = queryDinner('')
     if(result2['matching_results'] < 8):
@@ -84,7 +91,7 @@ def dinnerPlan(prefDict,alleg):
 
     return makePlan(result1,result2)
 
-def prefQueryBreakfastEgg(prefDict,alleg):
+def prefQueryBreakfastEgg(prefDict,alleg,calRange):
     proteinLikes = []
     if prefDict == {}:
         return queryBreakfast('')
@@ -96,19 +103,21 @@ def prefQueryBreakfastEgg(prefDict,alleg):
     carbLikes = addLikes(prefDict['carbDict'])
     queryString = selectRandom(proteinLikes, vegetableLikes, herbLikes, dairyLikes, carbLikes)
     if queryString is not '':
+        queryString += addCals(calRange)
         queryString += addAllergies(alleg)
     return queryBreakfast(queryString)
 
-def prefQueryBreakfastSmooth(prefDict,alleg):
+def prefQueryBreakfastSmooth(prefDict,alleg,calRange):
     if prefDict == {}:
         return queryBreakfast('')
     fruitLikes = addLikes(prefDict['fruitDict'])
     queryString = selectRandom(fruitLikes)
     if queryString is not '':
+        queryString += addCals(calRange)
         queryString += addAllergies(alleg)
     return queryBreakfast(queryString)
 
-def prefQueryLunch(prefDict,alleg):
+def prefQueryLunch(prefDict,alleg,calRange):
     if prefDict == {}:
         return queryLunch('')
     proteinLikes = addLikes(prefDict['proteinDict'])
@@ -118,11 +127,12 @@ def prefQueryLunch(prefDict,alleg):
     dairyLikes = addLikes(prefDict['dairyDict'])
     queryString = selectRandom(proteinLikes, carbLikes, vegetableLikes, herbLikes, dairyLikes)
     if queryString is not '':
+        queryString += addCals(calRange)
         queryString += addExcludes(prefDict['proteinDict'], prefDict['carbDict'], prefDict['vegetableDict'])
         queryString += addAllergies(alleg)
     return queryLunch(queryString)
 
-def prefQueryDinner(prefDict,alleg):
+def prefQueryDinner(prefDict,alleg,calRange):
     if prefDict == {}:
         return queryDinner('')
     proteinLikes = addLikes(prefDict['proteinDict'])
@@ -132,6 +142,7 @@ def prefQueryDinner(prefDict,alleg):
     spiceLikes = addLikes(prefDict['spiceDict'])
     queryString = selectRandom(proteinLikes, carbLikes, herbLikes, vegetableLikes, spiceLikes)
     if queryString is not '':
+        queryString += addCals(calRange)
         queryString += addExcludes(prefDict['proteinDict'], prefDict['carbDict'], prefDict['vegetableDict'])
         queryString += addAllergies(alleg)
     print(queryString)

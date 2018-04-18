@@ -68,10 +68,10 @@ def newMealPlan(request):
     lunchCalRange = [x * .35 for x in calRange]
     dinnerCalRange = [x * .40 for x in calRange]
 
+    breakfastQueryResults = wQ.breakfastPlan(preferences,alleg, breakfastCalRange)
+    lunchQueryResults = wQ.lunchPlan(preferences,alleg, lunchCalRange)
+    dinnerQueryResults = wQ.dinnerPlan(preferences,alleg, dinnerCalRange)
 
-    breakfastQueryResults = wQ.breakfastPlan(preferences,alleg)
-    lunchQueryResults = wQ.lunchPlan(preferences,alleg)
-    dinnerQueryResults = wQ.dinnerPlan(preferences,alleg)
     data = {'breakfasts' : breakfastQueryResults, 'lunches' : lunchQueryResults, 'dinners' : dinnerQueryResults}
     request.session['mealDict'] = data
     if str(request.user) != 'AnonymousUser':
