@@ -73,7 +73,7 @@ def createUserInfo(uid):
     ui = UserInfo(userId=uid)
     ui.save();
 
-def updateUserInfo(uid, w=0, h=0, glm=3, activity_level=2, phone='', btime=None, ltime=None, dtime=None, restrict='', allergy=''):
+def updateUserInfo(uid, w=0, h=0, glm=3, activity_level=2, phone='', btime=None, ltime=None, dtime=None, restrict='', allergy='', age=0, mf='M'):
     u = UserInfo(userId=uid)
     u.userId = uid
     u.weight = w
@@ -86,18 +86,26 @@ def updateUserInfo(uid, w=0, h=0, glm=3, activity_level=2, phone='', btime=None,
     u.dinnerTime = dtime
     u.dietRestrict = restrict
     u.allergies = allergy
+    u.age = age
+    u.mf = mf
     u.save(force_update=True)
 
 def getUserInfo(uid):
     res = UserInfo.objects.raw('select * from app_userinfo ui where ui.userId_id == %s', [uid.id])[0]
-    dic = {'cell':res.cell,
+    dic = {'phone':res.cell,
+           'cell':res.cell,
            'weight':res.weight,
             'height':res.height,
-            'activity_level':rest.activity_level,
+            'activity_level':res.activity_level,
             'gain_lose_maintain': res.gain_lose_maintain,
             'breakTime':res.breakTime,
             'lunchTime': res.lunchTime,
             'dinnerTime': res.dinnerTime,
+            'btime':res.breakTime,
+            'ltime': res.lunchTime,
+            'dtime': res.dinnerTime,
             'dietRestrict':res.dietRestrict,
-            'allergies': res.allergies }
+            'allergies': res.allergies,
+            'age':res.age,
+            'mf':res.mf}
     return dic
