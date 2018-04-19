@@ -136,16 +136,19 @@ def meals(request):
             breakfastCalRange = [x * .25 for x in calRange]
             lunchCalRange = [x * .35 for x in calRange]
             dinnerCalRange = [x * .40 for x in calRange]
-            data2 = wQ.breakfastPlan(preferences, alleg, breakfastCalRange)
+            breakData = wQ.breakfastPlan(preferences, alleg, breakfastCalRange)
+            lunchData = wQ.lunchPlan(preferences, alleg, lunchCalRange)
+            dinnerData = wQ.dinnerPlan(preferences, alleg, dinnerCalRange)
             list = form.split(",")
             list = list[:-1]
             list = [int(x) for x in list]
             print(list)
             for i in range(len(data['breakfasts'])):
                 for j in range(len(list)):
+                    if(i == j):
+                        data['breakfasts'][i] = breakData[i]
 
-                    if(i == j and i in list):
-                        data['breakfasts'][i] = data2[i]
+
 
 
     return render(request, 'app/meals.html', data)
