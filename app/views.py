@@ -9,6 +9,7 @@ from .Controllers import Conversation as con
 from .Controllers import Preference as pref
 from .Controllers import DatabaseController as DB
 from .models import User
+from django.http import JsonResponse
 from .Forms.forms import SignUpForm
 from .Forms.forms import UserInfoForm
 from .Forms.forms import PreferencesForm
@@ -44,6 +45,7 @@ def newMealPlan(request):
 
     alleg = []
     TDEE = 0
+
     if str(request.user) != 'AnonymousUser':
         if request.session.get('userDict') != None or request.session.get('userDict') != {}:
             if request.session.get('userDict') != None:
@@ -77,6 +79,7 @@ def newMealPlan(request):
     lunchQueryResults = wQ.addServings(lunchQueryResults,lunchCalRange)
     dinnerQueryResults = wQ.addServings(dinnerQueryResults,dinnerCalRange)
 
+
     data = {'breakfasts' : breakfastQueryResults, 'lunches' : lunchQueryResults, 'dinners' : dinnerQueryResults}
     request.session['mealDict'] = data
     if str(request.user) != 'AnonymousUser':
@@ -97,7 +100,19 @@ def meals(request):
         else:
             data = request.session['mealDict']
     elif request.method == 'POST':
-            data = newMealPlan(request)
+        #if 'newMealPlan' in request.POST:
+        data = newMealPlan(request)
+        '''elif 'exchangeMeals' in request.POST:
+            data = {"message": "Message"}
+            print(data)
+        data = request.session.get('mealDict')
+            data2 = newMealPlan(request)
+            for i in range(len(data['breakfasts'])):
+                if((from query string) 4321breakfast[i] is clicked)
+                data['breakfasts'][i] = data2['breakfasts'][i]
+        then call newMealPlan
+
+        '''
 
     return render(request, 'app/meals.html', data)
 
@@ -136,7 +151,7 @@ def index(request):
         request.session['mealDict'] = mealDict
         dicti = m.getUserInfo(request.user)
         if(dicti['breakTime'] != None):
-            print('loading ud')
+            #print('loading ud')
             request.session['userDict'] = {
                     'weight' : dicti['weight'],
                     'height' : dicti['height'],

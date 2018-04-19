@@ -1,6 +1,5 @@
 {% extends 'base.html' %}
 {% block title %}Mealy - Meal Plan{% endblock %}
-{% load mealy_extras %}
 
 {% block content %}
   <script>
@@ -37,23 +36,23 @@
     });
 
 
+
   $(document).ready(function(){
     $('form').submit(function(e){
-      var allSelectedElements = $(".select-for-reshuffle");
-      $.ajax({
-                type:"POST",
-                url:"app/meals",
-                data: {
-                        allSelectedElements // from form
-                       },
-                success: function(){
-                    $('#message').html("<h2>Contact Form Submitted!</h2>")
-                }
-           });
-           return false; //<---- move it here
+      var allSelectedElements = $(".select-for-reshuffle").attr('data-id');
       });
   });
 
+  $(document).ready(function(){
+    $('#exchangeMeals').on('click',function() {
+      $('.item').each(function(i) {
+        if($(this).hasClass(".select-for-reshuffle")) {
+        $('#hiddenMealInput').val($('#hiddenMealInput').val() + $(this).attr('data-meal') + i);
+      }
+      return false;
+      })
+    });
+  });
   </script>
 
   <script>
@@ -79,7 +78,8 @@
       {% csrf_token %}
       {{ form.as_p }}
       <button id="newMealPlan" class="buttonRound" type="submit" name="newMealPlan">New Meals</button>
-      <button id="exchangeMeals" class="buttonRound" type="submit" name="exchangeMeals">Exchange Meals</button>
+      <button id="exchangeMeals" class="buttonRound"  name="exchangeMeals">Exchange Meals</button>
+      <input type="hidden" name="hiddenMealInput" id="hiddenMealInput"></input>
       </form>
     </div>
 
@@ -91,7 +91,7 @@
     <div class="item"><h3>Saturday</h3></div>
     <div class="item"><h3>Sunday</h3></div>
     {% for breakfast in breakfasts %}
-      <div class="item" data-id="{{breakfast.id}}">
+      <div class="item" data-meal="breakfast" data-id="{{breakfast.id}}">
         <a class="card">
           <div class="thumb" style="background-image: url({{breakfast.image}});">
             <span class="fa-layers fa-fw">
@@ -103,8 +103,7 @@
             <h1>{{breakfast.title}}</h1>
             <p><i class="far fa-star"></i> Rating: {{breakfast.rating|floatformat:-2}}/5 <br/>
                <i class="far fa-clock"></i> Ready in: {{breakfast.minutes}} min<br/>
-               <i class="fas fa-burn"></i> Cals: {{ breakfast.calories|cut:"0" }}<br/>
-               <i class="fas fa-utensils"></i> Servings: {{ breakfast.calories|cut:"1" }}
+               <i class="fas fa-burn"></i> Cals: {{breakfast.calories}}
             </p>
             <span>Breakfast</span>
           </article>
@@ -115,7 +114,7 @@
         <div class="modal-content">
           <span onclick="closeModal('{{breakfast.id}}')" class="close"><i class="far fa-times-circle"></i></span>
           <h1><i class="fas fa-utensils"></i> {{breakfast.title}}</h1>
-          <p><i class="far fa-star"></i> Rating: {{breakfast.rating|floatformat:-2}}/5<br><i class="far fa-clock"></i> Ready in: {{breakfast.minutes}} minutes<br /><i class="fas fa-burn"></i> Cals: {{ breakfast.calories|cut:"0" }}<br/><i class="fas fa-utensils"></i> Servings: {{ breakfast.calories|cut:"1" }}</p>
+          <p><i class="far fa-star"></i> Rating: {{breakfast.rating|floatformat:-2}}/5<br><i class="far fa-clock"></i> Ready in: {{breakfast.minutes}} minutes<br /><i class="fas fa-burn"></i> Calories: {{breakfast.calories}}</p>
           <h2><i class="fas fa-list-ul"></i> Ingredients</h2>
           <ul>
             {% for ingredient in breakfast.ingredients %}
@@ -129,7 +128,7 @@
     {% endfor %}
 
     {% for lunch in lunches %}
-      <div class="item" data-id"{{lunch.id}}">
+      <div class="item" data-meal="lunch" data-id"{{lunch.id}}">
         <a class="card">
           <div class="thumb" style="background-image: url({{lunch.image}});">
             <span class="fa-layers fa-fw">
@@ -141,8 +140,7 @@
             <h1>{{lunch.title}}</h1>
             <p><i class="far fa-star"></i>Rating: {{lunch.rating|floatformat:-2}}/5 <br/>
                <i class="far fa-clock"></i>Ready in: {{lunch.minutes}} min<br/>
-               <i class="fas fa-burn"></i> Cals: {{ lunch.calories|cut:"0" }}<br/>
-               <i class="fas fa-utensils"></i> Servings: {{ lunch.calories|cut:"1" }}
+               <i class="fas fa-burn"></i> Cals: {{lunch.calories}}
             </p>
             <span>Lunch</span>
           </article>
@@ -153,7 +151,7 @@
           <div class="modal-content">
             <span onclick="closeModal('{{lunch.id}}')" class="close"><i class="far fa-times-circle"></i></span>
             <h1><i class="fas fa-utensils"></i> {{lunch.title}}</h1>
-            <p><i class="far fa-star"></i> Rating: {{lunch.rating|floatformat:-2}}/5<br><i class="far fa-clock"></i> Ready in: {{lunch.minutes}} minutes<br /><i class="fas fa-burn"></i> Cals: {{ lunch.calories|cut:"0" }}<br/><i class="fas fa-utensils"></i> Servings: {{ lunch.calories|cut:"1" }}</p>
+            <p><i class="far fa-star"></i> Rating: {{lunch.rating|floatformat:-2}}/5<br><i class="far fa-clock"></i> Ready in: {{lunch.minutes}} minutes<br /><i class="fas fa-burn"></i> Calories: {{lunch.calories}}</p>
             <h2><i class="fas fa-list-ul"></i> Ingredients</h2>
             <ul>
               {% for ingredient in lunch.ingredients %}
@@ -167,7 +165,7 @@
     {% endfor %}
 
     {% for dinner in dinners %}
-      <div class="item" data-id="{{dinner.id}}">
+      <div class="item" data-meal="dinner" data-id="{{dinner.id}}">
         <a class="card">
           <div class="thumb" style="background-image: url({{dinner.image}});">
             <span class="fa-layers fa-fw">
@@ -179,8 +177,7 @@
             <h1>{{dinner.title}}</h1>
             <p><i class="far fa-star"></i> Rating: {{dinner.rating|floatformat:-2}}/5 <br/>
               <i class="far fa-clock"></i> Ready in: {{dinner.minutes}} min<br />
-              <i class="fas fa-burn"></i> Cals: {{ dinner.calories|cut:"0" }}<br/>
-              <i class="fas fa-utensils"></i> Servings: {{ dinner.calories|cut:"1" }}
+              <i class="fas fa-burn"></i> Cals: {{dinner.calories}}
             </p>
             <span>Dinner</span>
           </article>
@@ -191,7 +188,7 @@
           <div class="modal-content">
             <span onclick="closeModal('{{dinner.id}}')" class="close"><i class="far fa-times-circle"></i></span>
             <h1><i class="fas fa-utensils"></i> {{dinner.title}}</h1>
-            <p><i class="far fa-star"></i> Rating: {{dinner.rating|floatformat:-2}}/5<br><i class="far fa-clock"></i> Ready in: {{dinner.minutes}} minutes<br /><i class="fas fa-burn"></i> Cals: {{ dinner.calories|cut:"0" }}<br/><i class="fas fa-utensils"></i> Servings: {{ dinner.calories|cut:"1" }}</p>
+            <p><i class="far fa-star"></i> Rating: {{dinner.rating|floatformat:-2}}/5<br><i class="far fa-clock"></i> Ready in: {{dinner.minutes}} minutes<br /><i class="fas fa-burn"></i> Calories: {{dinner.calories}}</p>
             <h2><i class="fas fa-list-ul"></i> Ingredients</h2>
             <ul>
               {% for ingredient in dinner.ingredients %}
