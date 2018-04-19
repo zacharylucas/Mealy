@@ -60,7 +60,7 @@ def check_for_text_reminder(phoneNumber, specifiedMealTime, fullMealDict, mealDi
         logging.debug('Time to start cooking: ' + startCookingHHMM)
         if startCookingHHMM == currentHHMM:
             logging.debug('Send a text for ' + mealName)
-            send_text_message(phoneNumber, mealDict, 'breakfast')
+            send_text_message(phoneNumber, mealDict, mealName)
         else:
             logging.debug('No text to send for ' + mealName)
     else:
@@ -74,4 +74,4 @@ def send_text_message(phoneNumber, mealDict, mealName):
     message = client.messages.create(
         to='+1' + phoneNumber, 
         from_="+12166665780",
-        body="Hey there! It's time to start preparing your %s from Mealy! Here is your recipe:\n\n%s\n\n%s calories\nReady in %d minutes.\n\nIngredients:\n%s\n\nInstructions:\n%s" % (mealName, mealDict['title'], mealDict['calories'], mealDict['minutes'], str(mealDict['ingredients']).replace('[','-').replace('"', '').replace('\']','').replace(']','').replace("\', \'",'\n-').replace(", \'",'\n-'), mealDict['instructions'] ))
+        body="Hey there! It's time to start preparing your %s from Mealy! Here is your recipe:\n\n%s\n\nRating: %s/5\nReady in: %d min\nCals: %s\n\nIngredients:\n%s\n\nInstructions:\n%s" % (mealName, mealDict['title'], str(round(mealDict['rating'], 2)), mealDict['minutes'], mealDict['calories'], str(mealDict['ingredients']).replace('[\'','-').replace('[','-').replace('"', '').replace('\']','').replace(']','').replace("\', \'",'\n-').replace(", \'",'\n-'), mealDict['instructions'] ))
