@@ -145,7 +145,6 @@ def prefQueryDinner(prefDict,alleg,calRange):
         queryString += addCals(calRange)
         queryString += addExcludes(prefDict['proteinDict'], prefDict['carbDict'], prefDict['vegetableDict'])
         queryString += addAllergies(alleg)
-    print(queryString)
     return queryDinner(queryString)
 
 def addAllergies(alleg):

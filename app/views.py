@@ -100,19 +100,53 @@ def meals(request):
         else:
             data = request.session['mealDict']
     elif request.method == 'POST':
-        #if 'newMealPlan' in request.POST:
-        data = newMealPlan(request)
-        '''elif 'exchangeMeals' in request.POST:
-            data = {"message": "Message"}
-            print(data)
-        data = request.session.get('mealDict')
-            data2 = newMealPlan(request)
-            for i in range(len(data['breakfasts'])):
-                if((from query string) 4321breakfast[i] is clicked)
-                data['breakfasts'][i] = data2['breakfasts'][i]
-        then call newMealPlan
+        if 'newMealPlan' in request.POST:
+            data = newMealPlan(request)
+        elif 'exchangeMeals' in request.POST:
+            data = request.session.get('mealDict')
+            form = request.POST.get('hiddenMealInput')
+            preferences = {}
+            if request.session.get('prefDict') != None:
+                preferences = request.session['prefDict']
 
-        '''
+            alleg = []
+            TDEE = 0
+
+            if str(request.user) != 'AnonymousUser':
+                if request.session.get('userDict') != None or request.session.get('userDict') != {}:
+                    if request.session.get('userDict') != None:
+                        if re.match('^[A-Za-z, ]*$', request.session['userDict']['allergy']):
+                            alleg = re.split(', ',request.session['userDict']['allergy'])
+                        if request.session['userDict']['mf'] == "M":
+                            TDEE = 655+ (9.6 * (0.453592 * int(request.session['userDict']['weight']))) + (1.8 * (2.54 * int(request.session['userDict']['height']))) - (4.7*int(request.session['userDict']['age']))
+                        else:
+                            TDEE = 66+ (13.7 * (0.453592 * int(request.session['userDict']['weight']))) + (5 * (2.54 * int(request.session['userDict']['height']))) - (6.8*int(request.session['userDict']['age']))
+
+            activity = [1.1, 1.2, 1.35, 1.45]
+            TDEE *= activity[request.session['userDict']['activity_level']-1]
+            calRange = []
+
+            if request.session['userDict']['glm'] == "lose_weight":
+                calRange = [0, TDEE - 300]
+            elif request.session['userDict']['glm'] == "maintain_weight":
+                calRange = [TDEE - 300, TDEE + 300]
+            else:
+                calRange = [TDEE + 300, TDEE +2000]
+
+            breakfastCalRange = [x * .25 for x in calRange]
+            lunchCalRange = [x * .35 for x in calRange]
+            dinnerCalRange = [x * .40 for x in calRange]
+            data2 = wQ.breakfastPlan(preferences, alleg, breakfastCalRange)
+            list = form.split(",")
+            list = list[:-1]
+            list = [int(x) for x in list]
+            print(list)
+            for i in range(len(data['breakfasts'])):
+                for j in range(len(list)):
+
+                    if(i == j and i in list):
+                        data['breakfasts'][i] = data2[i]
+
 
     return render(request, 'app/meals.html', data)
 
