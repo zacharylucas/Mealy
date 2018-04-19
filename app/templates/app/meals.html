@@ -115,7 +115,7 @@
         <div class="modal-content">
           <span onclick="closeModal('{{breakfast.id}}')" class="close"><i class="far fa-times-circle"></i></span>
           <h1><i class="fas fa-utensils"></i> {{breakfast.title}}</h1>
-          <p><i class="far fa-star"></i> Rating: {{breakfast.rating|floatformat:-2}}/5<br><i class="far fa-clock"></i> Ready in: {{breakfast.minutes}} minutes<br /><i class="fas fa-burn"></i> Calories: {{breakfast.calories}}</p>
+          <p><i class="far fa-star"></i> Rating: {{breakfast.rating|floatformat:-2}}/5<br><i class="far fa-clock"></i> Ready in: {{breakfast.minutes}} minutes<br /><i class="fas fa-burn"></i> Calories: {{breakfast.calories|cut:"0"}}<br /><i class="fas fa-utensils"></i> Servings: {{breakfast.calories|cut:"1"}}</p>
           <h2><i class="fas fa-list-ul"></i> Ingredients</h2>
           <ul>
             {% for ingredient in breakfast.ingredients %}
@@ -153,7 +153,7 @@
           <div class="modal-content">
             <span onclick="closeModal('{{lunch.id}}')" class="close"><i class="far fa-times-circle"></i></span>
             <h1><i class="fas fa-utensils"></i> {{lunch.title}}</h1>
-            <p><i class="far fa-star"></i> Rating: {{lunch.rating|floatformat:-2}}/5<br><i class="far fa-clock"></i> Ready in: {{lunch.minutes}} minutes<br /><i class="fas fa-burn"></i> Calories: {{lunch.calories}}</p>
+            <p><i class="far fa-star"></i> Rating: {{lunch.rating|floatformat:-2}}/5<br><i class="far fa-clock"></i> Ready in: {{lunch.minutes}} minutes<br /><i class="fas fa-burn"></i> Calories: {{lunch.calories|cut:"0"}}<br /><i class="fas fa-utensils"></i> Servings: {{lunch.calories|cut:"1"}}</p>
             <h2><i class="fas fa-list-ul"></i> Ingredients</h2>
             <ul>
               {% for ingredient in lunch.ingredients %}
@@ -191,7 +191,7 @@
           <div class="modal-content">
             <span onclick="closeModal('{{dinner.id}}')" class="close"><i class="far fa-times-circle"></i></span>
             <h1><i class="fas fa-utensils"></i> {{dinner.title}}</h1>
-            <p><i class="far fa-star"></i> Rating: {{dinner.rating|floatformat:-2}}/5<br><i class="far fa-clock"></i> Ready in: {{dinner.minutes}} minutes<br /><i class="fas fa-burn"></i> Calories: {{dinner.calories}}</p>
+            <p><i class="far fa-star"></i> Rating: {{dinner.rating|floatformat:-2}}/5<br><i class="far fa-clock"></i> Ready in: {{dinner.minutes}} minutes<br /><i class="fas fa-burn"></i> Calories: {{dinner.calories|cut:"0"}}<br /><i class="fas fa-utensils"></i> Servings: {{dinner.calories|cut:"1"}}</p>
             <h2><i class="fas fa-list-ul"></i> Ingredients</h2>
             <ul>
               {% for ingredient in dinner.ingredients %}
