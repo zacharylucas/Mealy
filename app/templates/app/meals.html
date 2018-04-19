@@ -36,6 +36,23 @@
     });
 
 
+  $(document).ready(function(){
+    $('form').submit(function(e){
+      var allSelectedElements = $(".select-for-reshuffle");
+      $.ajax({
+                type:"POST",
+                url:"app/meals",
+                data: {
+                        allSelectedElements // from form
+                       },
+                success: function(){
+                    $('#message').html("<h2>Contact Form Submitted!</h2>")
+                }
+           });
+           return false; //<---- move it here
+      });
+  });
+
   </script>
 
   <script>
@@ -60,7 +77,8 @@
       <form class="" action="" method="POST">
       {% csrf_token %}
       {{ form.as_p }}
-      <button class="buttonRound" type="submit" name="newMeals">New Meals</button>
+      <button id="newMealPlan" class="buttonRound" type="submit" name="newMealPlan">New Meals</button>
+      <button id="exchangeMeals" class="buttonRound" type="submit" name="exchangeMeals">Exchange Meals</button>
       </form>
     </div>
 

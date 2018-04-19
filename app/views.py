@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.template import loader
 from django.contrib.auth import login, authenticate
-
+from django.http import HttpResponseNotAllowed
 from .Controllers import watsonQueries as wQ
 from .Controllers import Conversation as con
 from .Controllers import Preference as pref
@@ -57,7 +57,7 @@ def newMealPlan(request):
     activity = [1.1, 1.2, 1.35, 1.45]
     TDEE *= activity[request.session['userDict']['activity_level']-1]
     calRange = []
-    
+
     if request.session['userDict']['glm'] == "lose_weight":
         calRange = [0, TDEE - 300]
     elif request.session['userDict']['glm'] == "maintain_weight":
@@ -93,9 +93,16 @@ def meals(request):
         else:
             data = request.session['mealDict']
     elif request.method == 'POST':
-        data = newMealPlan(request)
+            data = newMealPlan(request)
 
     return render(request, 'app/meals.html', data)
+
+def update_session(request):
+    if not request.is_ajax() or not request.method=='POST':
+        return HttpResponseNotAllowed(['POST'])
+
+    request.session['mykey'] = 'myvalue'
+    return HttpResponse('ok')
 
 def chatbot(request):
     data = {}
