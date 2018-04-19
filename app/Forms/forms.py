@@ -56,10 +56,13 @@ class UserInfoForm(forms.Form):
     activity_level = forms.CharField(widget=forms.Select(choices=ACTIVITY_LEVEL_CHOICES))
     sex = forms.CharField(widget=forms.Select(choices=SEX_CHOICE))
     phone_number = forms.RegexField(regex=r'^\+?1?\d{9,15}$', help_text="Ex: 1234567890")
-    preferred_breakfast_time = forms.RegexField(regex=r'^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$', help_text="HH:MM")
-    preferred_lunch_time = forms.RegexField(regex=r'^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$', help_text="HH:MM")
-    preferred_dinner_time = forms.RegexField(regex=r'^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$',help_text="HH:MM")
+    Acceptable = ['%H:%M:%S']
+    preferred_breakfast_time = forms.DateTimeField(input_formats = Acceptable, help_text="HH:MM:SS")
+    preferred_lunch_time = forms.DateTimeField(input_formats = Acceptable, help_text="HH:MM:SS")
+    preferred_dinner_time = forms.DateTimeField(input_formats = Acceptable, help_text="HH:MM:SS")
 
+    class Meta:
+        fields = ('dietary_restrictions', 'food_allergies', 'height', 'weight', 'age', 'diet_plan', 'activity_level', 'sex', 'phone_number', 'preferred_breakfast_time', 'preferred_lunch_time', 'preferred_dinner_time' )
 
 CHOICES = [
     ('like',''),
