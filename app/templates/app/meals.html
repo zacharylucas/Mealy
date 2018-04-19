@@ -4,14 +4,39 @@
 
 {% block content %}
   <script>
-    function mealClick(id){
-      var modal = document.getElementById(id);
-      if(modal.style.display == "none"){
-        modal.style.display = "block";
+
+  $(document).ready(function(){
+    $(".item").click(showModal);
+  });
+
+    function showModal() {
+      var modal = $("#" + $(this).attr("data-id"));
+      if(modal.css('display') == "none"){
+        modal.css('display','block')
       } else {
-        modal.style.display = "none";
+        modal.css('display','none')
       }
     }
+
+    $(document).ready(function(){
+      $(".fa-layers").hover(function(){
+        $(this).children(".fa-times").css("color", "black");
+        $(".item").off('click');
+        }, function(){
+        $(this).children(".fa-times").css("color", "#aaaaaa");
+        $(".item").on('click', showModal);
+      });
+    });
+
+
+    $(document).ready(function(){
+      $(".fa-layers").on('click',function() {
+        $(this).parent().parent().parent().toggleClass("select-for-reshuffle");
+
+      });
+    });
+
+
   </script>
 
   <script>
@@ -20,6 +45,10 @@
       modal.style.display = "none";
     }
   </script>
+
+  <script>
+  </script>
+
 
   <br>
   <br>
@@ -43,11 +72,15 @@
     <div class="item"><h3>Friday</h3></div>
     <div class="item"><h3>Saturday</h3></div>
     <div class="item"><h3>Sunday</h3></div>
-
     {% for breakfast in breakfasts %}
-      <div onclick="mealClick('{{breakfast.id}}')" class="item">
+      <div class="item" data-id="{{breakfast.id}}">
         <a class="card">
-          <div class="thumb" style="background-image: url({{breakfast.image}});"></div>
+          <div class="thumb" style="background-image: url({{breakfast.image}});">
+            <span class="fa-layers fa-fw">
+              <i class="fas fa-circle fa-2x close-icon" data-fa-transform="left-6 down-2"></i>
+              <i class="fa-inverse fas fa-2x fa-times close-icon" data-fa-transform="left-4 down-2 shrink-8"></i>
+            </span>
+          </div>
           <article>
             <h1>{{breakfast.title}}</h1>
             <p><i class="far fa-star"></i> Rating: {{breakfast.rating|floatformat:-2}}/5 <br/>
@@ -78,9 +111,14 @@
     {% endfor %}
 
     {% for lunch in lunches %}
-      <div onclick="mealClick('{{lunch.id}}')" class="item">
+      <div class="item" data-id"{{lunch.id}}">
         <a class="card">
-          <div class="thumb" style="background-image: url({{lunch.image}});"></div>
+          <div class="thumb" style="background-image: url({{lunch.image}});">
+            <span class="fa-layers fa-fw">
+              <i class="fas fa-circle fa-2x close-icon" data-fa-transform="left-6 down-2"></i>
+              <i class="fa-inverse fas fa-2x fa-times close-icon" data-fa-transform="left-4 down-2 shrink-8"></i>
+            </span>
+          </div>
           <article>
             <h1>{{lunch.title}}</h1>
             <p><i class="far fa-star"></i>Rating: {{lunch.rating|floatformat:-2}}/5 <br/>
@@ -111,9 +149,14 @@
     {% endfor %}
 
     {% for dinner in dinners %}
-      <div onclick="mealClick('{{dinner.id}}')" class="item">
+      <div class="item" data-id="{{dinner.id}}">
         <a class="card">
-          <div class="thumb" style="background-image: url({{dinner.image}});"></div>
+          <div class="thumb" style="background-image: url({{dinner.image}});">
+            <span class="fa-layers fa-fw">
+              <i class="fas fa-circle fa-2x close-icon" data-fa-transform="left-6 down-2"></i>
+              <i class="fa-inverse fas fa-2x fa-times close-icon" data-fa-transform="left-4 down-2 shrink-8"></i>
+            </span>
+          </div>
           <article>
             <h1>{{dinner.title}}</h1>
             <p><i class="far fa-star"></i> Rating: {{dinner.rating|floatformat:-2}}/5 <br/>

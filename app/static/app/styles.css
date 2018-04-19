@@ -204,6 +204,7 @@ body {
   padding-bottom: 60%;
   background-size: cover;
   background-position: center center;
+  text-align: right;
 }
 
 .card p {
@@ -227,6 +228,23 @@ body {
   letter-spacing: .05em;
   margin: 0 0 0 0;
 }
+
+.select-for-reshuffle {
+  opacity: 0.5;
+}
+
+.fa-circle {
+    color: white;
+}
+
+.fa-times {
+  color: #aaaaaa;
+}
+
+.fa-layers {
+
+}
+
 
 .modal {
   display: none; /* Hidden by default */
