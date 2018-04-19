@@ -48,7 +48,7 @@
     $('#exchangeMeals').on('click',function() {
       $('.meal-item').each(function(i, element) {
         if($(this).hasClass("select-for-reshuffle")) {
-        $('#hiddenMealInput').val($('#hiddenMealInput').val() + i + ',');
+        $('#hiddenMealInput').val($('#hiddenMealInput').val() + i + ' ');
       }
       })
     });
@@ -79,7 +79,7 @@
       {{ form.as_p }}
       <button id="newMealPlan" class="buttonRound" type="submit" name="newMealPlan">New Meals</button>
       <button id="exchangeMeals" class="buttonRound" type="submit" name="exchangeMeals">Exchange Meals</button>
-      <input name="hiddenMealInput" id="hiddenMealInput"></input>
+      <input type="hidden" name="hiddenMealInput" id="hiddenMealInput"></input>
       </form>
     </div>
 
@@ -129,41 +129,41 @@
     {% endfor %}
 
     {% for lunch in lunches %}
-      <div class="item meal-item" data-id"{{lunch.id}}">
-        <a class="card">
-          <div class="thumb" style="background-image: url({{lunch.image}});">
-            <span class="fa-layers fa-fw">
-              <i class="fas fa-circle fa-2x close-icon" data-fa-transform="left-6 down-2"></i>
-              <i class="fa-inverse fas fa-2x fa-times close-icon" data-fa-transform="left-4 down-2 shrink-8"></i>
-            </span>
-          </div>
-          <article>
-            <h1>{{lunch.title}}</h1>
-            <p><i class="far fa-star"></i>Rating: {{lunch.rating|floatformat:-2}}/5 <br/>
-               <i class="far fa-clock"></i>Ready in: {{lunch.minutes}} min<br/>
-               <i class="fas fa-burn"></i> Cals: {{ lunch.calories|cut:"0" }}<br/>
-               <i class="fas fa-utensils"></i> Servings: {{ lunch.calories|cut:"1" }}
-            </p>
-            <span>Lunch</span>
-          </article>
-        </a>
-      </div>
+    <div class="item meal-item" data-id="{{lunch.id}}">
+      <a class="card">
+        <div class="thumb" style="background-image: url({{lunch.image}});">
+          <span class="fa-layers fa-fw">
+            <i class="fas fa-circle fa-2x close-icon" data-fa-transform="left-6 down-2"></i>
+            <i class="fa-inverse fas fa-2x fa-times close-icon" data-fa-transform="left-4 down-2 shrink-8"></i>
+          </span>
+        </div>
+        <article>
+          <h1>{{lunch.title}}</h1>
+          <p><i class="far fa-star"></i> Rating: {{lunch.rating|floatformat:-2}}/5 <br/>
+             <i class="far fa-clock"></i> Ready in: {{lunch.minutes}} min<br/>
+             <i class="fas fa-burn"></i> Cals: {{ lunch.calories|cut:"0" }}<br/>
+             <i class="fas fa-utensils"></i> Servings: {{ lunch.calories|cut:"1" }}
+          </p>
+          <span>lunch</span>
+        </article>
+      </a>
+    </div>
 
       <div class="modal" id="{{lunch.id}}">
-          <div class="modal-content">
-            <span onclick="closeModal('{{lunch.id}}')" class="close"><i class="far fa-times-circle"></i></span>
-            <h1><i class="fas fa-utensils"></i> {{lunch.title}}</h1>
-            <p><i class="far fa-star"></i> Rating: {{lunch.rating|floatformat:-2}}/5<br><i class="far fa-clock"></i> Ready in: {{lunch.minutes}} minutes<br /><i class="fas fa-burn"></i> Calories: {{lunch.calories|cut:"0"}}<br /><i class="fas fa-utensils"></i> Servings: {{lunch.calories|cut:"1"}}</p>
-            <h2><i class="fas fa-list-ul"></i> Ingredients</h2>
-            <ul>
-              {% for ingredient in lunch.ingredients %}
-                <li>{{ingredient}}</li>
-              {% endfor %}
-            </ul>
-            <h2><i class="fas fa-align-left"></i> Directions</h2>
-            <p>{{lunch.instructions}}</p>
-          </div>
+        <div class="modal-content">
+          <span onclick="closeModal('{{lunch.id}}')" class="close"><i class="far fa-times-circle"></i></span>
+          <h1><i class="fas fa-utensils"></i> {{lunch.title}}</h1>
+          <p><i class="far fa-star"></i> Rating: {{lunch.rating|floatformat:-2}}/5<br><i class="far fa-clock"></i> Ready in: {{lunch.minutes}} minutes<br /><i class="fas fa-burn"></i> Calories: {{lunch.calories|cut:"0"}}<br /><i class="fas fa-utensils"></i> Servings: {{lunch.calories|cut:"1"}}</p>
+          <h2><i class="fas fa-list-ul"></i> Ingredients</h2>
+          <ul>
+            {% for ingredient in lunch.ingredients %}
+              <li>{{ingredient}}</li>
+            {% endfor %}
+          </ul>
+          <h2><i class="fas fa-align-left"></i> Directions</h2>
+          <p>{{lunch.instructions}}</p>
         </div>
+      </div>
     {% endfor %}
 
     {% for dinner in dinners %}

@@ -139,16 +139,24 @@ def meals(request):
             breakData = wQ.breakfastPlan(preferences, alleg, breakfastCalRange)
             lunchData = wQ.lunchPlan(preferences, alleg, lunchCalRange)
             dinnerData = wQ.dinnerPlan(preferences, alleg, dinnerCalRange)
-            list = form.split(",")
-            list = list[:-1]
-            list = [int(x) for x in list]
-            print(list)
+            breakData = wQ.addServings(breakData,breakfastCalRange)
+            lunchData = wQ.addServings(lunchData,lunchCalRange)
+            dinnerData = wQ.addServings(dinnerData,dinnerCalRange)
+            l = form.split(" ")
+            l = l[:-1]
+            l = [int(x) for x in l]
             for i in range(len(data['breakfasts'])):
-                for j in range(len(list)):
-                    if(i == j):
+                for j in range(len(l)):
+                    if(i == l[j]):
                         data['breakfasts'][i] = breakData[i]
-
-
+            for i in range(len(data['lunches'])):
+                for j in range(len(l)):
+                    if(i == l[j] - 7):
+                        data['lunches'][i] = lunchData[i]
+            for i in range(len(data['dinners'])):
+                for j in range(len(l)):
+                    if(i == l[j] - 14):
+                        data['dinners'][i] = dinnerData[i]
 
 
     return render(request, 'app/meals.html', data)
