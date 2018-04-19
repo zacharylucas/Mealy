@@ -23,10 +23,10 @@ dinner_discovery = DiscoveryV1(
 )
 
 breakfast_environment_id = '9eca8cd5-10d4-47f4-b2f0-6c5987717d48'
-breakfast_collection_id = '53ec59e8-23fb-4bf1-a80e-c17014f1f682'
+breakfast_collection_id = 'a1169358-2112-401e-b0a0-9e6cdccb5129'
 
 lunch_environment_id = 'e8a03832-1ad4-4c57-a8a9-4d4b3ae99d6e'
-lunch_collection_id = '6b24da5f-e3e9-4af4-8870-b6630080566d'
+lunch_collection_id = '11c9997b-bcd7-4d0f-97df-2b610ac9aebe'
 
 dinner_environment_id = '6a487cbb-3a04-4f03-9f06-88084e3c2b6d'
 dinner_collection_id = 'e32f6689-d733-42e2-814d-bf26b84d123d'
@@ -177,3 +177,11 @@ def selectRandom(*args):
         if len(args[i]) != 0:
             queryString += random.choice(args[i]) + " "
     return queryString
+
+def addServings(result,calRange):
+    for i in range(len(result)):
+        if result[i]['calories'] < calRange[0]:
+            result[i]['calories'] = str(result[i]['calories']) + "," + str(int(calRange[0]/int(result[i]['calories'])))
+        else:
+            result[i]['calories'] = str(result[i]['calories']) + ",1"
+    return result

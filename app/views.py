@@ -57,7 +57,7 @@ def newMealPlan(request):
     activity = [1.1, 1.2, 1.35, 1.45]
     TDEE *= activity[request.session['userDict']['activity_level']-1]
     calRange = []
-    
+
     if request.session['userDict']['glm'] == "lose_weight":
         calRange = [0, TDEE - 300]
     elif request.session['userDict']['glm'] == "maintain_weight":
@@ -72,6 +72,10 @@ def newMealPlan(request):
     breakfastQueryResults = wQ.breakfastPlan(preferences,alleg, breakfastCalRange)
     lunchQueryResults = wQ.lunchPlan(preferences,alleg, lunchCalRange)
     dinnerQueryResults = wQ.dinnerPlan(preferences,alleg, dinnerCalRange)
+
+    breakfastQueryResults = wQ.addServings(breakfastQueryResults,breakfastCalRange)
+    lunchQueryResults = wQ.addServings(lunchQueryResults,lunchCalRange)
+    dinnerQueryResults = wQ.addServings(dinnerQueryResults,dinnerCalRange)
 
     data = {'breakfasts' : breakfastQueryResults, 'lunches' : lunchQueryResults, 'dinners' : dinnerQueryResults}
     request.session['mealDict'] = data
