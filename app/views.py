@@ -93,6 +93,8 @@ def newMealPlan(request):
     return data
 
 def meals(request):
+    if request.session.get('userDict') == None or request.session.get('userDict') == {}:
+        return redirect('userInfo')
     data = {}
     if request.method == 'GET':
         if request.session.get('mealDict') == None or request.session.get('mealDict') == {}:
@@ -211,6 +213,7 @@ def index(request):
                     'mf' : dicti['mf'],
                     'age' :dicti['age']
                 }
+
     return render(request, 'app/index.html', context)
 
 def conversation(request):
@@ -395,6 +398,8 @@ def userInfo(request):
     return render(request, 'app/userInfo.html', {'form' : form})
 
 def preferenceSelection(request):
+    if request.session.get('userDict') == None or request.session.get('userDict') == {}:
+        return redirect('userInfo')
     if request.method == 'POST':
         form = PreferencesForm(request.POST)
         prefDict = pref.createPreferences(form)
