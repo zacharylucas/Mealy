@@ -37,13 +37,6 @@
     });
 
 
-
-  $(document).ready(function(){
-    $('form').submit(function(e){
-      var allSelectedElements = $(".select-for-reshuffle").attr('data-id');
-      });
-  });
-
   $(document).ready(function(){
     $('#exchangeMeals').on('click',function() {
       $('.meal-item').each(function(i, element) {
@@ -73,7 +66,9 @@
   <div class="band">
     <div class="mealPlanBanner">
       <h1>This Week's Meals</h1>
-      <p>Here is your weekly meal plan! Select a meal to see what ingredients you need and how to prepare it. When you want to generate a new meal plan for another week, or if you're unhappy with the current meal plan, hit the new meals button below.</p>
+      <p>Here is your weekly meal plan! Select a meal to see what ingredients you need and how to prepare it. When you want to generate a new meal plan for another week, or if you're unhappy with the current meal plan, hit the new meals button below.
+         <br><br>If you are happy with most of your meal plan, but want to change one or a few meals, press the 'x' on the meal(s) you want to replace, and then hit 'exchange meals' when you are ready to swap them out.
+      </p>
       <form class="" action="" method="POST">
       {% csrf_token %}
       {{ form.as_p }}

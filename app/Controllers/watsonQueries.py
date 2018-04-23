@@ -51,14 +51,16 @@ def makePlan(result1, result2):
     if(result1['matching_results'] == result2['matching_results']):
         plan = result1['results'][0:7]
     else:
-        plan = [result1['results'][0],result2['results'][0],result1['results'][1], result2['results'][1],result1['results'][2],result2['results'][2], result1['results'][3]]
+        r1_rand = random.sample(range(0,6),4)
+        r2_rand= random.sample(range(0,6),3)
+        plan = [result1['results'][r1_rand[0]],result2['results'][r2_rand[0]],result1['results'][r1_rand[1]], result2['results'][r2_rand[1]],result1['results'][r1_rand[2]],result2['results'][r2_rand[2]], result1['results'][r1_rand[3]]]
     return plan
 
 def addCals(calRange):
     queryString = ''
-    if calRange != [] and calRange[0] >= 0 and calRange[1] >= 0:
+    '''if calRange != [] and calRange[0] >= 0 and calRange[1] >= 0:
         queryString += r',calories>%d' % calRange[0]
-        queryString += r',calories<%d' % calRange[1]
+        queryString += r',calories<%d' % calRange[1]'''
     return queryString
 
 def breakfastPlan(prefDict,alleg,calRange):
